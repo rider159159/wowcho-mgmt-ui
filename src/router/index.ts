@@ -1,9 +1,9 @@
 import { App } from 'vue';
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 import permission from './permission';
-import DefaultLayout from '../layouts/DefaultLayout.vue'
+import DefaultLayout from '../components/layoutWrapper/DefaultLayout.vue'
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/demo',

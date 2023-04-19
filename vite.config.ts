@@ -11,8 +11,11 @@ export default  defineConfig(({ command, mode }) => {
   console.log('command', command);
   console.log('mode', mode);
   return {
+    base: '/backstage/',
+
     plugins: [
       vue(),
+      
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
