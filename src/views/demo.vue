@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { SET_TOKEN } from '@/utils'
+import { SET_TOKEN, toast } from '@/utils'
 // composables
-import { calculateDiscount } from '@/composables/project'
+import { calculateDiscount, timeStampChange } from '@/composables'
 // store 運用
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
-
+import { fetchMember, fetchPost, fetchProject } from '@/api'
 const { FN_LOGOUT } = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(userInfoStore())
-
 // 判斷環境
 const env = import.meta.env.MODE
 
@@ -16,26 +15,26 @@ const env = import.meta.env.MODE
 const router = useRouter()
 
 // 使用 API
-const api = inject('$api') as any
+// const api = inject('$api') as any
 
 // : Promise<void> 也可以移除
 async function getMemberInfo() : Promise<void> {
-  const { data, code } = await api.member.getMemberInfo()
+  const { data, code } = await fetchMember.getMemberInfo()
   if (code !== 200) return
   // API 丟置 store
   USER_INFO_REF.value = data.userInfo
 }
 
 // 彈窗控制
-const demoModal = ref(false)
+const modalController = ref(false)
 function openModal() {
-  demoModal.value = true
+  modalController.value = true
 }
 
 const projectList = ref<any>([])
 async function getProductAll(): Promise<void> {
   const params = { id: '123' }
-  const { data, code } = await api.project.getProjectAll(params)
+  const { data, code } = await fetchProject.getProjectAll(params)
   if (code !== 200) return
   projectList.value = data.projectList
 }
@@ -61,15 +60,32 @@ const form = {
 }
 
 async function submitForm() {
-  const { data, code } = await api.posts.createPosts(form)
+  const { data, code } = await fetchPost.createPosts(form)
   if (code !== 200) return
   console.log(data, '新增成功')
+  modalController.value = false
+}
+function openToast() {
+  toast.success('測試', {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 2000,
+    theme: 'colored'
+  })
+  toast.success('登入成功', {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 2000
+  })
+  toast.error('登入失敗', {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000
+  })
 }
 
 </script>
 
 <template>
   <section class="p-4">
+    <span class="mdi mdi-close text-36px text-red"></span>
     <div class="flex gap-4">
       <button @click.prevent="getMemberInfo"
         class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
@@ -82,6 +98,10 @@ async function submitForm() {
       <button @click.prevent="openModal"
         class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
         開啟彈窗
+      </button>
+      <button @click.prevent="openToast"
+        class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
+        開啟吐司
       </button>
       <button @click.prevent="getProductAll"
         class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
@@ -108,28 +128,29 @@ async function submitForm() {
     </div>
     <div>
       <h1>獲得環境:{{ env }}</h1>
+      <div> timeStamp 轉換{{ timeStampChange(1680307200000) }}</div>
     </div>
     <!-- 彈窗 -->
-    <Modal v-model="demoModal" title="測試彈窗">
-      <table class="w-full border-separate border border-slate-400 ...">
+    <Modal v-model="modalController" title="測試彈窗" :titleClass="'text-36px text-red'" :headerClass="'b-gray mx-2 border-b-2 !px-0 mx-2'" :width="'w-full md:w-80%'" :bodyClass="'bg-gray opacity-[0.7]'">
+      <table class="w-full border-separate border border-slate-400">
         <thead>
           <tr>
-            <th class="border border-slate-300 ...">State</th>
-            <th class="border border-slate-300 ...">City</th>
+            <th class="border border-slate-300">State</th>
+            <th class="border border-slate-300">City</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="border border-slate-300 ...">Indiana</td>
-            <td class="border border-slate-300 ...">Indianapolis</td>
+            <td class="border border-slate-300">Indiana</td>
+            <td class="border border-slate-300">Indianapolis</td>
           </tr>
           <tr>
-            <td class="border border-slate-300 ...">Ohio</td>
-            <td class="border border-slate-300 ...">Columbus</td>
+            <td class="border border-slate-300">Ohio</td>
+            <td class="border border-slate-300">Columbus</td>
           </tr>
           <tr>
-            <td class="border border-slate-300 ...">Michigan</td>
-            <td class="border border-slate-300 ...">Detroit</td>
+            <td class="border border-slate-300">Michigan</td>
+            <td class="border border-slate-300">Detroit</td>
           </tr>
         </tbody>
       </table>
