@@ -9,15 +9,19 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      'brand1': '#2378BF',
-      'brand2': '#369CF0',
-      'brand3': '#70BEFB',
-      'brand4': '#ECF7FF',
-      'gray1': '#1F2225',
-      'gray2': '#636466',
-      'gray3': '#BDBEC2',
-      'gray4': '##EFEFEF',
-      'line': '#C2D7EA',
+      brand:{
+        1: '#2378BF',
+        2: '#369CF0',
+        3: '#70BEFB',
+        4: '#ECF7FF',
+      },
+      gray:{
+        1: '#1F2225',
+        2: '#636466',
+        3: '#BDBEC2',
+        4: '#EFEFEF',
+      },
+      line: '#C2D7EA',
     },
     fontSize: {
       h1: '40px',
