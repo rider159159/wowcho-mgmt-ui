@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import '../src/style/style.scss'
 import 'uno.css'
 import '@unocss/reset/tailwind-compat.css'
+import 'vue3-toastify/dist/index.css';
 
 import App from './App.vue'
 import { setupStore } from './stores';

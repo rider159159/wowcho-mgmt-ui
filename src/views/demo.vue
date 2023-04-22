@@ -81,6 +81,8 @@ function openToast() {
   })
 }
 
+const image = ref('')
+
 </script>
 
 <template>
@@ -108,10 +110,11 @@ function openToast() {
         獲得商品列表
       </button>
       <button @click.prevent="saveCookie"
-      class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
+        class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
         儲存 cookie
       </button>
-
+      <Upload v-model="image"></Upload>
+      <img :src="image" alt="">
     </div>
     <h2 class="my-6 text-8 fw-700">商品列表</h2>
     <div class="grid grid-cols-3 gap-4">
