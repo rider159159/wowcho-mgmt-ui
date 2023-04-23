@@ -5,7 +5,7 @@
 <template>
   <div>
     <Header></Header>
-    <main class="mt-46px">
+    <main class="mt-56px">
       <router-view></router-view>
     </main>
   </div>

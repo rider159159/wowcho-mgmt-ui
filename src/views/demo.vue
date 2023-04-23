@@ -108,6 +108,8 @@ async function submitForm() {
     </div>
     <div>
       <h1>獲得環境:{{ env }}</h1>
+      <span class="mdi mdi-account"></span>
+
     </div>
     <!-- 彈窗 -->
     <Modal v-model="demoModal" title="測試彈窗">
