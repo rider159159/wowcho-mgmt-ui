@@ -71,6 +71,7 @@ async function submitForm() {
 <template>
   <section class="p-4">
     <div class="flex gap-4">
+      <span class="mdi mdi-account"></span>
       <Button class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">lorem</Button>
       <button @click.prevent="getMemberInfo"
         class="relative flex-none text-sm text-center font-semibold text-white py-2.5 px-4 rounded-lg bg-slate-900 dark:bg-sky-500 dark:text-white focus:outline-none hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:highlight-white/20 dark:hover:bg-sky-400 dark:focus:ring-2 dark:focus:ring-sky-600 dark:focus:ring-offset-slate-900">
