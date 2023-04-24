@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const TokenKey = 'wowcho';
+const TokenKey = 'wowcho-mgmt';
 
 export function GET_TOKEN() {
   return Cookies.get(TokenKey);
