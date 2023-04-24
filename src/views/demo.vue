@@ -89,7 +89,7 @@ function openToast() {
     autoClose: 2000
   })
 }
-
+const upload = ref('')
 </script>
 
 <template>
@@ -136,7 +136,8 @@ function openToast() {
     <div>
       <h1>獲得環境:{{ env }}</h1>
       <span class="mdi mdi-account"></span>
-
+      <Upload v-model="upload"></Upload>
+      <img :src="upload" alt="">
     </div>
     <!-- 彈窗 -->
     <Modal v-model="demoModal" title="測試彈窗">
