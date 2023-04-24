@@ -2,6 +2,10 @@
 import { SET_TOKEN } from '@/utils'
 // composables
 import { calculateDiscount } from '@/composables/project'
+
+// API 運用
+import { fetchMember } from '@/api'
+
 // store 運用
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
@@ -15,12 +19,9 @@ const env = import.meta.env.MODE
 // 使用 router
 const router = useRouter()
 
-// 使用 API
-const api = inject('$api') as any
-
 // : Promise<void> 也可以移除
 async function getMemberInfo() : Promise<void> {
-  const { data, code } = await api.member.getMemberInfo()
+  const { data, code } = await fetchMember.getMemberInfo()
   if (code !== 200) return
   // API 丟置 store
   USER_INFO_REF.value = data.userInfo
@@ -35,7 +36,7 @@ function openModal() {
 const projectList = ref<any>([])
 async function getProductAll(): Promise<void> {
   const params = { id: '123' }
-  const { data, code } = await api.project.getProjectAll(params)
+  const { data, code } = await fetchMember.getProjectAll(params)
   if (code !== 200) return
   projectList.value = data.projectList
 }
@@ -61,7 +62,7 @@ const form = {
 }
 
 async function submitForm() {
-  const { data, code } = await api.posts.createPosts(form)
+  const { data, code } = await fetchMember.createPosts(form)
   if (code !== 200) return
   console.log(data, '新增成功')
 }
