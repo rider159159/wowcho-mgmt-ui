@@ -7,6 +7,7 @@ import App from './App.vue'
 import { setupStore } from './stores';
 import { setupRouter } from './router';
 import { setupPlugins } from './plugins';
+import 'vue3-toastify/dist/index.css';
 
 function setupApp() {
   const app = createApp(App)
