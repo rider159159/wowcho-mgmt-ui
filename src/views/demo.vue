@@ -10,6 +10,9 @@ import { fetchMember } from '@/api'
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
 
+// 額外套件運用
+import Swal from 'sweetalert2'
+
 const { FN_LOGOUT } = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(userInfoStore())
 
@@ -21,10 +24,10 @@ const router = useRouter()
 
 // : Promise<void> 也可以移除
 async function getMemberInfo() : Promise<void> {
-  const { data, code } = await fetchMember.getMemberInfo()
-  if (code !== 200) return
+  const res = await fetchMember.getMemberInfo()
+  if (res.status !== 'Success') return
   // API 丟置 store
-  USER_INFO_REF.value = data.userInfo
+  USER_INFO_REF.value = res.data.userInfo
 }
 
 // 彈窗控制
@@ -36,9 +39,9 @@ function openModal() {
 const projectList = ref<any>([])
 async function getProductAll(): Promise<void> {
   const params = { id: '123' }
-  const { data, code } = await fetchMember.getProjectAll(params)
-  if (code !== 200) return
-  projectList.value = data.projectList
+  const res = await fetchMember.getProjectAll(params)
+  if (res.status !== 'Success') return
+  projectList.value = res.data.projectList
 }
 
 function toProject(item:any) {
@@ -62,9 +65,13 @@ const form = {
 }
 
 async function submitForm() {
-  const { data, code } = await fetchMember.createPosts(form)
-  if (code !== 200) return
-  console.log(data, '新增成功')
+  const res = await fetchMember.createPosts(form)
+  if (res.status !== 'Success') return
+  Swal.fire({
+    icon: 'success',
+    title: '新增成功'
+  })
+  console.log(res.data, '新增成功')
 }
 
 </script>
