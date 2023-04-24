@@ -39,28 +39,30 @@ class Http {
       errorMsg(response.data.message)
       return response
     },error => {
+      console.log(error.response)
       errorMsg(error.response.data.message)
+      return error.response
     })
   }
 
   // params = methods、 query 等等 axios 本身封裝，透過參數傳遞給 axios
   public httpGet<T>(url: string, params?: AxiosRequestConfig ):Promise<T> {
-    return Http.axiosInstance.get(url, params).then(res => res.data).catch()
+    return Http.axiosInstance.get(url, params).then(res => res.data)
   }
 
   public httpPost<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.post(url, data).then(res => res.data).catch()
+    return Http.axiosInstance.post(url, data).then(res => res.data)
   }
 
   public httpPut<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.put(url, data).then(res => res.data).catch()
+    return Http.axiosInstance.put(url, data).then(res => res.data)
   }
 
   public httpPatch<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.patch(url, data).then(res => res.data).catch()
+    return Http.axiosInstance.patch(url, data).then(res => res.data)
   }
   public httpDelete<T>(url: string, params?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.delete(url, params).then(res => res.data).catch()
+    return Http.axiosInstance.delete(url, params).then(res => res.data)
   }
 }
 
