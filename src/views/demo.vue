@@ -4,7 +4,7 @@ import { SET_TOKEN } from '@/utils'
 import { calculateDiscount } from '@/composables/project'
 
 // API 運用
-import { fetchMember } from '@/api'
+import { fetchDemo } from '@/api'
 
 // store 運用
 import { storeToRefs } from 'pinia'
@@ -24,7 +24,7 @@ const router = useRouter()
 
 // : Promise<void> 也可以移除
 async function getMemberInfo() : Promise<void> {
-  const res = await fetchMember.getMemberInfo()
+  const res = await fetchDemo.getMemberInfo()
   if (res.status !== 'Success') return
   // API 丟置 store
   USER_INFO_REF.value = res.data.userInfo
@@ -39,7 +39,7 @@ function openModal() {
 const projectList = ref<any>([])
 async function getProductAll(): Promise<void> {
   const params = { id: '123' }
-  const res = await fetchMember.getProjectAll(params)
+  const res = await fetchDemo.getProjectAll(params)
   if (res.status !== 'Success') return
   projectList.value = res.data.projectList
 }
@@ -65,7 +65,7 @@ const form = {
 }
 
 async function submitForm() {
-  const res = await fetchMember.createPosts(form)
+  const res = await fetchDemo.createPosts(form)
   if (res.status !== 'Success') return
   Swal.fire({
     icon: 'success',
