@@ -9,6 +9,6 @@ export const fetchMember = {
   // 取得帳戶資料
   getProfile: (params?:any):Promise<ApiResponse> => http.httpGet('/profile',{ params }),
   // 更新帳戶資料
-  editProfile: (data?:any):Promise<ApiResponse> => http.httpPost('/profile',data),
+  editProfile: (data?:any):Promise<ApiResponse> => http.httpPatch('/profile',data),
 }
 

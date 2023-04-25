@@ -6,22 +6,16 @@ import { userInfoStore } from '@/stores';
 
 const permission = (router:Router) => {
   router.beforeEach(async (to) => {
-    
-    // return '/login'
+    // 登入、註冊頁面不認證 JWT
+    if ( to.path == '/signup' || to.path == '/login') {
+      return true;
+    }
     const USER_TOKEN = GET_TOKEN();
-    console.log(USER_TOKEN)
     // 驗證 Token 若無則回到登入頁面
     if (!USER_TOKEN && to.path !== '/login') {
       return '/login';
     }
-    // 如果前往的頁面是登入頁
-    // 若有 Token 則回到跟目錄(頁面)
-    if (to.path === '/login') {
-      if (USER_TOKEN) {
-        return '/';
-      }
-      return true;
-    }
+
     // 實例化 pinia 的儲存庫 準備取得使用者資料並存入
     const USER_STORE = userInfoStore();
     // 取得使用者的令牌 (確認是否有效)
