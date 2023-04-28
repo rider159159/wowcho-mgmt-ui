@@ -90,6 +90,7 @@ function openToast() {
   })
 }
 const upload = ref('')
+const ck = ref('')
 </script>
 
 <template>
@@ -134,6 +135,7 @@ const upload = ref('')
       </div>
     </div>
     <div>
+      <Ckeditor v-model="ck"></Ckeditor>
       <h1>獲得環境:{{ env }}</h1>
       <span class="mdi mdi-account"></span>
       <Upload v-model="upload"></Upload>
