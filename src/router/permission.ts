@@ -11,8 +11,8 @@ const permission = (router:Router) => {
     const USER_TOKEN = GET_TOKEN();
     console.log(USER_TOKEN)
     // 驗證 Token 若無則回到登入頁面
-    if (!USER_TOKEN && to.path !== '/login') {
-      return '/login';
+    if ( to.path == '/signup' || to.path == '/login' ||  to.path == '/demo') {
+      return true;
     }
     // 如果前往的頁面是登入頁
     // 若有 Token 則回到跟目錄(頁面)

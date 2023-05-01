@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <div ref="editor" id="editor"></div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment'
@@ -38,7 +32,7 @@ import FileRepository from '@ckeditor/ckeditor5-upload/src/filerepository'
 import { MyUploadAdapter } from '@/plugins/ckeditor'
 
 const editor:any = ref(null)
-const editorInstance:any = ref(null)
+let editorInstance:any = null
 const emits = defineEmits(['update:modelValue'])
 // URL
 const apiUrl = import.meta.env.VITE_BASE_URL
@@ -47,6 +41,12 @@ function MyUploadAdapterPlugin(editor:any) {
   const uploadUrl = `${apiUrl}/upload`
   editor.plugins.get('FileRepository').createUploadAdapter = (loader:any) => {
     return new MyUploadAdapter(loader, uploadUrl)
+  }
+}
+
+function checkProps() {
+  if (props.modelValue.length > 0) {
+    editorInstance.setData(props.modelValue)
   }
 }
 
@@ -123,8 +123,8 @@ onMounted(() => {
     extraPlugins: [MyUploadAdapterPlugin]
   })
     .then((newEditor) => {
-      editorInstance.value = newEditor
-
+      editorInstance = newEditor
+      checkProps()
       newEditor.model.document.on('change:data', () => {
         emits('update:modelValue', newEditor.getData())
       })
@@ -134,8 +134,54 @@ onMounted(() => {
     })
 })
 onBeforeUnmount(() => {
-  if (editorInstance.value) {
-    editorInstance.value.destroy()
+  if (editorInstance) {
+    editorInstance.destroy()
   }
 })
+
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: ''
+  }
+})
+// watch(
+//   () => props.modelValue,
+//   (newValue) => {
+//     console.log(editorInstance.value.getData(), editorInstance.value)
+
+//     if (editorInstance.value && newValue !== editorInstance.value.getData()) {
+//       editorInstance.value.setData(newValue)
+//     }
+//   }
+// )
 </script>
+
+<template>
+  <div>
+    <div ref="editor" id="editor"></div>
+  </div>
+</template>
+
+<style>
+.ck.ck-word-count {
+    display: flex;
+    justify-content: flex-end;
+
+    background: var(--ck-color-toolbar-background);
+    padding: var(--ck-spacing-small) var(--ck-spacing-standard);
+    border: 1px solid var(--ck-color-toolbar-border);
+    border-top-width: 0;
+    border-radius: 0 0 var(--ck-border-radius);
+}
+
+.ck.ck-word-count .ck-word-count__words {
+    margin-right: var(--ck-spacing-standard);
+}
+
+.ck.ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
+.ck.ck-rounded-corners .ck-source-editing-area textarea {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+</style>

@@ -90,7 +90,13 @@ function openToast() {
   })
 }
 const upload = ref('')
-const ck = ref('')
+const ckeditor = ref('')
+const markdown = ref('')
+
+onMounted(() => {
+  ckeditor.value = 'test'
+  console.log()
+})
 </script>
 
 <template>
@@ -135,7 +141,16 @@ const ck = ref('')
       </div>
     </div>
     <div>
-      <Ckeditor v-model="ck"></Ckeditor>
+      <Ckeditor v-model="ckeditor" class="mb-50px"></Ckeditor>
+      <div>ck輸出內容:
+        <p>{{ ckeditor }}</p>
+      </div>
+      <!-- <Mkeditor v-model="mkeditor"></Mkeditor> -->
+      <Markdown v-model="markdown" ></Markdown>
+      <div>
+        mk 輸出內容:
+        <p>{{ markdown }}</p>
+      </div>
       <h1>獲得環境:{{ env }}</h1>
       <span class="mdi mdi-account"></span>
       <Upload v-model="upload"></Upload>
