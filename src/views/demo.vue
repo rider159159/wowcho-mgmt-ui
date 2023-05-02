@@ -94,8 +94,7 @@ const ckeditor = ref('')
 const markdown = ref('')
 
 onMounted(() => {
-  ckeditor.value = 'test'
-  console.log()
+  ckeditor.value = '<p>test</p><h3>asd</h3><h4>&nbsp;</h4><p>qweqwe</p><hr><p>&nbsp;</p>'
 })
 </script>
 
@@ -140,12 +139,11 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div>
+    <div >
       <Ckeditor v-model="ckeditor" class="mb-50px"></Ckeditor>
       <div>ck輸出內容:
         <p>{{ ckeditor }}</p>
       </div>
-      <!-- <Mkeditor v-model="mkeditor"></Mkeditor> -->
       <Markdown v-model="markdown" ></Markdown>
       <div>
         mk 輸出內容:

@@ -145,43 +145,11 @@ const props = defineProps({
     default: ''
   }
 })
-// watch(
-//   () => props.modelValue,
-//   (newValue) => {
-//     console.log(editorInstance.value.getData(), editorInstance.value)
 
-//     if (editorInstance.value && newValue !== editorInstance.value.getData()) {
-//       editorInstance.value.setData(newValue)
-//     }
-//   }
-// )
 </script>
 
 <template>
-  <div>
+  <div class="formatted">
     <div ref="editor" id="editor"></div>
   </div>
 </template>
-
-<style>
-.ck.ck-word-count {
-    display: flex;
-    justify-content: flex-end;
-
-    background: var(--ck-color-toolbar-background);
-    padding: var(--ck-spacing-small) var(--ck-spacing-standard);
-    border: 1px solid var(--ck-color-toolbar-border);
-    border-top-width: 0;
-    border-radius: 0 0 var(--ck-border-radius);
-}
-
-.ck.ck-word-count .ck-word-count__words {
-    margin-right: var(--ck-spacing-standard);
-}
-
-.ck.ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
-.ck.ck-rounded-corners .ck-source-editing-area textarea {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-</style>

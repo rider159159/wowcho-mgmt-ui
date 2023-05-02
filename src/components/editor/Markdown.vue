@@ -5,6 +5,10 @@ import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold'
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic'
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat'
 import Heading from '@ckeditor/ckeditor5-heading/src/heading'
+import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline'
+import DocumentList from '@ckeditor/ckeditor5-list/src/documentlist'
+
 const props = defineProps({
   modelValue: {
     type: String,
@@ -26,7 +30,9 @@ function checkProps() {
 onMounted(() => {
   ClassicEditor.create(mkEditor.value, {
     // Markdown Heading
-    plugins: [Heading, Autoformat, Essentials, Bold, Italic]
+    plugins: [Heading, Autoformat, Essentials, Bold, Italic, BlockQuote, HorizontalLine,
+      DocumentList
+    ]
   })
     .then((newEditor) => {
       editorInstance = newEditor
@@ -43,7 +49,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="markdown">
     <div ref="mkEditor" id="mkEditor"></div>
   </div>
 </template>
