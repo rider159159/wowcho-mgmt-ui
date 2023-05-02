@@ -4,7 +4,6 @@ import path from 'path'
 import AutoImport from 'unplugin-auto-import/vite' // 自動導入 hook
 import Components from 'unplugin-vue-components/vite' // 自動引入 components
 import Unocss from 'unocss/vite';
-import Markdown from 'vite-plugin-vue-markdown'
 
 import { createRequire } from 'node:module';
 const require = createRequire( import.meta.url );
@@ -36,7 +35,6 @@ export default  defineConfig(({ command, mode }) => {
         dts: './components.d.ts',
       }),
       Unocss(),
-      Markdown()
     ],
     server: {
       host: '0.0.0.0',
