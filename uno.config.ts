@@ -7,6 +7,11 @@ export default defineConfig({
   presets: [
     presetUno(),
   ],
+  rules: [
+    ['rounded-5xl', {
+      'border-radius': '2.5rem',
+    }],
+  ],
   theme: {
     colors: {
       brand:{

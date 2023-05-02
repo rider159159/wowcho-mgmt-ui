@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Ckeditor: typeof import('./src/components/editor/Ckeditor.vue')['default']
+    Button: typeof import('./src/components/common/Button.vue')['default']
     DefaultLayout: typeof import('./src/components/layoutWrapper/DefaultLayout.vue')['default']
     Header: typeof import('./src/components/layout/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
