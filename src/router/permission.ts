@@ -13,7 +13,7 @@ const permission = (router:Router) => {
     }
     const USER_TOKEN = GET_TOKEN();
     // 驗證 Token 若無則回到登入頁面
-    if (!USER_TOKEN && to.path !== '/login') {
+    if (!USER_TOKEN) {
       return '/login';
     }
 
@@ -25,12 +25,11 @@ const permission = (router:Router) => {
     if(res.status !== 'Success') {
       USER_STORE.FN_LOGOUT()
       return '/login';
-      // next({ name: 'login' })
     }
     // 儲存使用者資料
     USER_STORE.USER_INFO_REF = res.data;
+    // 驗證成功通過
     return true;
-    // next()
   })
 };
 
