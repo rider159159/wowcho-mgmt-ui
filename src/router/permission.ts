@@ -3,11 +3,12 @@ import { Router } from 'vue-router'
 import { GET_TOKEN, REMOVE_TOKEN } from '@/utils';
 import { fetchMember } from '@/api'
 import { userInfoStore } from '@/stores';
-
+// 白名單
+const whiteList = ['/signup', '/login', '/demo']
 const permission = (router:Router) => {
   router.beforeEach(async (to) => {
-    // 登入、註冊頁面不認證 JWT
-    if ( to.path == '/signup' || to.path == '/login') {
+    // 確認前往的是在白名單，若是直接通過，不是的則需驗證
+    if (whiteList.includes(to.path)) {
       return true;
     }
     const USER_TOKEN = GET_TOKEN();
