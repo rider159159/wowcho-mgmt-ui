@@ -8,5 +8,6 @@
     <main class="mt-46px">
       <router-view></router-view>
     </main>
+    <Footer />
   </div>
 </template>
