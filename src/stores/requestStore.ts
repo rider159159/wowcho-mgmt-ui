@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import {  UserInfo } from '@/interface'
-import { REMOVE_TOKEN } from '@/utils'
 
 export const requestStore = defineStore('request-store', () => {
   const isLoading = ref(false)
@@ -11,7 +9,7 @@ export const requestStore = defineStore('request-store', () => {
     loadingArray.value.push(loadingToken);
   };
 
-  const REMOVE_TARGET_LOADING = (loadingToken) => {
+  const REMOVE_TARGET_LOADING = (loadingToken:any) => {
     const loadingRequestIndex = loadingArray.value.findIndex((item) => item.uuid === loadingToken.uuid);
     loadingArray.value.splice(loadingRequestIndex, 1);
   }
