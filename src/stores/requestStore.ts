@@ -5,7 +5,6 @@ export const requestStore = defineStore('request-store', () => {
   const loadingArray = ref<Array<object>>([])
 
   const ADD_LOADING = (loadingToken:any) => {
-    console.log(loadingToken)
     loadingArray.value.push(loadingToken);
   };
 
