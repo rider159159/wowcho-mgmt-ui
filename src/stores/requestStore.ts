@@ -10,7 +10,7 @@ export const requestStore = defineStore('request-store', () => {
   };
 
   const REMOVE_TARGET_LOADING = (loadingToken:any) => {
-    const loadingRequestIndex = loadingArray.value.findIndex((item) => item.uuid === loadingToken.uuid);
+    const loadingRequestIndex = loadingArray.value.findIndex((item:any) => item.uuid === loadingToken.uuid);
     loadingArray.value.splice(loadingRequestIndex, 1);
   }
   return {
