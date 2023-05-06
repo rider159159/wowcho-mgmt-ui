@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { GET_TOKEN } from '../cookie'
 import { errorMsg } from '@/utils/msg'
+import { requestStore } from '@/stores';
+
 const defaultConfig = {
   timeOut: 30000,
   // 判斷環境變數
@@ -18,8 +20,20 @@ class Http {
   private httpInterceptorsRequest() {
     // TODO: axios request 攔截器，API 統一設定可來此
     Http.axiosInstance.interceptors.request.use((config) => {
-      const handleConfig = { ...config };
+      const requestStoreInstance = requestStore();
+      const { ADD_LOADING } = requestStoreInstance;
 
+      const uuid = self.crypto.randomUUID();
+      const abortControllerInstance = new AbortController();
+      // uuid 唯一識別碼， isUnLoad 判斷
+      const handleConfig = { ...config, uuid:uuid, isUnLoad: false } 
+
+      // handleConfig.uuid = uuid; // 建立請求唯一碼
+      handleConfig.signal = abortControllerInstance.signal; // 建立abort 的方法
+      if (!handleConfig.isUnLoad) {
+        console.log(handleConfig.uuid)
+        ADD_LOADING({ id: handleConfig.uuid, cancel: abortControllerInstance }); // 丟進pinia裡面的config
+      }
       if (handleConfig.headers) {
         handleConfig.headers.Authorization = `Bearer ${GET_TOKEN()}`;
       }
@@ -31,15 +45,24 @@ class Http {
 
   private httpInterceptorsResponse() {
     // TODO: axios response 攔截器，API 統一設定可來此
-    Http.axiosInstance.interceptors.response.use((response) => {
+    Http.axiosInstance.interceptors.response.use((response:any) => {
+      const requestStoreInstance = requestStore();
+      const { REMOVE_TARGET_LOADING } = requestStoreInstance;
+      REMOVE_TARGET_LOADING(response.config.uuid);
+
       const { status } = response
       if ( status === 200  || status < 300 || status === 304 ) {
         return response
       }
       errorMsg(response.data.message)
       return response
-    },error => {
-      console.log(error.response)
+    }, 
+    (error) => {
+      const requestStoreInstance = requestStore();
+      const { REMOVE_TARGET_LOADING } = requestStoreInstance;
+      console.log(error)
+      const { response = {}, config } = error;
+      REMOVE_TARGET_LOADING(config.uuid);
       errorMsg(error.response.data.message)
       return error.response
     })

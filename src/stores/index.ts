@@ -7,3 +7,4 @@ export function setupStore(AppInstance:App<Element>) {
 }
 export * from './userInfoStore';
 export * from './messageStore';
+export * from './requestStore';
