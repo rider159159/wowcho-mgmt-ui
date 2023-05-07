@@ -7,6 +7,7 @@ const layout = computed(() => route.meta.layout || null)
 
 <template>
   <div>
+    <Loading></Loading>
     <component :is="layout" v-if="layout">
       <router-view></router-view>
     </component>
