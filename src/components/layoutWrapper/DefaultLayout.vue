@@ -5,7 +5,7 @@
 <template>
   <div>
     <Header></Header>
-    <main class="mt-56px">
+    <main class="mt-80px min-h-[calc(100vh-380px)]">
       <router-view></router-view>
     </main>
     <Footer />

@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AdminMenu: typeof import('./src/components/common/AdminMenu.vue')['default']
+    AdminMenuLayout: typeof import('./src/components/layoutWrapper/AdminMenuLayout.vue')['default']
     DefaultLayout: typeof import('./src/components/layoutWrapper/DefaultLayout.vue')['default']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
     Header: typeof import('./src/components/layout/Header.vue')['default']

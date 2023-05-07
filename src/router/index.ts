@@ -2,6 +2,8 @@ import { App } from 'vue';
 import { createRouter, createWebHashHistory } from "vue-router"
 import permission from './permission';
 import DefaultLayout from '../components/layoutWrapper/DefaultLayout.vue'
+import AdminMenuLayout from '../components/layoutWrapper/AdminMenuLayout.vue'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -88,6 +90,20 @@ const router = createRouter({
           path: '',
           name: 'proposalIndex',
           component: () => import('../views/proposal/index.vue'),
+          meta: {
+            keepAlive: false,
+            layout: DefaultLayout 
+          },
+        },
+        // 新增提案
+        {
+          path: 'new',
+          name: 'proposalNew',
+          component: () => import('../views/proposal/new.vue'),
+          meta: {
+            keepAlive: false,
+            layout: DefaultLayout 
+          },
         },
         // 提案紀錄列表 router-view
         {
@@ -106,18 +122,30 @@ const router = createRouter({
               path: 'dashboard',
               name: 'dashboard',
               component: () => import('../views/proposal/[proposalName]/dashboard.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
             },
             // 修改提案計畫
             {
               path: 'edit',
               name: 'proposalEdit',
               component: () => import('../views/proposal/[proposalName]/edit.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
             },
             // 方案 router-view
             {
               path: 'options',
               name: 'option',
               component: () => import('../views/proposal/[proposalName]/options.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
               children: [
                 // 方案列表
                 {
@@ -144,12 +172,20 @@ const router = createRouter({
               path: 'backers',
               name: 'backers',
               component: () => import('../views/proposal/[proposalName]/backers.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
             },
             // 公告 router-view
             {
               path: 'announce',
               name: 'announce',
               component: () => import('../views/proposal/[proposalName]/announce.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
               children: [
                 // 公告列表
                 {
@@ -190,6 +226,10 @@ const router = createRouter({
               path: 'comments',
               name: 'comments',
               component: () => import('../views/proposal/[proposalName]/comments.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
               children: [
                 // 商品留言列表
                 {
@@ -230,6 +270,10 @@ const router = createRouter({
               path: 'faqs',
               name: 'faqs',
               component: () => import('../views/proposal/[proposalName]/faqs.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
               children: [
                 // 常見問答列表
                 {
@@ -256,12 +300,20 @@ const router = createRouter({
               path: 'payment',
               name: 'payment',
               component: () => import('../views/proposal/[proposalName]/payment.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
             },
             // 提案商業檔案設定
             {
-              path: 'profile',
-              name: 'profile',
+              path: 'businessProfile',
+              name: 'businessProfile',
               component: () => import('../views/proposal/[proposalName]/profile.vue'),
+              meta: {
+                keepAlive: false,
+                layout: AdminMenuLayout 
+              },
             },
             // 即時客服 Router-view
             {

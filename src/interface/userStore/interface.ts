@@ -3,5 +3,6 @@ export interface userInfo_interFace{
   name: string,
   nickName: string,
   photo: string,
-  email: string
+  email: string,
+  image: string
 }

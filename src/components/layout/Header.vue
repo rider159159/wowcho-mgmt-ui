@@ -4,17 +4,21 @@ import { userInfoStore } from '@/stores'
 
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
+const { FN_LOGOUT } = userInfoStore()
 
 const router = useRouter()
 
-const showMenu = ref(false);
-const showMemberMenu = ref(false);
-const isLogin = ref(true);
+const showMenu = ref(false)
+const showMemberMenu = ref(false)
 
 function closeMemberMenu() {
   setTimeout(() => {
     showMemberMenu.value = false
   }, 100)
+}
+
+function logout () {
+  FN_LOGOUT()
 }
 </script>
 
@@ -27,14 +31,14 @@ function closeMemberMenu() {
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
           id="navbarSupportedContentX">
           <img src="/logo.svg" alt="">
-          <div class="hidden lg:flex justify-between items-center relative">
+          <!-- <div class="hidden lg:flex justify-between items-center relative">
             <form action="">
               <input type="text" name="search" placeholder="搜尋" class="w-80 outline outline-1 outline-brand-3 rounded-3xl py-2 px-5 pl-10">
             </form>
             <svg class="absolute left-3 top-1/2 -translate-y-1/2" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 20L15.514 15.506M18 9.5C18 11.7543 17.1045 13.9163 15.5104 15.5104C13.9163 17.1045 11.7543 18 9.5 18C7.24566 18 5.08365 17.1045 3.48959 15.5104C1.89553 13.9163 1 11.7543 1 9.5C1 7.24566 1.89553 5.08365 3.48959 3.48959C5.08365 1.89553 7.24566 1 9.5 1C11.7543 1 13.9163 1.89553 15.5104 3.48959C17.1045 5.08365 18 7.24566 18 9.5V9.5Z" stroke="#70BEFB" stroke-width="2" stroke-linecap="round"/>
             </svg>
-          </div>
+          </div> -->
           <ul
             class="hidden lg:flex items-center gap-4">
             <li>
@@ -52,13 +56,13 @@ function closeMemberMenu() {
               >
             </li>
             <li data-te-nav-item-ref>
-              <a
+              <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                >提案</a
+                to="/proposal/new"
+                >提案</router-link
               >
             </li>
-            <li data-te-nav-item-ref>
+            <!-- <li data-te-nav-item-ref>
               <a
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 href="#!"
@@ -76,33 +80,36 @@ function closeMemberMenu() {
                 href="#!"
                 ><MyButton class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
               >
-            </li>
-            <li v-if="isLogin" class="cursor-pointer relative" data-te-nav-item-ref>
-              <svg @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </li> -->
+            <li class="cursor-pointer relative" data-te-nav-item-ref>
+              <!-- 使用者預設頭像 -->
+              <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <path d="M24 23C21.7909 23 20 21.2091 20 19C20 16.7909 21.7909 15 24 15C26.2091 15 28 16.7909 28 19C28 21.2091 26.2091 23 24 23Z" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
               </svg>
+              <!-- 使用者頭像 -->
+              <img v-else :src="USER_INFO_REF.image" @click="showMemberMenu = !showMemberMenu" class="w-48px h-48px rounded-full">
               <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-65 w-40 bg-white">
                 <li class="px-4 py-3" data-te-nav-item-ref>
-                  <a
+                  <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >贊助紀錄</a
+                    to=""
+                    >贊助紀錄</router-link
                   >
                 </li>
                 <li class="px-4 py-3" data-te-nav-item-ref>
-                  <a
+                  <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >提案紀錄</a
+                    to="/proposal"
+                    >提案紀錄</router-link
                   >
                 </li>
                 <li class="px-4 py-3" data-te-nav-item-ref>
-                  <a
+                  <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >個人設定</a
+                    to="/profile"
+                    >個人設定</router-link
                   >
                 </li>
                 <li class="px-4 py-3 border-t-1 border-line" data-te-nav-item-ref>
@@ -147,52 +154,50 @@ function closeMemberMenu() {
               >
             </li>
             <li data-te-nav-item-ref class="mb-8">
-              <a
+              <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                >探索</a
+                to=""
+                >探索</router-link
               >
             </li>
             <li data-te-nav-item-ref class="mb-8">
-              <a
+              <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                >提案</a
+                to="/proposal/new"
+                >提案</router-link
               >
             </li>
-            <li v-if="isLogin" data-te-nav-item-ref class="mb-8">
+            <!-- <li v-if="isLogin" data-te-nav-item-ref class="mb-8">
               <a
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
                 >後台管理</a
               >
-            </li>
-            <li v-if="isLogin" data-te-nav-item-ref class="mb-8">
-              <a
+            </li> -->
+            <li data-te-nav-item-ref class="mb-8">
+              <p
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 pb-5 [&.active]:text-black/90 border-b-1 border-line"
-                href="#!"
-                >會員專區</a
+                >會員專區</p
               >
               <ul class="mt-3 ml-4">
                 <li data-te-nav-item-ref class="mb-3">
-                  <a
+                  <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >贊助紀錄</a
+                    to=""
+                    >贊助紀錄</router-link
                   >
                 </li>
                 <li data-te-nav-item-ref class="mb-3">
-                  <a
+                  <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >提案紀錄</a
+                    to="/proposal"
+                    >提案紀錄</router-link
                   >
                 </li>
                 <li data-te-nav-item-ref class="mb-3">
-                  <a
+                  <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    href="#!"
-                    >個人設定</a
+                    to="/profile"
+                    >個人設定</router-link
                   >
                 </li>
               </ul>
@@ -200,17 +205,11 @@ function closeMemberMenu() {
           </ul>
         </div>
         <a
-          v-if="!isLogin"
+          @click.prevent="logout()"
           class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-          href="#!"
-          ><MyButton class="w-full bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
-        >
-        <a
-          v-if="isLogin"
-          class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-          href="#!"
-          ><MyButton class="w-full outline outline-2 outline-brand-1 bg-white text-brand-1 hover:bg-brand-1 hover:text-white">登出</MyButton></a
-        >
+          >
+          <MyButton class="w-full outline outline-2 outline-brand-1 bg-white text-brand-1 hover:bg-brand-1 hover:text-white">登出</MyButton>
+        </a>
       </div>
     </div>
   </header>
