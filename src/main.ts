@@ -8,6 +8,7 @@ import { setupStore } from './stores';
 import { setupRouter } from './router';
 import { setupPlugins } from './plugins';
 import 'vue3-toastify/dist/index.css';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 function setupApp() {
   const app = createApp(App)

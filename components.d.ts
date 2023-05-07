@@ -6,8 +6,6 @@ import '@vue/runtime-core'
 export {}
 
 declare module '@vue/runtime-core' {
-
-=======
   export interface GlobalComponents {
     AdminMenu: typeof import('./src/components/common/AdminMenu.vue')['default']
     Ckeditor: typeof import('./src/components/editor/Ckeditor.vue')['default']
@@ -15,8 +13,8 @@ declare module '@vue/runtime-core' {
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
     Header: typeof import('./src/components/layout/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    Markdown: typeof import('./src/components/editor/Markdown.vue')['default']
     Loading: typeof import('./src/components/common/Loading.vue')['default']
+    Markdown: typeof import('./src/components/editor/Markdown.vue')['default']
     Modal: typeof import('./src/components/common/Modal.vue')['default']
     MyButton: typeof import('./src/components/common/MyButton.vue')['default']
     Pagin: typeof import('./src/components/common/Pagin.vue')['default']
