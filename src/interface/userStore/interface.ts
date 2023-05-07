@@ -1,7 +1,8 @@
 export interface userInfo_interFace{
-  id: number,
+  account: string
   name: string,
-  nickName: string,
-  photo: string,
-  email: string
+  username: string,
+  gender: number|null,
+  isAllowedNotifications: boolean
+  isSubscribed: boolean
 }
