@@ -90,8 +90,9 @@ function openToast() {
   })
 }
 const upload = ref('')
+const pagination = ref(2)
+const total = ref(50)
 const ckeditor = ref('')
-const markdown = ref('')
 
 onMounted(() => {
   ckeditor.value = '<p>test</p><h3>asd</h3><h4>&nbsp;</h4><p>qweqwe</p><hr><p>&nbsp;</p>'
@@ -141,20 +142,12 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div >
-      <Ckeditor v-model="ckeditor" class="mb-50px"></Ckeditor>
-      <div>ck輸出內容:
-        <p>{{ ckeditor }}</p>
-      </div>
-      <Markdown v-model="markdown" ></Markdown>
-      <div>
-        mk 輸出內容:
-        <p>{{ markdown }}</p>
-      </div>
+    <div>
       <h1>獲得環境:{{ env }}</h1>
       <span class="mdi mdi-account"></span>
       <Upload v-model="upload"></Upload>
       <img :src="upload" alt="">
+      <Pagination v-model="pagination" :page-size="10" :total="total" ></Pagination>
     </div>
     <!-- 彈窗 -->
     <Modal v-model="demoModal" title="測試彈窗">
