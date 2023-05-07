@@ -5,12 +5,11 @@ export const requestStore = defineStore('request-store', () => {
   const loadingArray = ref<Array<object>>([])
 
   const ADD_LOADING = (loadingToken:any) => {
-    console.log(loadingToken)
     loadingArray.value.push(loadingToken);
   };
 
   const REMOVE_TARGET_LOADING = (loadingToken:any) => {
-    const loadingRequestIndex = loadingArray.value.findIndex((item) => item.uuid === loadingToken.uuid);
+    const loadingRequestIndex = loadingArray.value.findIndex((item:any) => item.uuid === loadingToken.uuid);
     loadingArray.value.splice(loadingRequestIndex, 1);
   }
   return {

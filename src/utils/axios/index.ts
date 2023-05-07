@@ -4,7 +4,7 @@ import { errorMsg } from '@/utils/msg'
 import { requestStore } from '@/stores';
 
 const defaultConfig = {
-  timeOut: 30000,
+  timeout: 30000,
   // 判斷環境變數
   baseURL: import.meta.env.VITE_BASE_URL ? import.meta.env.VITE_BASE_URL : 'http://localhost:3034'
 }
@@ -26,12 +26,11 @@ class Http {
       const uuid = self.crypto.randomUUID();
       const abortControllerInstance = new AbortController();
       // uuid 唯一識別碼， isUnLoad 判斷
-      const handleConfig = { ...config, uuid:uuid, isUnLoad: false } 
-
+      const handleConfig:any = { ...config, uuid:uuid } 
       // handleConfig.uuid = uuid; // 建立請求唯一碼
       handleConfig.signal = abortControllerInstance.signal; // 建立abort 的方法
+      
       if (!handleConfig.isUnLoad) {
-        console.log(handleConfig.uuid)
         ADD_LOADING({ id: handleConfig.uuid, cancel: abortControllerInstance }); // 丟進pinia裡面的config
       }
       if (handleConfig.headers) {
@@ -60,7 +59,6 @@ class Http {
     (error) => {
       const requestStoreInstance = requestStore();
       const { REMOVE_TARGET_LOADING } = requestStoreInstance;
-      console.log(error)
       const { response = {}, config } = error;
       REMOVE_TARGET_LOADING(config.uuid);
       errorMsg(error.response.data.message)
@@ -69,23 +67,28 @@ class Http {
   }
 
   // params = methods、 query 等等 axios 本身封裝，透過參數傳遞給 axios
-  public httpGet<T>(url: string, params?: AxiosRequestConfig ):Promise<T> {
-    return Http.axiosInstance.get(url, params).then(res => res.data)
+  public httpGet<T>(url: string, params?: AxiosRequestConfig, isUnLoad?:boolean ):Promise<T> {
+    const config = { ...params, isUnLoad};
+    return Http.axiosInstance.get(url, config).then(res => res.data)
   }
 
-  public httpPost<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.post(url, data).then(res => res.data)
+  public httpPost<T>(url: string, data?: AxiosRequestConfig, isUnLoad?:boolean, params?: AxiosRequestConfig):Promise<T> {
+    const config = { ...params, isUnLoad };
+    return Http.axiosInstance.post(url,data, config).then(res => res.data)
   }
 
-  public httpPut<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.put(url, data).then(res => res.data)
+  public httpPut<T>(url: string, data?: AxiosRequestConfig, isUnLoad?:boolean, params?: AxiosRequestConfig):Promise<T> {
+    const config = { ...params, isUnLoad };
+    return Http.axiosInstance.put(url, data, config).then(res => res.data)
   }
 
-  public httpPatch<T>(url: string, data?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.patch(url, data).then(res => res.data)
+  public httpPatch<T>(url: string, data?: AxiosRequestConfig, isUnLoad?:boolean, params?: AxiosRequestConfig):Promise<T> {
+    const config = { ...params, isUnLoad };
+    return Http.axiosInstance.patch(url, data, config).then(res => res.data)
   }
-  public httpDelete<T>(url: string, params?: AxiosRequestConfig):Promise<T> {
-    return Http.axiosInstance.delete(url, params).then(res => res.data)
+  public httpDelete<T>(url: string, data?: AxiosRequestConfig, isUnLoad?:boolean, params?: AxiosRequestConfig):Promise<T> {
+    const config = { data, isUnLoad };
+    return Http.axiosInstance.delete(url, config).then(res => res.data)
   }
 }
 
