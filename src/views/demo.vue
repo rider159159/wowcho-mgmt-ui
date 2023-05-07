@@ -90,6 +90,8 @@ function openToast() {
   })
 }
 const upload = ref('')
+const pagination = ref(2)
+const total = ref(50)
 </script>
 
 <template>
@@ -141,6 +143,7 @@ const upload = ref('')
       <span class="mdi mdi-account"></span>
       <Upload v-model="upload"></Upload>
       <img :src="upload" alt="">
+      <Pagination v-model="pagination" :page-size="10" :total="total" ></Pagination>
     </div>
     <!-- 彈窗 -->
     <Modal v-model="demoModal" title="測試彈窗">
