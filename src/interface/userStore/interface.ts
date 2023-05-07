@@ -1,5 +1,5 @@
 export interface userInfo_interFace{
-  id: number,
+  account: string
   name: string,
   nickName: string,
   photo: string,

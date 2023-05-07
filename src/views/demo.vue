@@ -92,6 +92,11 @@ function openToast() {
 const upload = ref('')
 const pagination = ref(2)
 const total = ref(50)
+const ckeditor = ref('')
+
+onMounted(() => {
+  ckeditor.value = '<p>test</p><h3>asd</h3><h4>&nbsp;</h4><p>qweqwe</p><hr><p>&nbsp;</p>'
+})
 </script>
 
 <template>
