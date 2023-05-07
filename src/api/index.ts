@@ -1,3 +1,3 @@
+export * from './demo';
+export * from './upload';
 export * from './member';
-export * from './project';
-export * from './posts';

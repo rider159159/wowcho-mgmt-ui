@@ -1,13 +1,10 @@
-import { configure, defineRule,FieldContext  } from 'vee-validate';
+import { Field, Form, ErrorMessage,configure, defineRule } from 'vee-validate';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import {
   email, required, min, max, confirmed
 } from '@vee-validate/rules';
-interface MobileRuleParams {
-  target: any; // 請根據您的需求更改這個類型
-  ctx: FieldContext;
-}
+import { App } from 'vue';
 
 defineRule('required', required);
 defineRule('email', email);
@@ -37,6 +34,13 @@ defineRule('password', (value:string) => {
 //   }
 //   return true;
 // });
+
+export function setupVeeValidate(AppInstance:App<Element>) {
+  AppInstance.component('VField', Field);
+  AppInstance.component('VForm', Form);
+  AppInstance.component('ErrorMessage', ErrorMessage);
+}
+
 
 configure({
   generateMessage: localize({
