@@ -29,7 +29,6 @@ async function submitForm() {
   const birthday = formData.birthday
   // 若生日是 TimeStamp 不做事，若非 TimeStamp 轉換成 TimeStamp
   typeof (birthday) === 'number' ? formData.birthday = birthday : formData.birthday = Date.parse(birthday)
-  console.log(Date.parse(birthday))
   // 從 pinia 獲取帳號資料
   formData.account = USER_INFO_REF.value.account
   const res = await fetchMember.editProfile(formData)
