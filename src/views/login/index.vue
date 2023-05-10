@@ -16,7 +16,7 @@ async function submitForm(value:any) {
     timer: 3000
   })
   setTimeout(() => {
-    router.push({ name: 'home' })
+    router.push({ path: '/proposal' })
   }, 2000)
 }
 

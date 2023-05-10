@@ -8,6 +8,42 @@ const defaultConfig = {
   // 判斷環境變數
   baseURL: import.meta.env.VITE_BASE_URL ? import.meta.env.VITE_BASE_URL : 'http://localhost:3034'
 }
+class ApiResponse {
+  constructor(response: any) {
+    return this.transformData(response);
+  }
+
+  transformData(data: any): any {
+    if (data.hasOwnProperty('data')) {
+      return {
+        ...data,
+        data: this.transformData(data.data),
+      };
+    }
+
+    if (data.hasOwnProperty('list') && Array.isArray(data.list)) {
+      return {
+        ...data,
+        list: data.list.map(this.transformObjectId),
+      };
+    }
+
+    if (data.hasOwnProperty('_id')) {
+      return this.transformObjectId(data);
+    }
+
+    return data;
+  }
+
+  transformObjectId(obj: any): any {
+    const newObj: any = { ...obj };
+    if (obj.hasOwnProperty('_id')) {
+      newObj.id = obj._id;
+      delete newObj._id;
+    }
+    return newObj;
+  }
+}
 
 class Http {
   constructor(){
@@ -29,10 +65,11 @@ class Http {
       const handleConfig:any = { ...config, uuid:uuid } 
       // handleConfig.uuid = uuid; // 建立請求唯一碼
       handleConfig.signal = abortControllerInstance.signal; // 建立abort 的方法
-      
+      // 是否要觸發全域 loading
       if (!handleConfig.isUnLoad) {
         ADD_LOADING({ id: handleConfig.uuid, cancel: abortControllerInstance }); // 丟進pinia裡面的config
       }
+      // 是否要帶 JWT
       if (handleConfig.headers) {
         handleConfig.headers.Authorization = `Bearer ${GET_TOKEN()}`;
       }
@@ -44,17 +81,20 @@ class Http {
 
   private httpInterceptorsResponse() {
     // TODO: axios response 攔截器，API 統一設定可來此
+    // @ts-ignore
     Http.axiosInstance.interceptors.response.use((response:any) => {
       const requestStoreInstance = requestStore();
+      // 移除 Loading
       const { REMOVE_TARGET_LOADING } = requestStoreInstance;
       REMOVE_TARGET_LOADING(response.config.uuid);
-
+      // 狀態成功，會傳轉換 _id 的資料
       const { status } = response
       if ( status === 200  || status < 300 || status === 304 ) {
-        return response
+        return { data: new ApiResponse(response.data) }
       }
       errorMsg(response.data.message)
-      return response
+      // return new ApiResponse(response.data);
+      return { data: new ApiResponse(response.data) }
     }, 
     (error) => {
       const requestStoreInstance = requestStore();

@@ -2,13 +2,14 @@ import { Field, Form, ErrorMessage,configure, defineRule } from 'vee-validate';
 import { localize, setLocale } from '@vee-validate/i18n';
 import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 import {
-  email, required, min, max, confirmed
+  email, required, min, max, confirmed, integer
 } from '@vee-validate/rules';
 import { App } from 'vue';
 
 defineRule('required', required);
 defineRule('email', email);
 defineRule('min', min);
+defineRule('integer', integer);
 
 defineRule('confirmed', (value:string, [target]:any) => {
   if (value === target) {
