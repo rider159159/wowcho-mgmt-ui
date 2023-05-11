@@ -62,20 +62,9 @@ async function submitForm() {
 
 </script>
 
-    <!-- 方案資訊 -->
-    <!-- <div class="flex flex-col xl:flex-row">
-      <div class="flex items-start">
-        <span class="text-#FF5D71 mr-1">*</span>
-        <h6 class="text-h5 leading-h5 mr-4">募資商品預覽圖</h6>
-        <p class="text-gray-2 text-14px leading-5">請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。</p>
-      </div>
-      <VField v-model="formBody.name" type="text" name="name" label="真實姓名" rules="required" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600" />
-    </div>
-    -->
-
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 leading-h2 mb-56px">新增募資提案</h4>
+    <h4 class="text-h2 font-bold leading-h2 mb-56px">新增募資提案</h4>
     <!-- 方案基本資訊 -->
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
     <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">
@@ -197,7 +186,7 @@ async function submitForm() {
     </MyLabel>
 
     <MyLabel title="風險與挑戰" class="mb-6" remark="接受 Markdown 語法。">
-      <Markdown  v-model="formBody.risksChallenge"></Markdown>
+      <Markdown v-model="formBody.risksChallenge"></Markdown>
     </MyLabel>
 
     <MyLabel title="退換貨方式" class="mb-6" remark="接受 Markdown 語法。">

@@ -26,7 +26,7 @@ const props = defineProps({
 <template>
   <label :for="props.label" class="block" :class="props.class">
     <div class="flex flex-col xl:flex-row xl:mb-3">
-      <div class="flex items-start">
+      <div class="flex items-start whitespace-pre">
         <span v-if="props.require" class="text-#FF5D71 mr-1">*</span>
         <h6 class="text-h5 leading-h5 xl:mr-4 mb-1 xl:mb-0">{{ props.title }}</h6>
       </div>
