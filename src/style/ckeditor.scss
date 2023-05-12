@@ -15,7 +15,11 @@
     border-radius: 8px !important;
   }
 }
-
+#markdown.ckError{
+  .ck.ck-editor__main > .ck-editor__editable {
+    border: #FF5D71 2px solid !important;
+  }
+}
 // ck 自訂義
 #editor{
   .ck-content {

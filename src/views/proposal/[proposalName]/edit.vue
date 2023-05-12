@@ -2,9 +2,9 @@
 import { fetchProposal } from '@/api'
 import { proposal } from '@/interface'
 import { Swal, toast } from '@/plugins'
-import router from '@/router'
 
 const route = useRoute()
+const router = useRouter()
 
 const categoryList = ref([
   {
@@ -93,7 +93,7 @@ async function submitForm() {
         proposal: res.data.customizedUrl
       }
     })
-  }, 3000)
+  }, 2100)
 }
 
 onMounted(() => {
@@ -204,12 +204,12 @@ onMounted(() => {
       </div>
     </div>
 
-    <MyLabel title="專案網址" label="customizedUrl" class="mb-6">
+    <!-- <MyLabel title="專案網址" label="customizedUrl" class="mb-6">
       <div class="flex items-center">
         <p class="mr-3">https://www.wowchao.com/#/project/</p>
         <input v-model="formBody.customizedUrl" type="text" id="customizedUrl" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3">
       </div>
-    </MyLabel>
+    </MyLabel> -->
 
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">承諾及告示</h5>
     <MyLabel title="客服聯絡方式" class="mb-6" remark="1.建議包含客服信箱、連絡電話或 Line。 2. 接受 Markdown 語法。">

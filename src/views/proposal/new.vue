@@ -4,6 +4,8 @@ import { proposal } from '@/interface'
 import { fetchProposal } from '@/api'
 import { toast, Swal } from '@/plugins'
 
+const router = useRouter()
+
 const tempProposal = JSON.parse(JSON.stringify(proposal))
 const formBody = ref(tempProposal)
 
@@ -71,6 +73,14 @@ async function submitForm() {
     autoClose: 2000,
     theme: 'colored'
   })
+  setTimeout(() => {
+    router.push({
+      path: '/proposal',
+      params: {
+        proposal: res.data.customizedUrl
+      }
+    })
+  }, 2100)
 }
 
 </script>

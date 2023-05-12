@@ -46,4 +46,4 @@ configure({
     ZhTW
   })
 })
-setLocale('zh_TW')
+setLocale('ZhTW')

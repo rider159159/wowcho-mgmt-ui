@@ -6,6 +6,7 @@ import { fetchPlan } from '@/api'
 import { Swal, toast } from '@/plugins'
 
 const route = useRoute()
+const router = useRouter()
 
 const formBody = ref(plan)
 // CK 編輯器用判斷是否獲得資料，以方便雙向綁定
@@ -114,6 +115,14 @@ async function submitForm() {
     autoClose: 2000,
     theme: 'colored'
   })
+  setTimeout(() => {
+    router.push({
+      name: 'optionIndex',
+      params: {
+        proposal: route.params.proposal
+      }
+    })
+  }, 2100)
 }
 
 onMounted(() => {
@@ -180,7 +189,11 @@ onMounted(() => {
       <li>簡短扼要地介紹品項描述，可縮短贊助人決定時間，提升使用者體驗。</li>
       <li>接受 Markdown 語法。</li>
     </ul>
-    <Markdown v-model="formBody.summary" :getCkData="getCkData"></Markdown>
+    <VField v-model="formBody.summary" name="summary" id="summary" label="方案內容" rules="required" type="number">
+      <Markdown v-model="formBody.summary" :getCkData="getCkData" :class="{'.ckError': errors.summary }"></Markdown>
+    </VField>
+    <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
+
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">方案規格</h5>
     <button @click.prevent="addPlan" class="w-130px bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 rounded-3xl" :class="{ 'bg-gray4 text-gray3 !hover:bg-gray4 hover:text-gray3': formBody.specification.length >= 2 }">新增規格</button>
     <div v-for="(item,index) in formBody.specification" :key="item.id" class="first:mt-4 relative bg-gray4 rounded-4 p-6 my-6">

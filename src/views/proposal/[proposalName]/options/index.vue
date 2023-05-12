@@ -9,6 +9,7 @@ const query = ref({
   pageSize: 12,
   proposalUrl: route.params.proposal
 })
+
 const planList:any = ref([])
 const planListTotal = ref(0)
 
@@ -40,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="py-6">
     <h4 class="text-h2 leading-h2 mb-56px fw-700">計畫方案</h4>
     <!-- 方案基本資訊 -->
     <div class="flex border-b-2 b-line pb-4">
@@ -53,14 +54,14 @@ onMounted(() => {
       </router-link>
     </div>
     <!-- grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 -->
-    <div class="">
+    <div>
       <div  v-for="(item,index) in planList" :key="index" class="mb-4">
         <div class="flex w-full py-4 gap-6">
           <img :src="item.image" class="w-[calc(25%-24px)]">
           <h5 class="w-[calc(45%-24px)] text-h6 leading-h5">{{ item.name }}</h5>
           <div class="w-[calc(30%-24px)]">
             <div class="w-full flex flex-col items-end gap-6">
-              <p class="leading-h5">NT - {{ item.actualPrice }}</p>
+              <p class="leading-h5">NT {{ item.actualPrice }}</p>
               <p> {{ item.nowBuyers }} / {{ item.quantity }}</p>
               <div class="flex">
                 <router-link :to="`/proposal/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center mr-4">修改方案</router-link>
@@ -70,6 +71,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
+      <Pagination v-model="query.page" :page-size="query.pageSize" :total="planListTotal" ></Pagination>
     </div>
   </div>
 </template>

@@ -4,10 +4,11 @@ import { plan, Ispecification, IinputItem } from '@/interface'
 import type { Ref } from 'vue'
 import { Swal, toast } from '@/plugins'
 import { fetchPlan } from '@/api'
-
 const route = useRoute()
+const router = useRouter()
 
-const formBody = ref(plan)
+const tempPlan = JSON.parse(JSON.stringify(plan))
+const formBody = ref(tempPlan)
 // 送出表單時，判斷用
 const formControl = ref(false)
 
@@ -76,7 +77,7 @@ function imageError () {
 // 規格錯誤
 function specificationError () {
   if (formBody.value.specification.length > 0) {
-    formBody.value.specification.forEach((item) => {
+    formBody.value.specification.forEach((item:any) => {
       if (item.option.length <= 0 || item.title.length <= 0) {
         return Swal.fire({
           icon: 'warning',
@@ -100,12 +101,20 @@ async function submitForm() {
     autoClose: 2000,
     theme: 'colored'
   })
+  setTimeout(() => {
+    router.push({
+      name: 'optionIndex',
+      params: {
+        proposal: route.params.proposal
+      }
+    })
+  }, 2100)
 }
 </script>
 
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 font-bold leading-h2 mb-4">新增募資提案</h4>
+    <h4 class="text-h2 font-bold leading-h2 mb-4">新增募資方案</h4>
     <p class="w-full text-gray2 text-h5 mb-56px">可以在此頁面中設定，募資計畫中的商品方案。</p>
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
@@ -156,13 +165,20 @@ async function submitForm() {
         </MyLabel>
       </div>
     </div>
-    <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">方案簡介</h5>
+    <div class="flex pb-4 mb-6 mt-56px border-b-2 b-line">
+      <span class="text-#FF5D71 mr-1">*</span>
+      <h5 class="w-full text-brand1 text-h4">方案簡介</h5>
+    </div>
     <ul class="list-disc text-14px text-gray2 pl-4 mb-4">
       <li>此選項介紹該方案內容，商品金額、分期付款、贊助數量，等等資訊介紹，可以無需在此介紹。</li>
       <li>簡短扼要地介紹品項描述，可縮短贊助人決定時間，提升使用者體驗。</li>
       <li>接受 Markdown 語法。</li>
     </ul>
-    <Markdown v-model="formBody.summary"></Markdown>
+    <VField v-model="formBody.summary" name="summary" id="summary" label="方案內容" rules="required" type="number">
+      <Markdown v-model="formBody.summary" :class="{'ckError': errors.summary }"></Markdown>
+    </VField>
+    <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
+
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">方案規格</h5>
     <button @click.prevent="addPlan" class="w-130px bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 rounded-3xl" :class="{ 'bg-gray4 text-gray3 !hover:bg-gray4 hover:text-gray3': formBody.specification.length >= 2 }">新增規格</button>
     <div v-for="(item,index) in formBody.specification" :key="item.id" class="first:mt-4 relative bg-gray4 rounded-4 p-6 my-6">

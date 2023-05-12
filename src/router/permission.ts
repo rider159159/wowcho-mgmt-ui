@@ -7,6 +7,9 @@ import { userInfoStore } from '@/stores'
 const whiteList = ['/signup', '/login', '/demo']
 const permission = (router: Router) => {
   router.beforeEach(async (to) => {
+    if (to.path === '/') {
+      return '/proposal'
+    }
     // 確認前往的是在白名單，若是直接通過，不是的則需驗證
     if (whiteList.includes(to.path)) {
       return true
