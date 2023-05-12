@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { fetchProposal } from '@/api'
 import { proposal } from '@/interface'
-import { toast } from '@/plugins'
+import { Swal, toast } from '@/plugins'
+import router from '@/router'
 
 const route = useRoute()
 
@@ -47,29 +48,52 @@ const ageLimitList = ref([
   }
 ])
 
-const formBody = ref(proposal)
+const tempProposal = JSON.parse(JSON.stringify(proposal))
+const formBody = ref(tempProposal)
+
 // CK 編輯器用判斷是否獲得資料，以方便雙向綁定
 const getCkData = ref(false)
+
+// 未上傳圖片
+function imageError () {
+  if (!formBody.value.image) { // 沒圖片
+    return Swal.fire({
+      icon: 'warning',
+      title: '請上傳募資商品預覽圖'
+    })
+  }
+}
+
 async function getProposal () {
   const query = {
     url: route.params.proposal
   }
   const res = await fetchProposal.get(query)
+  if (res.status !== 'Success') return
+
   getCkData.value = true
   formBody.value = res.data
 }
 
 async function submitForm() {
+  if (imageError()) return
   const formData = JSON.parse(JSON.stringify(formBody.value))
-
   const res = await fetchProposal.update(formData)
   if (res.status !== 'Success') return
 
-  toast.success('新增募資提案成功', {
+  toast.success('編輯募資提案成功!', {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: 2000,
     theme: 'colored'
   })
+  setTimeout(() => {
+    router.push({
+      name: 'dashboard',
+      params: {
+        proposal: res.data.customizedUrl
+      }
+    })
+  }, 3000)
 }
 
 onMounted(() => {
@@ -79,7 +103,7 @@ onMounted(() => {
 
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 leading-h2 mb-56px">新增募資提案</h4>
+    <h4 class="text-h2 leading-h2 mb-56px">修改募資提案</h4>
     <!-- 方案基本資訊 -->
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
     <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">
@@ -200,6 +224,6 @@ onMounted(() => {
       <Markdown  v-model="formBody.returnGoods" :getCkData="getCkData"></Markdown>
     </MyLabel>
 
-    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 text-white rounded-3xl">儲存提案</button>
+    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存提案</button>
   </VForm>
 </template>

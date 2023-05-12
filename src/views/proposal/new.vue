@@ -2,8 +2,10 @@
 import { proposal } from '@/interface'
 // API 運用
 import { fetchProposal } from '@/api'
-import { toast } from '@/plugins'
-const formBody = ref(proposal)
+import { toast, Swal } from '@/plugins'
+
+const tempProposal = JSON.parse(JSON.stringify(proposal))
+const formBody = ref(tempProposal)
 
 const categoryList = ref([
   {
@@ -47,9 +49,20 @@ const ageLimitList = ref([
   }
 ])
 
-async function submitForm() {
-  const formData = JSON.parse(JSON.stringify(formBody.value))
+// 未上傳圖片
+function imageError () {
+  if (!formBody.value.image) { // 沒圖片
+    return Swal.fire({
+      icon: 'warning',
+      title: '請上傳募資商品預覽圖'
+    })
+  }
+}
 
+async function submitForm() {
+  if (imageError()) return
+
+  const formData = JSON.parse(JSON.stringify(formBody.value))
   const res = await fetchProposal.create(formData)
   if (res.status !== 'Success') return
 
@@ -193,6 +206,6 @@ async function submitForm() {
       <Markdown  v-model="formBody.returnGoods"></Markdown>
     </MyLabel>
 
-    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 text-white rounded-3xl">儲存提案</button>
+    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存提案</button>
   </VForm>
 </template>
