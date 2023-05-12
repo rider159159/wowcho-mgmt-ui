@@ -1,6 +1,6 @@
 import { http } from '@/utils/axios'
-import { ApiResponse } from '@/interface'
+import { type ApiResponse } from '@/interface'
 
 export const fetchUpload = {
-  upload: (data?:any, isUnLoad?:boolean):Promise<ApiResponse> => http.httpPost('/upload',data, isUnLoad),
+  upload: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpPost('/upload', data, isUnLoad)
 }

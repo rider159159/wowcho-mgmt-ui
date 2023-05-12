@@ -1,4 +1,4 @@
-export * from './api/interface';
+export * from './api/interface'
 export * from './login/interface'
 export * from './login/const'
 export * from './userStore/interface'

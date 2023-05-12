@@ -1,14 +1,13 @@
 import { http } from '@/utils/axios'
-import { ApiResponse } from '@/interface'
+import { type ApiResponse } from '@/interface'
 
 export const fetchMember = {
   // 註冊
-  register:(data?:any, isUnLoad?:boolean):Promise<ApiResponse> => http.httpPost('/register',data ,isUnLoad),
+  register: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpPost('/register', data, isUnLoad),
   // 登入
-  login: (data?:any, isUnLoad?:boolean):Promise<ApiResponse> => http.httpPost('/login',data, isUnLoad),
+  login: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpPost('/login', data, isUnLoad),
   // 取得帳戶資料
-  getProfile: (params?:any, isUnLoad?:boolean):Promise<ApiResponse> => http.httpGet('/profile',{ params } ,isUnLoad),
+  getProfile: async (params?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpGet('/profile', { params }, isUnLoad),
   // 更新帳戶資料
-  editProfile: (data?:any, isUnLoad?:boolean):Promise<ApiResponse> => http.httpPatch('/profile',data, isUnLoad),
+  editProfile: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpPatch('/profile', data, isUnLoad)
 }
-

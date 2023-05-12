@@ -1,6 +1,6 @@
-import { login_interface } from './interface'
+import { type Ilogin } from './interface'
 
-export const login:login_interface = {
+export const login: Ilogin = {
   email: '',
   password: '',
   confirmPassword: ''

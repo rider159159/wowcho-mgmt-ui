@@ -1,2 +1,2 @@
-export * from './cookie';
-export * from './msg';
+export * from './cookie'
+export * from './msg'

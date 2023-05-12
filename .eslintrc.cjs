@@ -5,8 +5,7 @@ module.exports = {
   },
   extends: [
     'plugin:vue/vue3-essential',
-    'standard-with-typescript',
-    './.eslintrc-auto-import.json'
+    'standard'
   ],
   overrides: [
   ],
@@ -16,7 +15,8 @@ module.exports = {
     parser: '@typescript-eslint/parser'
   },
   plugins: [
-    'vue'
+    'vue',
+    '@typescript-eslint'
   ],
   rules: {
     'space-before-function-paren': 0,
