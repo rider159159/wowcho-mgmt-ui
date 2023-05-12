@@ -59,9 +59,9 @@ export interface IProposal {
   faqIdList: string[]
 
   // 客服聯絡方式
-  serviceContact: string
+  contact: string
   // 風險與挑戰
-  risksChallenge: string
+  risk: string
   // 退換貨方式
-  returnGoods: string
+  refund: string
 }

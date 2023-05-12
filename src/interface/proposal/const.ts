@@ -36,9 +36,9 @@ export const proposal: IProposal = {
   faqIdList: [],
 
   // 客服聯絡方式
-  serviceContact: '',
+  contact: '',
   // 風險與挑戰
-  risksChallenge: '',
+  risk: '',
   // 退換貨方式
-  returnGoods: ''
+  refund: '',
 }

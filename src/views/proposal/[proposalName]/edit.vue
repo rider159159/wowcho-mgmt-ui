@@ -66,7 +66,7 @@ function imageError () {
 
 async function getProposal () {
   const query = {
-    url: route.params.proposal
+    proposalUrl: route.params.proposal
   }
   const res = await fetchProposal.get(query)
   if (res.status !== 'Success') return
@@ -213,15 +213,15 @@ onMounted(() => {
 
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">承諾及告示</h5>
     <MyLabel title="客服聯絡方式" class="mb-6" remark="1.建議包含客服信箱、連絡電話或 Line。 2. 接受 Markdown 語法。">
-      <Markdown  v-model="formBody.serviceContact" :getCkData="getCkData"></Markdown>
+      <Markdown  v-model="formBody.contact" :getCkData="getCkData"></Markdown>
     </MyLabel>
 
     <MyLabel title="風險與挑戰" class="mb-6" remark="接受 Markdown 語法。">
-      <Markdown  v-model="formBody.risksChallenge" :getCkData="getCkData"></Markdown>
+      <Markdown  v-model="formBody.risk" :getCkData="getCkData"></Markdown>
     </MyLabel>
 
     <MyLabel title="退換貨方式" class="mb-6" remark="接受 Markdown 語法。">
-      <Markdown  v-model="formBody.returnGoods" :getCkData="getCkData"></Markdown>
+      <Markdown  v-model="formBody.refund" :getCkData="getCkData"></Markdown>
     </MyLabel>
 
     <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存提案</button>
