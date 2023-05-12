@@ -2,8 +2,10 @@
 import { proposal } from '@/interface'
 // API 運用
 import { fetchProposal } from '@/api'
-import { toast } from '@/plugins'
-const formBody = ref(proposal)
+import { toast, Swal } from '@/plugins'
+
+const tempProposal = JSON.parse(JSON.stringify(proposal))
+const formBody = ref(tempProposal)
 
 const categoryList = ref([
   {
@@ -47,9 +49,20 @@ const ageLimitList = ref([
   }
 ])
 
-async function submitForm() {
-  const formData = JSON.parse(JSON.stringify(formBody.value))
+// 未上傳圖片
+function imageError () {
+  if (!formBody.value.image) { // 沒圖片
+    return Swal.fire({
+      icon: 'warning',
+      title: '請上傳募資商品預覽圖'
+    })
+  }
+}
 
+async function submitForm() {
+  if (imageError()) return
+
+  const formData = JSON.parse(JSON.stringify(formBody.value))
   const res = await fetchProposal.create(formData)
   if (res.status !== 'Success') return
 
@@ -61,17 +74,6 @@ async function submitForm() {
 }
 
 </script>
-
-    <!-- 方案資訊 -->
-    <!-- <div class="flex flex-col xl:flex-row">
-      <div class="flex items-start">
-        <span class="text-#FF5D71 mr-1">*</span>
-        <h6 class="text-h5 leading-h5 mr-4">募資商品預覽圖</h6>
-        <p class="text-gray-2 text-14px leading-5">請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。</p>
-      </div>
-      <VField v-model="formBody.name" type="text" name="name" label="真實姓名" rules="required" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600" />
-    </div>
-    -->
 
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
@@ -204,6 +206,6 @@ async function submitForm() {
       <Markdown  v-model="formBody.returnGoods"></Markdown>
     </MyLabel>
 
-    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 text-white rounded-3xl">儲存提案</button>
+    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存提案</button>
   </VForm>
 </template>

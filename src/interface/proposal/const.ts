@@ -22,7 +22,7 @@ export const proposal:IProposal = {
 	// 年齡限制
 	ageLimit:0,
 	// 客製化 URL
-	customizedUrl:null,
+	customizedUrl:'',
 	// 狀態 0 = 草稿，前台看不到 1 = 上架
 	status: 1,
 	// 關聯
