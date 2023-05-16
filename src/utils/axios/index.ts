@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 import { GET_TOKEN } from '../cookie'
-import { errorMsg } from '@/utils/msg'
+import { errorMsg, setUUID } from '@/utils'
 import { requestStore } from '@/stores'
 
 const defaultConfig = {
@@ -59,7 +59,7 @@ class Http {
       const requestStoreInstance = requestStore()
       const { ADD_LOADING } = requestStoreInstance
 
-      const uuid = self.crypto.randomUUID()
+      const uuid = setUUID()
       const abortControllerInstance = new AbortController()
       // uuid 唯一識別碼， isUnLoad 判斷
       const handleConfig: any = { ...config, uuid }
