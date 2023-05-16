@@ -36,26 +36,26 @@ const router = createRouter({
         layout: DefaultLayout 
       }
     },
-    // 登入
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/login/index.vue'),
-      meta: {
-        keepAlive: false,
-        layout: DefaultLayout 
-      }
-    },
-    // 註冊
-    {
-      path: '/signup',
-      name: 'signup',
-      component: () => import('../views/signup/index.vue'),
-      meta: {
-        keepAlive: false,
-        layout: DefaultLayout 
-      }
-    },
+    // // 登入
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: () => import('../views/login/index.vue'),
+    //   meta: {
+    //     keepAlive: false,
+    //     layout: DefaultLayout 
+    //   }
+    // },
+    // // 註冊
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: () => import('../views/signup/index.vue'),
+    //   meta: {
+    //     keepAlive: false,
+    //     layout: DefaultLayout 
+    //   }
+    // },
     // 錯誤頁面
     {
       path: "/:catchAll(.*)",

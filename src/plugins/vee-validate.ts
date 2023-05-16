@@ -6,9 +6,12 @@ import {
 } from '@vee-validate/rules';
 import { App } from 'vue';
 
-defineRule('required', required);
-defineRule('email', email);
-defineRule('min', min);
+defineRule('required', value => {
+  return value ? true : `此欄位為必填`;
+});
+defineRule('email', email)
+defineRule('min', min)
+
 
 defineRule('confirmed', (value:string, [target]:any) => {
   if (value === target) {

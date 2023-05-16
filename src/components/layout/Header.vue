@@ -1,6 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
+
+import Modal from '../common/Modal.vue'
+import Login from '../../views/login/index.vue'
+import Signup from '../../views/signup/index.vue'
+const showModal = ref(false); // 控制 Modal 的顯示與否
+const currentComponent = ref('Login')
+// 登入註冊彈窗控制
+const openModal = () => { showModal.value = true }
+const closeModal = () => { showModal.value = false }
+
 
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
@@ -62,7 +73,7 @@ function logout () {
                 >提案</router-link
               >
             </li>
-            <!-- <li data-te-nav-item-ref>
+            <li data-te-nav-item-ref>
               <a
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 href="#!"
@@ -78,9 +89,9 @@ function logout () {
               <a
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 href="#!"
-                ><MyButton class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
+                ><MyButton @click.prevent="openModal" class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
               >
-            </li> -->
+            </li>
             <li class="cursor-pointer relative" data-te-nav-item-ref>
               <!-- 使用者預設頭像 -->
               <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,6 +224,18 @@ function logout () {
         </a>
       </div>
     </div>
+
+    <!-- 登入註冊彈窗 -->
+    <Modal v-model="showModal" @close="closeModal">
+      <Login v-if="currentComponent === 'Login'" 
+            @switchToSignup="currentComponent='Signup'" 
+            @closeModal="closeModal"
+      />
+      <Signup v-if="currentComponent === 'Signup'" 
+            @switchToLogin="currentComponent='Login'" 
+      />
+    </Modal>
+
   </header>
 </template>
 
