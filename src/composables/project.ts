@@ -9,3 +9,9 @@ export function calculateDiscount(originPrice:number = 0, discountPrice:number =
   discount = Number(discountString) * 100
   return discount
 }
+
+// 計算千分位
+export function numberWithCommas(value:string|number) {
+  const stringValue = typeof value === 'number' ? value.toString() : value;
+  return stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
