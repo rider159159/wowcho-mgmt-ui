@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
+import { GET_TOKEN } from '@/utils'
 
 import Modal from '../common/Modal.vue'
 import Login from '../../views/login/index.vue'
@@ -16,6 +17,8 @@ const closeModal = () => { showModal.value = false }
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
 const { FN_LOGOUT } = userInfoStore()
+const isLogin = ref(false)
+const loginTure = () => { isLogin.value = true }
 
 const router = useRouter()
 
@@ -31,6 +34,11 @@ function closeMemberMenu() {
 function logout () {
   FN_LOGOUT()
 }
+
+onMounted(() => {
+  const token = GET_TOKEN()
+  token ? isLogin.value = true : isLogin.value = false
+})
 </script>
 
 <template>
@@ -92,7 +100,7 @@ function logout () {
                 ><MyButton @click.prevent="openModal" class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
               >
             </li>
-            <li class="cursor-pointer relative" data-te-nav-item-ref>
+            <li v-if="isLogin" class="cursor-pointer relative" data-te-nav-item-ref>
               <!-- 使用者預設頭像 -->
               <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
@@ -217,6 +225,12 @@ function logout () {
           </ul>
         </div>
         <a
+          v-if="!isLogin"
+          class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
+          href="#!"
+          ><MyButton @click.prevent="openModal" class="w-full bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
+        >
+        <a
           @click.prevent="logout()"
           class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
           >
@@ -230,6 +244,7 @@ function logout () {
       <Login v-if="currentComponent === 'Login'" 
             @switchToSignup="currentComponent='Signup'" 
             @closeModal="closeModal"
+            @loginTure="loginTure"
       />
       <Signup v-if="currentComponent === 'Signup'" 
             @switchToLogin="currentComponent='Login'" 

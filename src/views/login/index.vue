@@ -3,7 +3,7 @@ import { fetchMember } from '@/api'
 import { SET_TOKEN } from '@/utils'
 import { Swal } from '@/plugins/sweet-alert'
 const router = useRouter()
-const emits = defineEmits(['switchToSignup','closeModal'])
+const emits = defineEmits(['switchToSignup','closeModal','loginTure'])
 
 async function submitForm(value:any) {
   const formBody = value
@@ -19,7 +19,9 @@ async function submitForm(value:any) {
   setTimeout(() => {
     // router.push({ path: '/proposal' })
     emits('closeModal')
+    emits('loginTure')
     router.push({ path: '/' })
+    
   }, 1000)
 }
 
