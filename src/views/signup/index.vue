@@ -46,14 +46,14 @@ const emits = defineEmits(['switchToLogin'])
       <div>
         <label for="account" class="flex flex-col">
           <p class="mb-2 h6">帳號</p>
-          <VField type="text" name="account" label="帳號" rules="required" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1" />
+          <VField type="text" name="account" label="帳號" rules="required" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1" placeholder="請輸入帳號"/>
         </label>
         <ErrorMessage name="account" class="block text-red-500 text-13px"/>
       </div>
       <div>
         <label for="email" class="flex flex-col">
           <p class="mb-2 h6">電子信箱</p>
-          <VField type="email" name="email" label="電子信箱" rules="required|email" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1" />
+          <VField type="email" name="email" label="電子信箱" rules="required|email" class="text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1" placeholder="請輸入電子信箱"/>
         </label>
         <ErrorMessage name="email" class="block text-red-500 text-13px"/>
       </div>
@@ -62,7 +62,7 @@ const emits = defineEmits(['switchToLogin'])
           <p class="mb-2">密碼:</p>
           <VField name="password" label="密碼" rules="required|password" v-slot="{ field }">
             <div class="relative">
-              <input v-bind="field" :type="passwordType" class="w-full text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1">
+              <input v-bind="field" :type="passwordType" class="w-full text-h6 leading-h4 px-2 mb-2 rounded b border-[#ccc] focus:outline-none focus:ring-1 focus:ring-brand-1 focus:border-brand-1" placeholder="請輸入密碼">
               <span v-if="passwordShow" @click="togglePasswordType(false,'text')" class="mdi mdi-eye text-h4 absolute right-4 cursor-pointer"></span>
               <span v-if="!passwordShow" @click="togglePasswordType(true,'password')" class="mdi mdi-eye-off text-h4 absolute right-4 cursor-pointer"></span>
             </div>
