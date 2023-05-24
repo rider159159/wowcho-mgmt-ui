@@ -8,15 +8,11 @@ const router = useRouter()
 
 const categoryList = ref([
   {
-    title: '出版',
-    value: 0
-  },
-  {
     title: '社會',
     value: 1
   },
   {
-    title: '教育',
+    title: '出版',
     value: 2
   },
   {
@@ -24,16 +20,24 @@ const categoryList = ref([
     value: 3
   },
   {
-    title: '科技',
+    title: '娛樂',
     value: 4
   },
   {
-    title: '休閒',
+    title: '生活',
     value: 5
   },
   {
     title: '設計',
     value: 6
+  },
+  {
+    title: '科技',
+    value: 7
+  },
+  {
+    title: '休閒',
+    value: 8
   }
 ])
 
