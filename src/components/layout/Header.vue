@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { userInfoStore } from '@/stores'
+import { userInfoStore, userLoginStore } from '@/stores'
 import { GET_TOKEN } from '@/utils'
 
 import Modal from '../common/Modal.vue'
@@ -9,9 +9,17 @@ import Login from '../../views/login/index.vue'
 import Signup from '../../views/signup/index.vue'
 const showModal = ref(false); // 控制 Modal 的顯示與否
 const currentComponent = ref('Login')
+//監聽登入註冊彈窗狀態
+const LOGIN_STORE = userLoginStore()
+watch(() => LOGIN_STORE.SHOW_LOGIN_MODAL, (newVal) => {
+  showModal.value = newVal;
+});
 // 登入註冊彈窗控制
 const openModal = () => { showModal.value = true }
-const closeModal = () => { showModal.value = false }
+const closeModal = () => { 
+  LOGIN_STORE.SHOW_LOGIN_MODAL = false;
+  showModal.value = false;
+}
 
 
 const store = userInfoStore()
@@ -240,7 +248,7 @@ onMounted(() => {
     </div>
 
     <!-- 登入註冊彈窗 -->
-    <Modal v-model="showModal" @close="closeModal">
+    <Modal v-model="showModal" @update:modelValue="closeModal">
       <Login v-if="currentComponent === 'Login'" 
             @switchToSignup="currentComponent='Signup'" 
             @closeModal="closeModal"

@@ -25,6 +25,7 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue', 'closeModal', 'saveClick'])
 const closeModal = () => {
   emits('update:modelValue', false)
+  emits('closeModal');
 }
 </script>
 <template>

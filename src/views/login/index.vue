@@ -2,8 +2,10 @@
 import { fetchMember } from '@/api'
 import { SET_TOKEN } from '@/utils'
 import { Swal } from '@/plugins/sweet-alert'
+import { userLoginStore } from '@/stores'
 const router = useRouter()
 const emits = defineEmits(['switchToSignup','closeModal','loginTure'])
+const LOGIN_STORE = userLoginStore()
 
 async function submitForm(value:any) {
   const formBody = value
@@ -11,7 +13,7 @@ async function submitForm(value:any) {
   SET_TOKEN(res.data.token)
   Swal.fire({
     icon: 'success',
-    title: '登入成功，即將前往首頁!',
+    title: '登入成功!',
     confirmButtonText: '確定',
     confirmButtonColor: '#2378BF',
     timer: 3000
@@ -20,7 +22,7 @@ async function submitForm(value:any) {
     // router.push({ path: '/proposal' })
     emits('closeModal')
     emits('loginTure')
-    router.push({ path: '/' })
+    router.push({ path: LOGIN_STORE.TO_ROUTE || '/' })
     
   }, 1000)
 }
