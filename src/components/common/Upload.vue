@@ -55,10 +55,10 @@ function checkImage(e:any) {
 
 <template>
   <div>
-    <label for="uploadInput" class="flex justify-center py-8px rounded-20px w-120px cursor-pointer border border-#3989D0 hover:bg-#3989D0/20 duration-300 select-none" :class="props.class">
-      上傳圖片
+    <label for="uploadInput" class="inline-block cursor-pointer w-320px" :class="props.class">
+      <img class="w-full" src="/proposal/Upload.svg">
     </label>
-    <input @change="checkImage" accept=".jpg, .png, .jpeg" type="file" id="uploadInput" class="hidden">
+    <input @change="checkImage" accept=".jpg, .png, .jpeg .webp" type="file" id="uploadInput" class="hidden">
     <span v-if="showErrorMessage">{{ props.errorMessage }}</span>
   </div>
 </template>

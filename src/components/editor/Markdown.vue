@@ -13,6 +13,10 @@ const props = defineProps({
   modelValue: {
     type: String,
     default: ''
+  },
+  getCkData: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -26,6 +30,12 @@ function checkProps() {
     editorInstance.setData(props.modelValue)
   }
 }
+
+watch(() => props.getCkData,
+  (oldValue, newValue) => {
+    editorInstance.setData(props.modelValue)
+  }
+)
 
 onMounted(() => {
   ClassicEditor.create(mkEditor.value, {
@@ -46,10 +56,16 @@ onMounted(() => {
     })
 })
 
+onBeforeUnmount(() => {
+  if (editorInstance) {
+    editorInstance.destroy()
+  }
+})
+
 </script>
 
 <template>
-  <div class="markdown">
-    <div ref="mkEditor" id="mkEditor"></div>
+  <div id="markdown" class="formatted">
+    <div ref="mkEditor" class="w-full text-h6 h-120px leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"></div>
   </div>
 </template>

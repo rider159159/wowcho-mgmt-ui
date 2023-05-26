@@ -1,14 +1,44 @@
-.markdown{
+// mark自訂義
+#markdown{
+  .ck-content {
+    min-height: 120px;
+  }
   .ck-editor__top{
     display: none;
   }
-}
-
-.formatted{
-  .ck-content{
-    min-height: 300px;
+  .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused){
+  border: #C2D7EA 2px solid;
+  border-radius: 8px;
+  }
+  .ck.ck-editor__main > .ck-editor__editable.ck-focused{
+    border: rgb(112, 190, 251) 2px solid !important;
+    border-radius: 8px !important;
   }
 }
+#markdown.ckError{
+  .ck.ck-editor__main > .ck-editor__editable {
+    border: #FF5D71 2px solid !important;
+  }
+}
+// ck 自訂義
+#editor{
+  .ck-content {
+    min-height: 350px;
+  }
+  .ck-focused {
+    border: rgb(112, 190, 251) 2px solid
+  }
+  .ck-rounded-corners.ck-editor{
+    border:#C2D7EA 2px solid
+  }
+  .ckError{
+    .ck-focused {
+      border: #FF5D71 2px solid
+    }
+  }
+
+}
+
 
 .formatted p,.formatted ul,.formatted ol,.formatted blockquote,.formatted pre {
   font-size: 1em;

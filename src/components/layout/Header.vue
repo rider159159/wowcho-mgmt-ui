@@ -30,7 +30,7 @@ function logout () {
         <div
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
           id="navbarSupportedContentX">
-          <img src="/logo.svg" alt="">
+          <img @click="router.push('/proposal')" class="cursor-pointer" src="/logo.svg" alt="">
           <!-- <div class="hidden lg:flex justify-between items-center relative">
             <form action="">
               <input type="text" name="search" placeholder="搜尋" class="w-80 outline outline-1 outline-brand-3 rounded-3xl py-2 px-5 pl-10">

@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 // 2023/10/03 14:03:02
 export function dateTime(timestamp: number) :string {
@@ -36,4 +36,8 @@ export function dateMMDDYYYY(timestamp: number) :string {
 
 export function timeHHMMSS(timestamp: number) :string {
   return timestamp ? dayjs(dayjs.unix(timestamp)).format('HH:mm:ss') : '-'
+}
+
+export function timeStampChange (timeStamp: number): string {
+  return dayjs(timeStamp).format('YYYY-MM-DD')
 }

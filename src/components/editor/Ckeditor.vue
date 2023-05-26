@@ -31,6 +31,21 @@ import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalli
 import FileRepository from '@ckeditor/ckeditor5-upload/src/filerepository'
 import { MyUploadAdapter } from '@/plugins/ckeditor'
 
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  class: {
+    type: String,
+    default: ''
+  },
+  getCkData: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const editor:any = ref(null)
 let editorInstance:any = null
 const emits = defineEmits(['update:modelValue'])
@@ -50,6 +65,11 @@ function checkProps() {
   }
 }
 
+watch(() => props.getCkData,
+  (oldValue, newValue) => {
+    editorInstance.setData(props.modelValue)
+  }
+)
 onMounted(() => {
   ClassicEditor.create(editor.value, {
     toolbar: {
@@ -133,23 +153,17 @@ onMounted(() => {
       console.error('There was a problem initializing the editor.', error)
     })
 })
+
 onBeforeUnmount(() => {
   if (editorInstance) {
     editorInstance.destroy()
   }
 })
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: ''
-  }
-})
-
 </script>
 
 <template>
-  <div class="formatted">
-    <div ref="editor" id="editor"></div>
+  <div id="editor" class="formatted" :class="props.class">
+    <div ref="editor" ></div>
   </div>
 </template>

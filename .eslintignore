@@ -1,0 +1,4 @@
+node_modules/*
+dist/*
+src/interface/*
+auto-imports.d.ts

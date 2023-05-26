@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { fetchProposal } from '@/api'
+import { defaultImage as vDefaultImage } from '@/directive/defaultImage'
+import { toast } from '@/plugins'
+
 const router = useRouter()
 const tabList = ref([
   {
@@ -16,32 +20,49 @@ const tabList = ref([
 ])
 const tabActive = ref(0)
 
-const projectsList = ref([
-  {
-    title: '日本BROSKI 防水真皮背包｜不怕淋雨高質感牛皮革、包身立體不變型【嘖嘖人氣好評贊助第二彈】',
-    image: './test.webp',
-    id: 'revopoint-range-1'
-  },
-  {
-    title: '日本BROSKI 防水真皮背包｜不怕淋雨高質感牛皮革、包身立體不變型【嘖嘖人氣好評贊助第二彈】',
-    image: './test.webp',
-    id: 'revopoint-range-2'
-  },
-  {
-    title: '日本BROSKI 防水真皮背包｜不怕淋雨高質感牛皮革、包身立體不變型【嘖嘖人氣好評贊助第二彈】',
-    image: './test.webp',
-    id: 'revopoint-range-3'
-  }
-])
+const proposalList:any = ref([])
+
+const query = ref({
+  page: 3,
+  pageSize: 12
+})
+const ProposalListTotal = ref(0)
 
 function toProject (item:any) {
+  // TODO: 確認使用 customizedUrl 、 id
   router.push({
-    path: `/proposal/${item.id}/dashboard`
-    // params: {
-    //   id: item.id
-    // }
+    path: `/proposal/${item.customizedUrl}/dashboard`
   })
 }
+async function getProposalList() {
+  const res = await fetchProposal.getList(query.value)
+  if (res.status !== 'Success') return
+  proposalList.value = res.data.list
+  ProposalListTotal.value = res.data.totalCount
+}
+
+async function delProposal(id:string) {
+  const query = { id: [id] }
+  const res = await fetchProposal.delete(query)
+  if (res.status !== 'Success') return
+  toast.success('刪除募資提案成功!', {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 2000,
+    theme: 'colored'
+  })
+  getProposalList()
+}
+
+watch(
+  () => query.value.page,
+  (newValue, oldValue) => {
+    getProposalList()
+  }
+)
+
+onMounted(() => {
+  getProposalList()
+})
 </script>
 
 <template>
@@ -57,13 +78,25 @@ function toProject (item:any) {
         </a>
       </li>
     </ul>
-    <div class="grid grid-cols-3 gap-4">
-    <div @click="toProject(item)" v-for="(item,index) in projectsList" :key="index" class="rounded-xl cursor-pointer">
-      <div class="flex flex-col w-full">
-        <img :src="item.image" alt="">
-        <p>{{ item.title }}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">
+        <div class="flex flex-col w-full">
+          <img v-default-image="'./proposal/proposalDefault.svg'" @click="toProject(item)" :src="item.image" class="cursor-pointer mb-2">
+          <h5 class="text-h5 leading-h4">{{ item.name }}</h5>
+          <div class="flex justify-between">
+            <div>
+              <p class="leading-h5">募資目標金額: {{ item.targetPrice }}</p>
+              <p>當前累積金額: {{ item.nowPrice }}</p>
+            </div>
+            <div class="self-center">
+              <button @click.prevent="delProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-3 px-6 rounded-full">刪除募資提案</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="flex w-full items-center">
+      <Pagination v-model="query.page" :page-size="query.pageSize" :total="ProposalListTotal" ></Pagination>
+    </div>
   </section>
 </template>

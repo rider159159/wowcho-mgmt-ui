@@ -1,2 +1,2 @@
-export * from './dayjs';
-export * from './project';
+export * from './dayjs'
+export * from './project'

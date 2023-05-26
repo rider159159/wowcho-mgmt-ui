@@ -1,5 +1,5 @@
-import { defineConfig } from '@unocss/vite';
-import presetUno from '@unocss/preset-uno';
+import { defineConfig } from '@unocss/vite'
+import presetUno from '@unocss/preset-uno'
 import transformerDirectives from '@unocss/transformer-directives'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 
@@ -7,33 +7,33 @@ import transformerVariantGroup from '@unocss/transformer-variant-group'
 export default defineConfig({
   exclude: ['node_modules', 'dist', '.git', 'public'],
   presets: [
-    presetUno(),
+    presetUno()
   ],
   // 有紅底線但能正常使用，是 unocss 本身的 error
   transformers: [
     transformerDirectives(),
-    transformerVariantGroup(),
-  ], 
+    transformerVariantGroup()
+  ],
   rules: [
     ['rounded-5xl', {
-      'border-radius': '2.5rem',
-    }],
+      'border-radius': '2.5rem'
+    }]
   ],
   theme: {
     colors: {
-      brand:{
+      brand: {
         1: '#2378BF',
         2: '#369CF0',
         3: '#70BEFB',
-        4: '#ECF7FF',
+        4: '#ECF7FF'
       },
-      gray:{
+      gray: {
         1: '#1F2225',
         2: '#636466',
         3: '#BDBEC2',
-        4: '#EFEFEF',
+        4: '#EFEFEF'
       },
-      line: '#C2D7EA',
+      line: '#C2D7EA'
     },
     fontSize: {
       h1: '40px',
@@ -41,15 +41,15 @@ export default defineConfig({
       h3: '28px',
       h4: '24px',
       h5: '20px',
-      h6: '16px',
+      h6: '16px'
     },
-    lineHeight:{
+    lineHeight: {
       h1: '48px',
       h2: '38px',
       h3: '34px',
       h4: '28px',
       h5: '24px',
-      h6: '20px',
+      h6: '20px'
     }
   }
 })

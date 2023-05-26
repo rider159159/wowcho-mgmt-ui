@@ -1,6 +1,6 @@
-import { userInfo_interFace } from './interface'
+import { type IUserInfo } from './interface'
 
-export const UserInfo:userInfo_interFace = {
+export const UserInfo: IUserInfo = {
   account: '',
   name: '',
   username: '',
@@ -11,9 +11,9 @@ export const UserInfo:userInfo_interFace = {
   birthday: null,
   customizedUrl: null,
   isSubscribed: true,
-  isAllowedNotifications:true,
+  isAllowedNotifications: true,
   website: null, // 個人網站,
   youtube: null, // YT 網址
   instagram: null,
-  facebook: null,
+  facebook: null
 }

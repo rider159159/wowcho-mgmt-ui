@@ -1,10 +1,10 @@
-import { App } from 'vue';
-import { createPinia } from 'pinia';
+import { type App } from 'vue'
+import { createPinia } from 'pinia'
 
-export function setupStore(AppInstance:App<Element>) {
-  const store = createPinia();
-  AppInstance.use(store as any);
+export function setupStore (AppInstance: App<Element>) {
+  const store = createPinia()
+  AppInstance.use(store as any)
 }
-export * from './userInfoStore';
-export * from './messageStore';
-export * from './requestStore';
+export * from './userInfoStore'
+export * from './messageStore'
+export * from './requestStore'

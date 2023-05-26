@@ -1,18 +1,18 @@
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 
-const TokenKey = 'wowcho-mgmt';
+const TokenKey = 'wowcho-mgmt'
 
-export function GET_TOKEN() {
-  return Cookies.get(TokenKey);
+export function GET_TOKEN () {
+  return Cookies.get(TokenKey)
 }
 
-const inFifteenMinutes = new Date(new Date().getTime() + 480 * 60 * 1000);
-export function SET_TOKEN(token:any) {
+const inFifteenMinutes = new Date(new Date().getTime() + 480 * 60 * 1000)
+export function SET_TOKEN (token: any) {
   return Cookies.set(TokenKey, token, {
-    expires: inFifteenMinutes,
-  });
+    expires: inFifteenMinutes
+  })
 }
 
-export function REMOVE_TOKEN() {
-  return Cookies.remove(TokenKey);
+export function REMOVE_TOKEN () {
+  Cookies.remove(TokenKey)
 }
