@@ -1,11 +1,18 @@
 import { defineConfig } from '@unocss/vite'
 import presetUno from '@unocss/preset-uno'
+import transformerDirectives from '@unocss/transformer-directives'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
 
 // 先不使用 presetAttributify
 export default defineConfig({
   exclude: ['node_modules', 'dist', '.git', 'public'],
   presets: [
     presetUno()
+  ],
+  // 有紅底線但能正常使用，是 unocss 本身的 error
+  transformers: [
+    transformerDirectives(),
+    transformerVariantGroup()
   ],
   rules: [
     ['rounded-5xl', {

@@ -167,15 +167,28 @@ const router = createRouter({
                 }
               ]
             },
-            // 查看贊助訂單列表
+            // 贊助訂單 router-view
             {
               path: 'backers',
               name: 'backers',
-              component: async () => await import('../views/proposal/[proposalName]/backers.vue'),
               meta: {
                 keepAlive: false,
                 layout: AdminMenuLayout
-              }
+              },
+              children: [
+                // 贊助訂單列表
+                {
+                  path: '',
+                  name: 'backersList',
+                  component: () => import('../views/proposal/[proposalName]/backers/index.vue')
+                },
+                // 贊助訂單詳情
+                {
+                  path: ':id',
+                  name: 'backersDetail',
+                  component: () => import('../views/proposal/[proposalName]/backers/[id].vue')
+                }
+              ]
             },
             // 公告 router-view
             {
