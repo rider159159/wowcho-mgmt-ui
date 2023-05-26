@@ -4,12 +4,7 @@ import { fetchMember } from '@/api'
 import { SET_TOKEN } from '@/utils'
 import { Swal } from '@/plugins/sweet-alert'
 import { userInfoStore } from '@/stores'
-declare global {
-  // eslint-disable-next-line no-unused-vars
-  interface Window {
-    handleCredentialResponse: (response: any) => void;
-  }
-}
+
 const oauthId = import.meta.env.VITE_OAUTH_ID
 const router = useRouter()
 const USER_STORE = userInfoStore()
