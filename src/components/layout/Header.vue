@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
-
+import { Swal } from '@/plugins'
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
 const { FN_LOGOUT } = userInfoStore()
@@ -19,6 +19,16 @@ function closeMemberMenu() {
 
 function logout () {
   FN_LOGOUT()
+  Swal.fire({
+    text: '已成功登出，將切換至登入頁面。',
+    icon: 'success'
+  })
+  closeMemberMenu()
+  setTimeout(() => {
+    router.push({
+      name: 'login'
+    })
+  }, 1000)
 }
 </script>
 
@@ -46,13 +56,6 @@ function logout () {
                 class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 @click.prevent="router.push('/demo')"
                 >範例</a
-              >
-            </li>
-            <li data-te-nav-item-ref>
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                >探索</a
               >
             </li>
             <li data-te-nav-item-ref>
@@ -90,18 +93,12 @@ function logout () {
               </svg>
               <!-- 使用者頭像 -->
               <img v-else :src="USER_INFO_REF.image" @click="showMemberMenu = !showMemberMenu" class="w-48px h-48px rounded-full">
-              <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-65 w-40 bg-white">
-                <li class="px-4 py-3" data-te-nav-item-ref>
-                  <router-link
-                    class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    to=""
-                    >贊助紀錄</router-link
-                  >
-                </li>
+              <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-55 w-40 bg-white">
                 <li class="px-4 py-3" data-te-nav-item-ref>
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/proposal"
+                    @click="closeMemberMenu"
                     >提案紀錄</router-link
                   >
                 </li>
@@ -109,6 +106,7 @@ function logout () {
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/profile"
+                    @click="closeMemberMenu"
                     >個人設定</router-link
                   >
                 </li>
@@ -157,23 +155,10 @@ function logout () {
             <li data-te-nav-item-ref class="mb-8">
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                to=""
-                >探索</router-link
-              >
-            </li>
-            <li data-te-nav-item-ref class="mb-8">
-              <router-link
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 to="/proposal/new"
                 >提案</router-link
               >
             </li>
-            <!-- <li v-if="isLogin" data-te-nav-item-ref class="mb-8">
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                >後台管理</a
-              >
-            </li> -->
             <li data-te-nav-item-ref class="mb-8">
               <p
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 pb-5 [&.active]:text-black/90 border-b-1 border-line"
@@ -183,14 +168,8 @@ function logout () {
                 <li data-te-nav-item-ref class="mb-3">
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    to=""
-                    >贊助紀錄</router-link
-                  >
-                </li>
-                <li data-te-nav-item-ref class="mb-3">
-                  <router-link
-                    class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/proposal"
+                    @click="showMenu = false;"
                     >提案紀錄</router-link
                   >
                 </li>
@@ -198,6 +177,7 @@ function logout () {
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/profile"
+                    @click="showMenu = false;"
                     >個人設定</router-link
                   >
                 </li>

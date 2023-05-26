@@ -18,6 +18,7 @@ declare module '@vue/runtime-core' {
     Modal: typeof import('./src/components/common/Modal.vue')['default']
     MyButton: typeof import('./src/components/common/MyButton.vue')['default']
     MyLabel: typeof import('./src/components/common/MyLabel.vue')['default']
+    Oauth: typeof import('./src/components/Oauth.vue')['default']
     Pagination: typeof import('./src/components/common/Pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
