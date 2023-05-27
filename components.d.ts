@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Ckeditor: typeof import('./src/components/editor/Ckeditor.vue')['default']
     DefaultLayout: typeof import('./src/components/layoutWrapper/DefaultLayout.vue')['default']
     Footer: typeof import('./src/components/layout/Footer.vue')['default']
+    FullWidthLayout: typeof import('./src/components/layoutWrapper/FullWidthLayout.vue')['default']
     Header: typeof import('./src/components/layout/Header.vue')['default']
     Loading: typeof import('./src/components/common/Loading.vue')['default']
     Markdown: typeof import('./src/components/editor/Markdown.vue')['default']

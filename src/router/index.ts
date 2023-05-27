@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import permission from './permission'
 import DefaultLayout from '../components/layoutWrapper/DefaultLayout.vue'
 import AdminMenuLayout from '../components/layoutWrapper/AdminMenuLayout.vue'
+import FullWidthLayout from '@/components/layoutWrapper/FullWidthLayout.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -63,6 +64,16 @@ const router = createRouter({
       component: async () => await import('../views/error.vue'),
       meta: {
         keepAlive: false
+      }
+    },
+    // 關於我們
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/about/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: FullWidthLayout
       }
     },
     // 提案諮詢頁面
