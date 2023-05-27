@@ -96,6 +96,16 @@ const router = createRouter({
         layout: DefaultLayout
       }
     },
+    // 常見問題
+    {
+      path: '/common_problem',
+      name: 'commonProblem',
+      component: () => import('../views/commonProblem/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
+      }
+    },
     // 提案諮詢頁面
     {
       path: '/proposalConsulation',
