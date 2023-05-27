@@ -76,6 +76,16 @@ const router = createRouter({
         layout: FullWidthLayout
       }
     },
+    // 使用條款
+    {
+      path: '/terms_of_use',
+      name: 'termsOfUse',
+      component: () => import('../views/termsOfUse/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
+      }
+    },
     // 隱私權條款
     {
       path: '/privacy_publicy',
