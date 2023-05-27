@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img | bg-no-repeat bg-cover mt-22 flex flex-col items-center">
+  <div class="bg-img | bg-no-repeat bg-cover md:mt-10 lg:mt-22 flex flex-col items-center">
     <div class="container pt-9 md:pt-14 pb-7 md:pb-8 w-full md:max-w-700px lg:max-w-976px xl:max-w-1200px 2xl:(max-w-1296px)">
       <div class="lg:max-w-876px mx-auto">
         <img class="mx-auto mb-5 md:mb-8" src="/footer_logo.svg" alt="Logo">
@@ -7,17 +7,17 @@
           <div class="mb-8 flex items-start flex-col lg:(mb-0 flex-row items-center)">
             <h2 class="text-2xl text-gray-1 lg:mr-11 mb-5 lg:mb-0">關於我</h2>
             <div class="lt-lg:gap-8 flex justify-between items-center text-gray-2">
-              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="#" title="關於我們">關於我們</a>
-              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="#" title="使用條款">使用條款</a>
-              <a class="flex-grow-1 lg:(px-5) text-center" href="#" title="使用者條款">使用者條款</a>
+              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="/#/about" title="關於我們">關於我們</a>
+              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="/#/terms_of_use" title="使用條款">使用條款</a>
+              <a class="flex-grow-1 lg:(px-5) text-center" href="/#/privacy_publicy" title="隱私權條款">隱私權條款</a>
             </div>
           </div>
           <div class="mb-8 flex items-start flex-col lg:(mb-0 flex-row items-center)">
             <h2 class="text-2xl text-gray-1 lg:mr-11 mb-5 lg:mb-0">幫助</h2>
             <div class="lt-lg:gap-8 flex justify-between items-center text-gray-2">
-              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="#" title="常見問題">常見問題</a>
-              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="#" title="提案諮詢">提案諮詢</a>
-              <a class="flex-grow-1 lg:(px-5) text-center" href="#" title="聯絡客服">聯絡客服</a>
+              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="#/common_problem" title="常見問題">常見問題</a>
+              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="mailto:wowcho2023@gmail.com?subject=提案諮詢" title="提案諮詢">提案諮詢</a>
+              <a class="flex-grow-1 lg:(px-5) text-center" href="mailto:wowcho2023@gmail.com" title="聯絡客服">聯絡客服</a>
             </div>
           </div>
         </div>
