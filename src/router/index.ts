@@ -76,6 +76,16 @@ const router = createRouter({
         layout: FullWidthLayout
       }
     },
+    // 隱私權條款
+    {
+      path: '/privacy_publicy',
+      name: 'privacyPublicy',
+      component: () => import('../views/privacyPublicy/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
+      }
+    },
     // 提案諮詢頁面
     {
       path: '/proposalConsulation',
