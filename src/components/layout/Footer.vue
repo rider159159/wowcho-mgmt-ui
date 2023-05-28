@@ -1,30 +1,31 @@
 <template>
-  <div class="bg-img | bg-no-repeat bg-cover">
-    <div class="container border-b-1 border-#C2D7EA pt-9 md:pt-14 pb-7 md:pb-8 mx-auto mb-8">
-      <div class="lg:w-850px mx-auto">
+  <div class="bg-img | bg-no-repeat bg-cover md:mt-10 lg:mt-22 flex flex-col items-center">
+    <div class="container pt-9 md:pt-14 pb-7 md:pb-8 w-full md:max-w-700px lg:max-w-976px xl:max-w-1200px 2xl:(max-w-1296px)">
+      <div class="lg:max-w-876px mx-auto">
         <img class="mx-auto mb-5 md:mb-8" src="/footer_logo.svg" alt="Logo">
-        <div class="md:flex md:justify-between md:items-center px-5 md:px-0">
-          <div class="md:flex items-center mb-8 md:mb-0">
-            <h2 class="text-2xl text-gray-1 md:mr-6 lg:mr-11 mb-5 md:mb-0">關於我</h2>
-            <ul class="flex items-center text-gray-2">
-              <li class="border-r-1 border-#C2D7EA pr-2.5 mr-2.5 md:pr-5 md:pr-5"><a href="#" title="關於我們">關於我們</a></li>
-              <li class="border-r-1 border-#C2D7EA pr-2.5 mr-2.5 md:pr-5 md:pr-5"><a href="#" title="使用條款">使用條款</a></li>
-              <li><a href="#" title="使用者條款">使用者條款</a></li>
-            </ul>
+        <div class="md:flex md:justify-around lg:justify-between lg:items-center px-5 lg:px-0">
+          <div class="mb-8 flex items-start flex-col lg:(mb-0 flex-row items-center)">
+            <h2 class="text-2xl text-gray-1 lg:mr-11 mb-5 lg:mb-0">關於我</h2>
+            <div class="lt-lg:gap-8 flex justify-between items-center text-gray-2">
+              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="/#/about" title="關於我們">關於我們</a>
+              <a class="flex-grow-1  lg:(px-5 border-r-1 border-line) text-center" href="/#/terms_of_use" title="使用條款">使用條款</a>
+              <a class="flex-grow-1 lg:(px-5) text-center" href="/#/privacy_publicy" title="隱私權條款">隱私權條款</a>
+            </div>
           </div>
-          <div class="md:flex items-center mb-8 md:mb-0">
-            <h2 class="text-2xl text-gray-1 md:mr-6 lg:mr-11 mb-5 md:mb-0">幫助</h2>
-            <ul class="flex items-center text-gray-2">
-              <li class="border-r-1 border-#C2D7EA pr-2.5 mr-2.5 md:pr-5 md:pr-5"><a href="#" title="常見問題">常見問題</a></li>
-              <li class="border-r-1 border-#C2D7EA pr-2.5 mr-2.5 md:pr-5 md:pr-5"><a href="#" title="提案諮詢">提案諮詢</a></li>
-              <li><a href="#" title="聯絡客服">聯絡客服</a></li>
-            </ul>
+          <div class="mb-8 flex items-start flex-col lg:(mb-0 flex-row items-center)">
+            <h2 class="text-2xl text-gray-1 lg:mr-11 mb-5 lg:mb-0">幫助</h2>
+            <div class="lt-lg:gap-8 flex justify-between items-center text-gray-2">
+              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="#/common_problem" title="常見問題">常見問題</a>
+              <a class="flex-grow-1 lg:(px-5 border-r-1 border-line) text-center" href="mailto:wowcho2023@gmail.com?subject=提案諮詢" title="提案諮詢">提案諮詢</a>
+              <a class="flex-grow-1 lg:(px-5) text-center" href="mailto:wowcho2023@gmail.com" title="聯絡客服">聯絡客服</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container flex flex-col md:flex-row-reverse justify-center md:justify-between items-center mx-auto">
-      <ul class="flex justify-center items-center gap-x-3 mb-5">
+    <div class="bg-line mx-3 h-1px mb-8 w-full md:max-w-700px lg:max-w-976px xl:max-w-1200px 2xl:(max-w-1296px)"></div>
+    <div class="container flex flex-col md:flex-row-reverse justify-center md:justify-between items-center mx-auto w-full md:max-w-700px lg:max-w-976px xl:max-w-1200px 2xl:(max-w-1296px)">
+      <ul class="flex justify-center items-center gap-5 mb-5">
         <li>
           <a class="block border border-brand-3 rounded-full p-1.5" href="#" title="另開新分頁：Facebook" target="_blank">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +48,7 @@
           </a>
         </li>
       </ul>
-      <p class="mb-5">©2023 WowChao. All rights reserved</p>
+      <p class="mb-5 text-brand-3">©2023 WowCho. All rights reserved</p>
     </div>
   </div>
 </template>
@@ -55,9 +56,11 @@
 <style lang="scss" scoped>
 .bg-img {
   background-image: url('/footer-mobile-background.png');
+  background-position: top center;
 
   @media (min-width: 768px) {
     background-image: url('/footer-desktop-background.png');
+    background-position: top center;
   }
 }
 </style>

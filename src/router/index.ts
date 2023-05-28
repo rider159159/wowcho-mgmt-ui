@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import permission from './permission'
 import DefaultLayout from '../components/layoutWrapper/DefaultLayout.vue'
 import AdminMenuLayout from '../components/layoutWrapper/AdminMenuLayout.vue'
+import FullWidthLayout from '@/components/layoutWrapper/FullWidthLayout.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -63,6 +64,46 @@ const router = createRouter({
       component: async () => await import('../views/error.vue'),
       meta: {
         keepAlive: false
+      }
+    },
+    // 關於我們
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/about/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: FullWidthLayout
+      }
+    },
+    // 使用條款
+    {
+      path: '/terms_of_use',
+      name: 'termsOfUse',
+      component: () => import('../views/termsOfUse/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
+      }
+    },
+    // 隱私權條款
+    {
+      path: '/privacy_publicy',
+      name: 'privacyPublicy',
+      component: () => import('../views/privacyPublicy/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
+      }
+    },
+    // 常見問題
+    {
+      path: '/common_problem',
+      name: 'commonProblem',
+      component: () => import('../views/commonProblem/index.vue'),
+      meta: {
+        keepAlive: false,
+        layout: DefaultLayout
       }
     },
     // 提案諮詢頁面

@@ -34,6 +34,12 @@ const permission = (router: Router) => {
     // 驗證成功通過
     return true
   })
+
+
+  // 滑到頁頂
+  router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0)
+  })
 }
 
 export default permission
