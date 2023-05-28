@@ -6,11 +6,11 @@ const route = useRoute()
 </script>
 
 <template>
-  <ul class="w-70 text-center text-gray-2">
+  <ul class="min-w-55 text-center text-gray-2">
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'dashboard'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/dashboard`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'proposalEdit'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/edit`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'optionIndex'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/options`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +47,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'backers'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/backers`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,7 +60,7 @@ const route = useRoute()
     <!-- <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'onlinechat'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         href="onlinechat"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +72,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'comments'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/comments`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ const route = useRoute()
     <!-- <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'refunds'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         href="refunds"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +96,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'announce'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/announce`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'faqs'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/faqs`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +127,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'payment'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/payment`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +139,7 @@ const route = useRoute()
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'businessProfile'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2"
+        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/businessProfile`"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

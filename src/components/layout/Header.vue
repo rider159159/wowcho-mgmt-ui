@@ -2,18 +2,19 @@
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
 import { Swal } from '@/plugins'
+
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
 const { FN_LOGOUT } = userInfoStore()
 
 const router = useRouter()
-
 const showMenu = ref(false)
 const showMemberMenu = ref(false)
 
 function closeMemberMenu() {
   setTimeout(() => {
     showMemberMenu.value = false
+    showMenu.value = false
   }, 100)
 }
 
@@ -30,6 +31,9 @@ function logout () {
     })
   }, 1000)
 }
+
+const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
+
 </script>
 
 <template>
@@ -41,14 +45,6 @@ function logout () {
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
           id="navbarSupportedContentX">
           <img @click="router.push('/proposal')" class="cursor-pointer" src="/logo.svg" alt="">
-          <!-- <div class="hidden lg:flex justify-between items-center relative">
-            <form action="">
-              <input type="text" name="search" placeholder="搜尋" class="w-80 outline outline-1 outline-brand-3 rounded-3xl py-2 px-5 pl-10">
-            </form>
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 20L15.514 15.506M18 9.5C18 11.7543 17.1045 13.9163 15.5104 15.5104C13.9163 17.1045 11.7543 18 9.5 18C7.24566 18 5.08365 17.1045 3.48959 15.5104C1.89553 13.9163 1 11.7543 1 9.5C1 7.24566 1.89553 5.08365 3.48959 3.48959C5.08365 1.89553 7.24566 1 9.5 1C11.7543 1 13.9163 1.89553 15.5104 3.48959C17.1045 5.08365 18 7.24566 18 9.5V9.5Z" stroke="#70BEFB" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div> -->
           <ul
             class="hidden lg:flex items-center gap-4">
             <li>
@@ -65,26 +61,18 @@ function logout () {
                 >提案</router-link
               >
             </li>
-            <!-- <li data-te-nav-item-ref>
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                >
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17 23C16.45 23 15.979 22.804 15.587 22.412C15.195 22.02 14.9993 21.5493 15 21V17C15 16.45 15.196 15.979 15.588 15.587C15.98 15.195 16.4507 14.9993 17 15H21C21.55 15 22.021 15.196 22.413 15.588C22.805 15.98 23.0007 16.4507 23 17V21C23 21.55 22.804 22.021 22.412 22.413C22.02 22.805 21.5493 23.0007 21 23H17ZM17 33C16.45 33 15.979 32.804 15.587 32.412C15.195 32.02 14.9993 31.5493 15 31V27C15 26.45 15.196 25.979 15.588 25.587C15.98 25.195 16.4507 24.9993 17 25H21C21.55 25 22.021 25.196 22.413 25.588C22.805 25.98 23.0007 26.4507 23 27V31C23 31.55 22.804 32.021 22.412 32.413C22.02 32.805 21.5493 33.0007 21 33H17ZM27 23C26.45 23 25.979 22.804 25.587 22.412C25.195 22.02 24.9993 21.5493 25 21V17C25 16.45 25.196 15.979 25.588 15.587C25.98 15.195 26.4507 14.9993 27 15H31C31.55 15 32.021 15.196 32.413 15.588C32.805 15.98 33.0007 16.4507 33 17V21C33 21.55 32.804 22.021 32.412 22.413C32.02 22.805 31.5493 23.0007 31 23H27ZM27 33C26.45 33 25.979 32.804 25.587 32.412C25.195 32.02 24.9993 31.5493 25 31V27C25 26.45 25.196 25.979 25.588 25.587C25.98 25.195 26.4507 24.9993 27 25H31C31.55 25 32.021 25.196 32.413 25.588C32.805 25.98 33.0007 26.4507 33 27V31C33 31.55 32.804 32.021 32.412 32.413C32.02 32.805 31.5493 33.0007 31 33H27ZM17 21H21V17H17V21ZM27 21H31V17H27V21ZM27 31H31V27H27V31ZM17 31H21V27H17V31Z" fill="#369CF0"/>
-                  <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
-                </svg>
-                </a
-              >
+
+            <li v-if="!isLogin">
+              <div class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white [&.active]:text-black/90">
+                <RouterLink to="/signup" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 py-2 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">註冊</RouterLink>
+              </div>
             </li>
-            <li v-if="!isLogin" data-te-nav-item-ref>
-              <a
-                class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                href="#!"
-                ><MyButton class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入/註冊</MyButton></a
-              >
-            </li> -->
-            <li class="cursor-pointer relative" data-te-nav-item-ref>
+            <li v-if="!isLogin">
+              <div class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white [&.active]:text-black/90">
+                <RouterLink to="/login" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 py-2 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入</RouterLink>
+              </div>
+            </li>
+            <li  v-if="isLogin" class="cursor-pointer relative" data-te-nav-item-ref>
               <!-- 使用者預設頭像 -->
               <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
@@ -156,6 +144,7 @@ function logout () {
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 to="/proposal/new"
+                @click="closeMemberMenu"
                 >提案</router-link
               >
             </li>
@@ -169,7 +158,7 @@ function logout () {
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/proposal"
-                    @click="showMenu = false;"
+                    @click="closeMemberMenu"
                     >提案紀錄</router-link
                   >
                 </li>
@@ -177,7 +166,7 @@ function logout () {
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/profile"
-                    @click="showMenu = false;"
+                    @click="closeMemberMenu"
                     >個人設定</router-link
                   >
                 </li>

@@ -9,7 +9,7 @@ const isLoading = computed(() => loadingArray.value.length > 0)
 </script>
 
 <template>
-  <div v-show="isLoading" class="fixed top-0 left-0 flex flex-col items-center justify-center  w-full h-full bg-black/40 z-500 pointer-events-none">
+  <div v-show="isLoading" class="fixed top-0 left-0 flex flex-col items-center justify-center  w-full h-full bg-black/40 z-500">
     <svg class="spinner">
     <circle>
       <animateTransform attributeName="transform" type="rotate" values="-90;810" keyTimes="0;1" dur="2s" repeatCount="indefinite"></animateTransform>
