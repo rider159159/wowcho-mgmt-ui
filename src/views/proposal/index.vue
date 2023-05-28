@@ -4,21 +4,21 @@ import { defaultImage as vDefaultImage } from '@/directive/defaultImage'
 import { toast } from '@/plugins'
 
 const router = useRouter()
-const tabList = ref([
-  {
-    title: '集資中',
-    value: 0
-  },
-  {
-    title: '集資尚未開始',
-    value: 1
-  },
-  {
-    title: '集資結束',
-    value: 2
-  }
-])
-const tabActive = ref(0)
+// const tabList = ref([
+//   {
+//     title: '集資中',
+//     value: 0
+//   },
+//   {
+//     title: '集資尚未開始',
+//     value: 1
+//   },
+//   {
+//     title: '集資結束',
+//     value: 2
+//   }
+// ])
+// const tabActive = ref(0)
 
 const proposalList:any = ref([])
 
