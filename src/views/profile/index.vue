@@ -50,8 +50,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <VForm class="lg-w-1024px m-a flex flex-col lg:flex-row gap-4 items-center lg-items-start" @submit="submitForm">
+  <div class="w-full">
+    <VForm class="m-a flex flex-col lg:flex-row gap-4 items-center lg-items-start" @submit="submitForm">
       <section class="justify-center lg-w-1/4">
         <div class="w-full text-h4 p-5 text-center">個人資料設定</div>
         <img v-if="formBody.image == undefined" src="/default.webp" class="w-full rounded-5xl">

@@ -57,11 +57,10 @@ function checkImage(e:any) {
   <div class="w-full">
     <label for="uploadInput" class="inline-block cursor-pointer w-full" :class="props.class">
       <!-- <img class="w-full" src="/proposal/Upload.svg"> -->
-      <div class="flex flex-col items-center  b-#DFEAF4 b-dotted b-2 w-full py-16">
+      <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16">
         <img src="/CloudUploplad.svg">
         <p v-if="modelValue.length === 0" class="text-gray-2">上傳圖片</p>
         <p v-else class="text-gray-2">重新上傳圖片</p>
-
       </div>
     </label>
     <input @change="checkImage" accept=".jpg, .png, .jpeg .webp" type="file" id="uploadInput" class="hidden">

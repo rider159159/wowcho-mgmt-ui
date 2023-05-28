@@ -129,6 +129,14 @@ onMounted(() => {
     </MyLabel>
     <span v-if="errors.name" class="block text-#FF5D71 mb-3 text-14px">{{ errors.name }}</span>
 
+    <MyLabel title="募資商品簡介" label="summary" :require="true" class="mb-6" :class="{'!mb-1':errors.summary}" remark="簡介建議填寫該商品重點，折扣、金額、數量不建議在此填寫。" >
+      <VField v-model="formBody.summary" as="textarea" type="textarea" name="summary" id="summary" label="募資商品簡介" placeholder="募資商品簡介" rules="required"
+        class="w-full text-h6 h-120px leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+        :class="{'!border-#FF5D71':errors.summary}" >
+      </VField>
+    </MyLabel>
+
+    <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
     <MyLabel title="募資商品詳細介紹" label="description" :require="true" class="mb-6" :class="{'!mb-1':errors.description}" remark="請告訴我們關於你計畫的故事、為什麼大家應該支持你的計畫。(最少 350 字，可使用 MarkDown 語法)">
       <VField v-model="formBody.description" name="description" id="description" label="募資商品詳細介紹" placeholder="募資商品簡介" rules="required"
         class="w-full text-h6 leading-h4 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
@@ -153,7 +161,7 @@ onMounted(() => {
       <span v-if="errors.targetPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.targetPrice }}</span>
     </div>
 
-    <MyLabel title="募資活動時間" :require="true" class="w-full">
+    <MyLabel title="募資活動時間" class="w-full">
       <div class="flex w-full xl:w-50%">
         <div class="w-50%">
           <VField v-model="formBody.startTime" name="startTime" id="startTime" label="提案開始時間" rules="required" type="number" placeholder="請根據你計畫的需求,估算你所需要募集的金額。">

@@ -56,6 +56,10 @@ async function delProposal(id:string) {
 watch(
   () => query.value.page,
   (newValue, oldValue) => {
+    window.scrollTo({
+      top: 80,
+      behavior: 'smooth'
+    })
     getProposalList()
   }
 )
@@ -82,8 +86,8 @@ onMounted(() => {
       <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">
         <div class="flex flex-col w-full">
           <img v-default-image="'./proposal/proposalDefault.svg'" @click="toProject(item)" :src="item.image" class="cursor-pointer mb-2">
-          <h5 class="text-h5 leading-h4">{{ item.name }}</h5>
-          <div class="flex justify-between">
+          <h5 class="text-h6 leading-h5">{{ item.name }}</h5>
+          <div class="flex justify-between text-14px">
             <div>
               <p class="leading-h5">募資目標金額: {{ item.targetPrice }}</p>
               <p>當前累積金額: {{ item.nowPrice }}</p>
