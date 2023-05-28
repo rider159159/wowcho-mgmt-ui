@@ -149,7 +149,7 @@ async function submitForm() {
       <div class="flex w-full xl:w-50%">
         <div class="w-50%">
           <VField v-model="formBody.startTime"  name="startTime" id="startTime" label="提案開始時間" rules="required" type="number" placeholder="請根據你計畫的需求,估算你所需要募集的金額。">
-            <VueDatePicker v-model="formBody.startTime" :min-date="new Date()" :format="'yyyy/MM/dd HH:mm'" model-type="timestamp" locale="zh-TW" auto-apply>
+            <VueDatePicker v-model="formBody.startTime"  :format="'yyyy/MM/dd HH:mm'" model-type="timestamp" locale="zh-TW" auto-apply>
               <template #dp-input="{ value }">
                 <input :value="value" type="text" placeholder="請選擇開始時間" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
                   :class="{'!border-#FF5D71':errors.startTime}">

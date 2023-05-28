@@ -4,26 +4,26 @@ import { defaultImage as vDefaultImage } from '@/directive/defaultImage'
 import { toast } from '@/plugins'
 
 const router = useRouter()
-const tabList = ref([
-  {
-    title: '集資中',
-    value: 0
-  },
-  {
-    title: '集資尚未開始',
-    value: 1
-  },
-  {
-    title: '集資結束',
-    value: 2
-  }
-])
-const tabActive = ref(0)
+// const tabList = ref([
+//   {
+//     title: '集資中',
+//     value: 0
+//   },
+//   {
+//     title: '集資尚未開始',
+//     value: 1
+//   },
+//   {
+//     title: '集資結束',
+//     value: 2
+//   }
+// ])
+// const tabActive = ref(0)
 
 const proposalList:any = ref([])
 
 const query = ref({
-  page: 3,
+  page: 1,
   pageSize: 12
 })
 const ProposalListTotal = ref(0)
@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
   <section class="container m-auto">
-    <ul class="flex">
+    <!-- <ul class="flex">
       <li v-for="item in tabList" :key="item.value">
         <a
           @click.prevent="tabActive = item.value"
@@ -77,7 +77,7 @@ onMounted(() => {
           {{ item.title }}
         </a>
       </li>
-    </ul>
+    </ul> -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
       <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">
         <div class="flex flex-col w-full">

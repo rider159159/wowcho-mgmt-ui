@@ -12,6 +12,10 @@ dist
 *.local
 package-lock.json
 
+.env.development
+.env.production
+pnpm-lock.yaml
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
