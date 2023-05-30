@@ -18,10 +18,7 @@ const inputItem:IinputItem = {
 }
 // 規格輸入框
 const inputList:Ref<Array<IinputItem>> = ref([
-  {
-    optionText: '',
-    showError: false
-  }
+
 ])
 
 // 添加方按規格

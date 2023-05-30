@@ -81,7 +81,7 @@ const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
               </svg>
               <!-- 使用者頭像 -->
               <img v-else :src="USER_INFO_REF.image" @click="showMemberMenu = !showMemberMenu" class="w-48px h-48px rounded-full">
-              <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-55 w-40 bg-white">
+              <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-50 w-40 bg-white">
                 <li class="px-4 py-3" data-te-nav-item-ref>
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"

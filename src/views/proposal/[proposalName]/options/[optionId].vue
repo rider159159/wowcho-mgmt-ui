@@ -20,10 +20,7 @@ const inputItem:IinputItem = {
 }
 // 規格輸入框
 const inputList:Ref<Array<IinputItem>> = ref([
-  {
-    optionText: '',
-    showError: false
-  }
+
 ])
 
 // 添加方按規格
@@ -100,6 +97,19 @@ async function getPlan () {
   if (res.status !== 'Success') return
   getCkData.value = true
   formBody.value = res.data
+  formBody.value.specification.forEach((i) => {
+    // const specification:Ispecification = {
+    //   title: '',
+    //   option: [],
+    //   id: new Date().getTime()
+    // }
+
+    // specification.id = new Date().getTime()
+    inputList.value.push({
+      optionText: '',
+      showError: false
+    })
+  })
 }
 
 async function submitForm() {
