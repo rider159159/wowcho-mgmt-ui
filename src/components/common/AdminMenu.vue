@@ -1,8 +1,11 @@
 <script setup lang="ts">
 // const router = useRouter()
 const route = useRoute()
-// console.log(router, route, route.name)
-
+const routeMatched = (routeName:string) => {
+  return computed(() => {
+    return route.matched.some(item => item.name === routeName)
+  })
+}
 </script>
 
 <template>
@@ -33,8 +36,9 @@ const route = useRoute()
       </router-link>
     </li>
     <li>
+      <!-- routeMatched -->
       <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'optionIndex'}"
+        :class="{'bg-brand-4 border-brand-2': routeMatched('option').value } "
         class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/options`"
       >
@@ -46,7 +50,7 @@ const route = useRoute()
     </li>
     <li>
       <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'backers'}"
+        :class="{'bg-brand-4 border-brand-2': routeMatched('backers').value}"
         class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/backers`"
       >
@@ -57,21 +61,9 @@ const route = useRoute()
         贊助訂單
       </router-link>
     </li>
-    <!-- <li>
-      <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'onlinechat'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
-        href="onlinechat"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M22 17.002C21.9996 18.3696 21.5321 19.696 20.675 20.7616C19.8179 21.8273 18.6226 22.5683 17.287 22.862L16.649 20.948C17.2332 20.8518 17.7888 20.6271 18.2758 20.2903C18.7627 19.9534 19.1689 19.5128 19.465 19H17C16.4696 19 15.9609 18.7893 15.5858 18.4142C15.2107 18.0391 15 17.5304 15 17V13C15 12.4696 15.2107 11.9609 15.5858 11.5858C15.9609 11.2107 16.4696 11 17 11H19.938C19.694 9.0669 18.7529 7.28927 17.2914 6.00068C15.8299 4.71208 13.9484 4.00108 12 4.00108C10.0516 4.00108 8.17007 4.71208 6.70857 6.00068C5.24708 7.28927 4.30603 9.0669 4.062 11H7C7.53043 11 8.03914 11.2107 8.41421 11.5858C8.78929 11.9609 9 12.4696 9 13V17C9 17.5304 8.78929 18.0391 8.41421 18.4142C8.03914 18.7893 7.53043 19 7 19H4C3.46957 19 2.96086 18.7893 2.58579 18.4142C2.21071 18.0391 2 17.5304 2 17V12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12V17.002ZM20 17V13H17V17H20ZM4 13V17H7V13H4Z" fill="#636466"/>
-        </svg>
-        即時客服
-      </router-link>
-    </li> -->
     <li>
       <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'comments'}"
+        :class="{'bg-brand-4 border-brand-2': route.name === 'commentsIndex'}"
         class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/comments`"
       >
@@ -81,18 +73,6 @@ const route = useRoute()
         贊助者留言
       </router-link>
     </li>
-    <!-- <li>
-      <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'refunds'}"
-        class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
-        href="refunds"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12.0049 2C17.5279 2 22.0049 6.477 22.0049 12C22.0049 17.523 17.5279 22 12.0049 22C9.67338 22.0034 7.41454 21.1888 5.62189 19.698L5.37789 19.489L6.27889 17.587C7.56687 18.9071 9.27142 19.7416 11.104 19.9493C12.9366 20.157 14.7847 19.7252 16.3354 18.7268C17.8862 17.7285 19.0444 16.225 19.6139 14.4708C20.1835 12.7166 20.1295 10.8195 19.461 9.1006C18.7925 7.38169 17.5506 5.94654 15.9456 5.03807C14.3405 4.1296 12.4708 3.80362 10.653 4.1153C8.83524 4.42697 7.18096 5.35717 5.9702 6.74843C4.75944 8.1397 4.06658 9.90657 4.00889 11.75L4.00489 12H6.50489L3.79889 17.716C2.62811 16.0401 2.00173 14.0444 2.00489 12C2.00489 6.477 6.4819 2 12.0049 2ZM13.0049 6V8H15.5049V10H10.0049C9.87995 9.99977 9.75944 10.0463 9.66711 10.1305C9.57478 10.2147 9.51731 10.3304 9.50602 10.4548C9.49473 10.5793 9.53044 10.7034 9.60611 10.8028C9.68179 10.9023 9.79195 10.9697 9.91489 10.992L10.0049 11H14.0049C14.6679 11 15.3038 11.2634 15.7727 11.7322C16.2415 12.2011 16.5049 12.837 16.5049 13.5C16.5049 14.163 16.2415 14.7989 15.7727 15.2678C15.3038 15.7366 14.6679 16 14.0049 16H13.0049V18H11.0049V16H8.50489V14H14.0049C14.1298 14.0002 14.2503 13.9537 14.3427 13.8695C14.435 13.7853 14.4925 13.6696 14.5038 13.5452C14.5151 13.4207 14.4794 13.2966 14.4037 13.1972C14.328 13.0977 14.2178 13.0303 14.0949 13.008L14.0049 13H10.0049C9.34185 13 8.70597 12.7366 8.23713 12.2678C7.76829 11.7989 7.50489 11.163 7.50489 10.5C7.50489 9.83696 7.76829 9.20107 8.23713 8.73223C8.70597 8.26339 9.34185 8 10.0049 8H11.0049V6H13.0049Z" fill="#636466"/>
-        </svg>
-        退款管理
-      </router-link>
-    </li> -->
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'announce'}"
@@ -114,7 +94,7 @@ const route = useRoute()
     </li>
     <li>
       <router-link
-        :class="{'bg-brand-4 border-brand-2': route.name === 'faqs'}"
+        :class="{'bg-brand-4 border-brand-2': route.name === 'faqsIndex'}"
         class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
         :to="`/proposal/${route.params.proposal}/faqs`"
       >

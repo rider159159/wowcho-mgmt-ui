@@ -77,7 +77,6 @@ function imageError () {
 function specificationError () {
   if (formBody.value.specification.length > 0) {
     formBody.value.specification.forEach((item) => {
-      console.log(item)
       if (item.option.length <= 0 || item.title.length <= 0) {
         return Swal.fire({
           icon: 'warning',

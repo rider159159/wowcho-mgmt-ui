@@ -26,8 +26,8 @@ const formBody = ref({
 async function submitForm() {
   const formData = JSON.parse(JSON.stringify(formBody.value))
   const res = await patchBusinessProfile(formData)
-  if(res.status !== 'Success') return
-  
+  if (res.status !== 'Success') return
+
   toast.success('修改商業檔案成功', {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: 2000,
@@ -52,8 +52,8 @@ async function submitForm() {
         class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
         :class="{'!border-#FF5D71':errors.email}" />
     </MyLabel>
-    <span v-if="errors.name" class="block text-#FF5D71 mb-3 text-14px">{{ errors.email }}</span>
-    
+    <span v-if="errors.email" class="block text-#FF5D71 mb-3 text-14px">{{ errors.email }}</span>
+
     <MyLabel title="Facebook" label="facebook" class="mb-6" :class="{'!mb-1':errors.facebook}">
       <VField v-model="formBody.facebook"  name="facebook" id="facebook" label="Facebook" placeholder="abc123"
         class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
@@ -67,7 +67,7 @@ async function submitForm() {
         :class="{'!border-#FF5D71':errors.twitter}" />
     </MyLabel>
     <span v-if="errors.twitter" class="block text-#FF5D71 mb-3 text-14px">{{ errors.twitter }}</span>
-    
+
     <MyLabel title="Line" label="line" class="mb-6" :class="{'!mb-1':errors.line}">
       <VField v-model="formBody.line"  name="line" id="line" label="Line" placeholder="abc123"
         class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"

@@ -27,7 +27,6 @@ class MyUploadAdapter {
           })
             .then(async (response) => await response.json())
             .then((data) => {
-              console.log(data)
               if (data.status === 'Success') {
                 resolve({ default: data.data.imgUrl })
               } else {
