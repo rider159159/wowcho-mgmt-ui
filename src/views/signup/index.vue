@@ -29,7 +29,12 @@ function togglePasswordType(show:boolean, type:string) {
 </script>
 
 <template>
-  <section class="flex justify-center w-full px-4">
+  <section class="flex flex-col items-center w-full px-4 mb-8">
+    <h3 class="text-h3 text-center mb-6">註冊</h3>
+    <div class="text-14px mb-4">
+      已經有帳號了嗎?
+      <button type="button" @click="router.push('/login')" class="text-brand2 bg-white">登入帳號</button>
+    </div>
     <VForm  @submit="submitForm" v-slot="{ errors }" class="w-full md:w-75% xl:w-50% flex flex-col gap-4">
       <div>
         <label for="account" class="flex flex-col">

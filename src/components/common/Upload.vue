@@ -14,6 +14,10 @@ const props = defineProps({
     type: String,
     default: '檔案不可大於 5 Mb'
   },
+  labelTitle: {
+    type: String,
+    default: '上傳圖片'
+  },
   class: {
     type: String,
     default: ''
@@ -54,12 +58,12 @@ function checkImage(e:any) {
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full flex justify-center">
     <label for="uploadInput" class="inline-block cursor-pointer min-w-200px lg:w-full" :class="props.class">
       <!-- <img class="w-full" src="/proposal/Upload.svg"> -->
       <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16">
         <img src="/CloudUploplad.svg">
-        <p v-if="modelValue === ''" class="text-gray-2">上傳圖片</p>
+        <p v-if="modelValue === ''" class="text-gray-2">{{ props.labelTitle }}</p>
         <p v-else class="text-gray-2">重新上傳圖片</p>
       </div>
     </label>

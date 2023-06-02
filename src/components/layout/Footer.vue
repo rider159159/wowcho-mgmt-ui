@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-img | bg-no-repeat bg-cover md:mt-10 lg:mt-22 flex flex-col items-center">
+  <div class="bg-img | bg-no-repeat bg-cover flex flex-col items-center">
     <div class="container pt-9 md:pt-14 pb-7 md:pb-8 w-full md:max-w-700px lg:max-w-976px xl:max-w-1200px 2xl:(max-w-1296px)">
       <div class="lg:max-w-876px mx-auto">
         <img class="mx-auto mb-5 md:mb-8" src="/footer_logo.svg" alt="Logo">
