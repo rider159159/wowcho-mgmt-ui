@@ -61,7 +61,7 @@ const routeMatched = (routeName:string) => {
         贊助訂單
       </router-link>
     </li>
-    <li>
+    <!-- <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'commentsIndex'}"
         class="flex items-center gap-x-3 border-l-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 duration-300"
@@ -116,6 +116,6 @@ const routeMatched = (routeName:string) => {
         </svg>
         商業檔案設定
       </router-link>
-    </li>
+    </li> -->
   </ul>
 </template>

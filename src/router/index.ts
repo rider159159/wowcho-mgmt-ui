@@ -363,15 +363,15 @@ const router = createRouter({
               }
             },
             // 提案商業檔案設定
-            {
-              path: 'businessProfile',
-              name: 'businessProfile',
-              component: async () => await import('../views/proposal/[proposalName]/profile.vue'),
-              meta: {
-                keepAlive: false,
-                layout: AdminMenuLayout
-              }
-            },
+            // {
+            //   path: 'businessProfile',
+            //   name: 'businessProfile',
+            //   component: async () => await import('../views/proposal/[proposalName]/profile.vue'),
+            //   meta: {
+            //     keepAlive: false,
+            //     layout: AdminMenuLayout
+            //   }
+            // },
             // 即時客服 Router-view
             {
               path: 'onlinechat',
@@ -386,7 +386,7 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: async () => await import('../views/profile/index.vue'),
+      component: async () => await import('../views/proposal/[proposalName]/profile.vue'),
       meta: {
         keepAlive: false,
         layout: DefaultLayout

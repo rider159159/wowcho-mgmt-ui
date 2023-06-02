@@ -4,9 +4,12 @@ import { toast } from '@/plugins'
 
 onMounted(() => { getBusinessProfile() })
 
-function getBusinessProfile() {
+async function getBusinessProfile() {
   // 取得商業檔案
-  return fetchBusinessProfile.get()
+  const res = await fetchBusinessProfile.get()
+  if (res.status !== 'Success') return
+  getCkData.value = true
+  formBody.value = res.data
 }
 
 function patchBusinessProfile(formData: any) {
@@ -14,13 +17,18 @@ function patchBusinessProfile(formData: any) {
   return fetchBusinessProfile.update(formData)
 }
 
+const getCkData = ref(false)
+
 // 有 api 後會拔掉
 const formBody = ref({
-  name: 'xxxxxx',
-  email: 'aaa@bbb.cc',
-  facebook: 'https://aaaaaa.xxxxxx',
-  twitter: 'https://aaaaaa.xxxxxx',
-  line: 'xxxxxx.xxxx'
+  businessName: '',
+  businessEmail: '',
+  businessIntro: '',
+  businessImage: '',
+  email: '',
+  facebook: '',
+  instagram: '',
+  website: ''
 })
 
 async function submitForm() {
@@ -37,44 +45,60 @@ async function submitForm() {
 </script>
 
 <template>
-  <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 font-bold leading-h2 mb-56px">商業檔案</h4>
+  <h4 class="text-h2 font-bold leading-h2 mb-56px">商業檔案設定</h4>
+  <VForm @submit="submitForm" v-slot="{ errors }" class="container m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
 
-    <MyLabel title="提案單位名稱" label="name" :require="true" class="mb-6" :class="{'!mb-1':errors.name}">
-      <VField v-model="formBody.name"  name="name" id="name" label="提案單位名稱" placeholder="雨傘王" rules="required"
-        class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
-        :class="{'!border-#FF5D71':errors.name}" />
-    </MyLabel>
-    <span v-if="errors.name" class="block text-#FF5D71 mb-3 text-14px">{{ errors.name }}</span>
+    <section class=" w-full lg:w-1/4 pt-40px">
+      <svg v-if="formBody.businessImage == undefined" class="w-full" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
+        <path d="M24 23C21.7909 23 20 21.2091 20 19C20 16.7909 21.7909 15 24 15C26.2091 15 28 16.7909 28 19C28 21.2091 26.2091 23 24 23Z" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
+        <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
+      </svg>
+      <img v-else :src="formBody.businessImage" class="w-full rounded-5xl">
+      <Upload v-model="formBody.businessImage" labelTitle="上傳個人圖片" class="m-a mt-8"></Upload>
+    </section>
 
-    <MyLabel title="Email" label="email" class="mb-6" :class="{'!mb-1':errors.email}">
-      <VField v-model="formBody.email"  name="email" id="email" label="Email" placeholder="example@gmail.com"
-        class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
-        :class="{'!border-#FF5D71':errors.email}" />
-    </MyLabel>
-    <span v-if="errors.email" class="block text-#FF5D71 mb-3 text-14px">{{ errors.email }}</span>
+    <section class="w-full lg:w-3/4 flex flex-col gap-8 pt-20px">
+      <MyLabel title="提案單位名稱" label="businessName" :require="true">
+      <VField v-model="formBody.businessName" name="businessName" id="businessName" label="提案單位名稱" placeholder="請輸入你的單位名稱" rules="required"
+          class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+          :class="{'!border-#FF5D71':errors.businessName}" />
+          <span v-if="errors.businessName" class="block text-#FF5D71 mt-4 text-14px">{{ errors.businessName }}</span>
+      </MyLabel>
 
-    <MyLabel title="Facebook" label="facebook" class="mb-6" :class="{'!mb-1':errors.facebook}">
-      <VField v-model="formBody.facebook"  name="facebook" id="facebook" label="Facebook" placeholder="abc123"
-        class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
-        :class="{'!border-#FF5D71':errors.facebook}" />
-    </MyLabel>
-    <span v-if="errors.facebook" class="block text-#FF5D71 mb-3 text-14px">{{ errors.facebook }}</span>
+      <MyLabel title="提案單位 Email" label="email" :require="true" >
+        <VField v-model="formBody.businessEmail" name="businessEmail" id="email" label="提案單位 Email" placeholder="example@mail.com" rules="required"
+          class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+          :class="{'!border-#FF5D71':errors.businessEmail}" />
+          <span v-if="errors.businessEmail" class="block text-#FF5D71 mt-4 text-14px">{{ errors.businessEmail }}</span>
+      </MyLabel>
 
-    <MyLabel title="Twitter" label="twitter" class="mb-6" :class="{'!mb-1':errors.twitter}">
-      <VField v-model="formBody.twitter"  name="twitter" id="twitter" label="Twitter" placeholder="abc123"
-        class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
-        :class="{'!border-#FF5D71':errors.twitter}" />
-    </MyLabel>
-    <span v-if="errors.twitter" class="block text-#FF5D71 mb-3 text-14px">{{ errors.twitter }}</span>
+      <MyLabel title="Facebook 網址" label="facebook">
+        <input v-model="formBody.facebook" id="facebook" placeholder="https://facebook.com/page-name"
+          class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+        />
+      </MyLabel>
 
-    <MyLabel title="Line" label="line" class="mb-6" :class="{'!mb-1':errors.line}">
-      <VField v-model="formBody.line"  name="line" id="line" label="Line" placeholder="abc123"
-        class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
-        :class="{'!border-#FF5D71':errors.line}" />
-    </MyLabel>
-    <span v-if="errors.line" class="block text-#FF5D71 mb-3 text-14px">{{ errors.line }}</span>
+      <MyLabel title="Instagram 網址" label="Instagram">
+        <input v-model="formBody.instagram" id="Instagram" placeholder="https://instagram.com/account-name"
+          class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+        />
+      </MyLabel>
 
-    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存商業檔案</button>
+      <MyLabel title="網站網址" label="website">
+        <input v-model="formBody.website" id="website" placeholder="https://www.example.com"
+          class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+        />
+      </MyLabel>
+
+      <MyLabel title="商業檔案介紹" label="businessIntro">
+        <Markdown v-model="formBody.businessIntro" :getCkData="getCkData" name="businessIntro" label="website" class="mb-4"></Markdown>
+        <ul>
+          <li class="text-gray-2 text-14px leading-5 ml-12px xl:ml-0 mb-12px xl:mb-0 !ml-0">接受 Markdown 語法</li>
+        </ul>
+      </MyLabel>
+
+      <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存商業檔案</button>
+    </section>
   </VForm>
 </template>

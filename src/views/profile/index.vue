@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <div>
     <div class="w-full text-h4 font-bold p-5 text-center">個人資料設定</div>
-    <VForm @submit="submitForm" v-slot="{ errors }" class="lg-w-1024px m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
+    <VForm @submit="submitForm" v-slot="{ errors }" class="m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
       <section class="justify-center lg:w-1/4 pt-40px">
         <svg v-if="formBody.image == undefined" class="w-full" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
@@ -60,7 +60,7 @@ onMounted(() => {
           <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
         </svg>
         <img v-else :src="formBody.image" class="w-full rounded-5xl">
-        <Upload v-model="formBody.image" labelTitle="上傳個人圖片" class="m-a mt-8"></Upload>
+        <Upload v-model="formBody.image" labelTitle="上傳商業檔案圖片" class="m-a mt-8"></Upload>
       </section>
       <section class="lg:w-3/4 flex flex-col gap-6 pt-20px">
         <div>
