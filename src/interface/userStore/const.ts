@@ -6,14 +6,16 @@ export const UserInfo: IUserInfo = {
   username: '',
   gender: 0,
   email: '',
-  image: null,
-  address: null,
+  image: '',
+  address: '',
   birthday: null,
-  customizedUrl: null,
+  customizedUrl: '',
   isSubscribed: true,
   isAllowedNotifications: true,
-  website: null, // 個人網站,
-  youtube: null, // YT 網址
-  instagram: null,
-  facebook: null
+  website: '', // 個人網站,
+  youtube: '', // YT 網址
+  instagram: '',
+  facebook: '',
+  memberRole: '', //是否是第三方資料
+  oauthId: ''//
 }

@@ -1,19 +1,20 @@
 export interface IUserInfo {
-  account: string
-  name: string | null
-  username: string | null// 用戶名稱
-  email: string
-  image: string | null
-  address: string | null
-  birthday: null | number | string
-  customizedUrl: null | string
-  gender: -1 | 0 | 1 | 2 | 3 | 4 // 性別
-  isAllowedNotifications: boolean
+  account: string // 帳號
+  name: string // 真實姓名
+  username: string // 用戶名稱
+  email: string // 信箱
+  image?: string // 用戶圖片網址
+  isAllowedNotifications: boolean // 允許通知
   isSubscribed: boolean // 訂閱電子報
-  createdAt?: string
-  updatedAt?: string
-  website?: string | null // 個人網站,
-  youtube?: string | null // YT 網址
-  instagram: null | string
-  facebook: null | string
+  customizedUrl: string // 客製化網址
+  gender: number // 性別
+  birthday?: number|null, // 生日
+  address?: string // 地址
+  website?: string // 個人網站
+  facebook?: string // FB 網址
+  instagram?: string // IG 網址
+  youtube?: string // YT 網址
+  tokenList?: Array<string> // 驗證
+  memberRole?: string, //是否是第三方資料
+  oauthId: string//第三方驗證資料關聯
 }

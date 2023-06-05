@@ -1,12 +1,12 @@
 import dayjs from 'dayjs'
 
 // 2023/10/03 14:03:02
-export function dateTime(timestamp: number) :string {
+export function dateTime(timestamp: number|string) :string {
   return timestamp ? dayjs(timestamp).format('YYYY/MM/DD HH:mm:ss') : '-'
 }
 
 // 2023/10/03
-export function dateYYYYMMDD(timestamp:number) :string {
+export function dateYYYYMMDD(timestamp:number|string) :string {
   return timestamp ? dayjs(timestamp).format('YYYY/MM/DD') : '-'
 }
 

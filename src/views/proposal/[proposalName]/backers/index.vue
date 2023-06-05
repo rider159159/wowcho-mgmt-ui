@@ -1,25 +1,12 @@
 <script setup lang="ts">
-import { E_ORDER_STATUS, E_SHIPPING_STATUS, ISponsor, ORDER_STATUS, SHIPPING_STATUS } from '@/interface'
-import { dateYYYYMMDD, numberWithCommas } from '@/composables'
+import { dateYYYYMMDD } from '@/composables'
+import { fetchSponsor } from '@/api'
+import { SponsorList } from '@/interface'
 
 const router = useRouter()
+const route = useRoute()
 
-const list: ISponsor[] = []
-
-for (let i = 1; i <= 10; i++) {
-  const data: ISponsor = {
-    id: `ID_${i}`,
-    title: `Sponsor ${i}`,
-    plan: `Plan ${i}`,
-    spec: `Spec ${i}`,
-    totalAmount: `NT$${numberWithCommas(i * 1000)}`,
-    orderTime: Date.now(), // Use appropriate timestamp value here
-    orderStatus: i % 3 === 0 ? E_ORDER_STATUS.CANCELED : i % 3 === 1 ? E_ORDER_STATUS.SUCCESS : E_ORDER_STATUS.PAID, // Example alternating order status
-    shippingStatus: i % 2 === 0 ? E_SHIPPING_STATUS.NOT_SHIPPED : E_SHIPPING_STATUS.SHIPPED // Example alternating shipping status
-  }
-
-  list.push(data)
-}
+const list = ref(SponsorList)
 
 function goDetail(id: string) {
   // console.log(id)
@@ -28,6 +15,18 @@ function goDetail(id: string) {
     params: { id }
   })
 }
+async function getSponsorList () {
+  const query = {
+    customizedUrl: route.params.proposal
+  }
+  const res = await fetchSponsor.getList(query)
+  if (res.status !== 'Success') return
+  list.value = res.data.list
+}
+
+onMounted(() => {
+  getSponsorList()
+})
 </script>
 
 <template>
@@ -38,21 +37,19 @@ function goDetail(id: string) {
           <th class="rounded-l-lg">訂單編號</th>
           <th>購買日期</th>
           <th>贊助專案</th>
-          <th>方案</th>
+          <th>選擇規格</th>
           <th>金額</th>
-          <th>訂單狀態</th>
-          <th>出貨狀態</th>
+          <th>購買人名稱</th>
           <th class="rounded-r-lg">詳細</th>
         </thead>
         <tbody>
           <tr v-for="sponsor in list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
-            <td>{{ sponsor.id }}</td>
-            <td>{{ dateYYYYMMDD(sponsor.orderTime) }}</td>
-            <td>{{ sponsor.title }}</td>
-            <td>{{ sponsor.plan }}</td>
-            <td>{{ sponsor.totalAmount }}</td>
-            <td :class="!(sponsor.orderStatus === E_ORDER_STATUS.CANCELED) ? 'text-green' : 'text-red'">{{ ORDER_STATUS[sponsor.orderStatus] }}</td>
-            <td :class="sponsor.shippingStatus === E_SHIPPING_STATUS.SHIPPED ? 'text-green' : 'text-red'">{{ SHIPPING_STATUS[sponsor.shippingStatus] }}</td>
+            <td>{{ sponsor.MerchantOrderNo }}</td>
+            <td>{{ dateYYYYMMDD(sponsor.updatedAt) }}</td>
+            <td>{{  sponsor.proposalId.name }}</td>
+            <td>{{ sponsor.option.join('、') }}</td>
+            <td>{{ sponsor.planId.actualPrice }}</td>
+            <td>{{ sponsor.CVSCOMName }}</td>
             <td class="flex justify-center items-center text-brand-2 hover:text-brand-1 transition transition-all transition-duration-500 rounded-r-lg" @click="goDetail(sponsor.id)">
               <div>詳情</div>
               <div class="mdi mdi-chevron-right w-6 h-6"></div>
