@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
 import { Swal } from '@/plugins'
+import { useClickOutside } from '@/composables'
 
 const store = userInfoStore()
 const { USER_INFO_REF } = storeToRefs(store)
@@ -11,11 +12,9 @@ const router = useRouter()
 const showMenu = ref(false)
 const showMemberMenu = ref(false)
 
-function closeMemberMenu() {
-  setTimeout(() => {
-    showMemberMenu.value = false
-    showMenu.value = false
-  }, 100)
+function closeMenu() {
+  showMemberMenu.value = false
+  showMenu.value = false
 }
 
 function logout () {
@@ -24,7 +23,7 @@ function logout () {
     text: '已成功登出，將切換至登入頁面。',
     icon: 'success'
   })
-  closeMemberMenu()
+  closeMenu()
   setTimeout(() => {
     router.push({
       name: 'login'
@@ -34,6 +33,8 @@ function logout () {
 
 const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
 
+const loginMenuRef = ref(null)
+useClickOutside(loginMenuRef, () => { showMemberMenu.value = false })
 </script>
 
 <template>
@@ -44,7 +45,7 @@ const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
         <div
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
           id="navbarSupportedContentX">
-          <img @click="router.push('/proposal')" class="cursor-pointer" src="/logo.svg" alt="">
+          <img @click="router.push('/proposal')" class="cursor-pointer" src="/logo.svg">
           <ul
             class="hidden lg:flex items-center gap-4">
             <li>
@@ -54,7 +55,7 @@ const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
                 >範例</a
               >
             </li>
-            <li data-te-nav-item-ref>
+            <li>
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 to="/proposal/new"
@@ -72,33 +73,34 @@ const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
                 <RouterLink to="/login" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 py-2 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入</RouterLink>
               </div>
             </li>
-            <li  v-if="isLogin" class="cursor-pointer relative" data-te-nav-item-ref>
+            <li  v-if="isLogin" ref="loginMenuRef" class="cursor-pointer relative">
               <!-- 使用者預設頭像 -->
-              <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" @blur="closeMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <path d="M24 23C21.7909 23 20 21.2091 20 19C20 16.7909 21.7909 15 24 15C26.2091 15 28 16.7909 28 19C28 21.2091 26.2091 23 24 23Z" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
               </svg>
               <!-- 使用者頭像 -->
               <img v-else :src="USER_INFO_REF.image" @click="showMemberMenu = !showMemberMenu" class="w-48px h-48px rounded-full">
-              <ul tabindex="0" v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-50 w-40 bg-white">
-                <li class="px-4 py-3" data-te-nav-item-ref>
+              <!-- 下拉選單 -->
+              <ul v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-50 w-40 bg-white">
+                <li class="px-4 py-3">
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/proposal"
-                    @click="closeMemberMenu"
+                    @click="closeMenu"
                     >提案紀錄</router-link
                   >
                 </li>
-                <li class="px-4 py-3" data-te-nav-item-ref>
+                <li class="px-4 py-3">
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/profile"
-                    @click="closeMemberMenu"
+                    @click="closeMenu"
                     >商業檔案設定</router-link
                   >
                 </li>
-                <li class="px-4 py-3 border-t-1 border-line" data-te-nav-item-ref>
+                <li class="px-4 py-3 border-t-1 border-line">
                   <a
                     @click.prevent="logout()"
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
@@ -133,40 +135,40 @@ const isLogin = computed(() => USER_INFO_REF.value.email.length >= 1)
             </svg>
           </div>
           <ul>
-            <li data-te-nav-item-ref class="mb-8">
+            <li class="mb-8">
               <a
                 class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 @click.prevent="router.push('/demo')"
                 >範例</a
               >
             </li>
-            <li data-te-nav-item-ref class="mb-8">
+            <li class="mb-8">
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 to="/proposal/new"
-                @click="closeMemberMenu"
+                @click="closeMenu"
                 >提案</router-link
               >
             </li>
-            <li data-te-nav-item-ref class="mb-8">
+            <li class="mb-8">
               <p
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 pb-5 [&.active]:text-black/90 border-b-1 border-line"
                 >會員專區</p
               >
               <ul class="mt-3 ml-4">
-                <li data-te-nav-item-ref class="mb-3">
+                <li class="mb-3">
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/proposal"
-                    @click="closeMemberMenu"
+                    @click="closeMenu"
                     >提案紀錄</router-link
                   >
                 </li>
-                <li data-te-nav-item-ref class="mb-3">
+                <li class="mb-3">
                   <router-link
                     class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                     to="/profile"
-                    @click="closeMemberMenu"
+                    @click="closeMenu"
                     >商業檔案設定</router-link
                   >
                 </li>
