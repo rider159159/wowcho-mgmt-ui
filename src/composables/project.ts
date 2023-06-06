@@ -11,7 +11,7 @@ export function calculateDiscount (originPrice = 0, discountPrice = 0) {
 }
 
 // 計算千分位
-export function numberWithCommas(value:string|number) {
+export function numberWithCommas(value:string|number = 0) {
   const stringValue = typeof value === 'number' ? value.toString() : value
   return stringValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }

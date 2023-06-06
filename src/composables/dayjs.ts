@@ -41,3 +41,12 @@ export function timeHHMMSS(timestamp: number) :string {
 export function timeStampChange (timeStamp: number): string {
   return dayjs(timeStamp).format('YYYY-MM-DD')
 }
+
+// 剩餘 23 天
+export function formatRemainingTime(timeStamp:any) {
+  const currentTime = dayjs()
+  const targetTime = dayjs(timeStamp)
+  const diff = targetTime.diff(currentTime, 'day')
+
+  return diff
+}
