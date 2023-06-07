@@ -97,7 +97,7 @@ async function submitForm() {
     <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">
       <div class="flex flex-col">
         <img v-if="formBody.image" :src="formBody.image" class="mb-4">
-        <Upload v-model="formBody.image"></Upload>
+        <Upload v-model="formBody.image" class="self-start"></Upload>
       </div>
 
     </MyLabel>

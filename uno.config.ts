@@ -12,8 +12,8 @@ export default defineConfig({
   // 有紅底線但能正常使用，是 unocss 本身的 error
   transformers: [
     transformerDirectives(),
-    transformerVariantGroup(),
-  ],   
+    transformerVariantGroup()
+  ],
   rules: [
     ['rounded-5xl', {
       'border-radius': '2.5rem'

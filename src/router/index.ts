@@ -168,7 +168,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/dashboard.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               }
             },
             // 修改提案計畫
@@ -178,7 +179,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/edit.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               }
             },
             // 方案 router-view
@@ -188,7 +190,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/options.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               },
               children: [
                 // 方案列表
@@ -217,7 +220,8 @@ const router = createRouter({
               name: 'backers',
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               },
               children: [
                 // 贊助訂單列表
@@ -241,7 +245,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/announce.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               },
               children: [
                 // 公告列表
@@ -285,7 +290,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/comments.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               },
               children: [
                 // 商品留言列表
@@ -329,7 +335,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/faqs.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               },
               children: [
                 // 常見問答列表
@@ -359,7 +366,8 @@ const router = createRouter({
               component: async () => await import('../views/proposal/[proposalName]/payment.vue'),
               meta: {
                 keepAlive: false,
-                layout: AdminMenuLayout
+                layout: AdminMenuLayout,
+                proposalMenu: true
               }
             },
             // 提案商業檔案設定

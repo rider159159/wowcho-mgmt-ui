@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
   <div class="md:(max-w-324 mx-auto) flex flex-col justify-center py-20">
-    <div class="mx-3 mb-8 w-full overflow-x-scroll lg:overflow-hidden">
+    <div class="mb-8 w-full overflow-x-scroll lg:overflow-hidden">
       <table class="min-w-324">
         <thead class="h-50px bg-gray-4 rounded-lg text-gray-2 font-medium">
           <th class="rounded-l-lg">訂單編號</th>

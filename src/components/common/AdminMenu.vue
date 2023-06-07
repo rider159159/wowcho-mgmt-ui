@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // const router = useRouter()
 const route = useRoute()
+
 const routeMatched = (routeName:string) => {
   return computed(() => {
     return route.matched.some(item => item.name === routeName)
@@ -9,7 +10,7 @@ const routeMatched = (routeName:string) => {
 </script>
 
 <template>
-  <ul class="min-w-55 text-center text-gray-2">
+  <ul class="min-w-55 text-center text-gray-2 hidden lg:block">
     <li>
       <router-link
         :class="{'bg-brand-4 border-brand-2': route.name === 'dashboard'}"
