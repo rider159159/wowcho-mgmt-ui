@@ -6,23 +6,34 @@ import { SponsorList } from '@/interface'
 const router = useRouter()
 const route = useRoute()
 
-const list = ref(SponsorList)
+const data = ref({
+  list: { ...SponsorList },
+  totalCount: 0
+})
 
 function goDetail(id: string) {
-  // console.log(id)
   router.push({
     name: 'backersDetail',
     params: { id }
   })
 }
+
+const formQuery = ref({
+  page: 1,
+  pageSize: 10,
+  customizedUrl: route.params.proposal
+})
+
 async function getSponsorList () {
-  const query = {
-    customizedUrl: route.params.proposal
-  }
-  const res = await fetchSponsor.getList(query)
+  const res = await fetchSponsor.getList(formQuery.value)
   if (res.status !== 'Success') return
-  list.value = res.data.list
+  data.value = res.data
 }
+
+watch(
+  () => formQuery.value.page,
+  () => getSponsorList()
+)
 
 onMounted(() => {
   getSponsorList()
@@ -43,7 +54,7 @@ onMounted(() => {
           <th class="rounded-r-lg">詳細</th>
         </thead>
         <tbody>
-          <tr v-for="sponsor in list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
+          <tr v-for="sponsor in data.list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
             <td>{{ sponsor.MerchantOrderNo }}</td>
             <td>{{ dateYYYYMMDD(sponsor.updatedAt) }}</td>
             <td>{{  sponsor.proposalId.name }}</td>
@@ -58,7 +69,12 @@ onMounted(() => {
         </tbody>
       </table>
     </div>
-    <Pagination />
+    <Pagination
+      v-if="data.totalCount > 0"
+      v-model="formQuery.page"
+      :page-size="formQuery.pageSize"
+      :total="data.totalCount"
+    />
   </div>
 </template>
 

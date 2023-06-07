@@ -35,6 +35,11 @@ async function delPlan(id:number) {
   getPlanList()
 }
 
+watch(
+  () => query.value.page,
+  () => getPlanList()
+)
+
 onMounted(() => {
   getPlanList()
 })
@@ -71,7 +76,12 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <Pagination v-model="query.page" :page-size="query.pageSize" :total="planListTotal" ></Pagination>
+      <Pagination
+        v-if="planListTotal > 0"
+        v-model="query.page"
+        :page-size="query.pageSize"
+        :total="planListTotal"
+      ></Pagination>
     </div>
   </div>
 </template>
