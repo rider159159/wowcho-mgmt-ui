@@ -33,7 +33,7 @@ const data = [
   {
     title: '資訊分享與揭露',
     content: [
-    '除非事前經過您的同意，渦潮並不會將您的個人資訊任意提供或洩漏予第三人，但下列狀況則不在本條限制內：'
+      '除非事前經過您的同意，渦潮並不會將您的個人資訊任意提供或洩漏予第三人，但下列狀況則不在本條限制內：'
     ],
     list: [
       '在法院、檢察署、警察機關或法令之正式要求下，渦潮得以將必要之個人資訊內容提供給上列之政府機關。',
@@ -111,14 +111,14 @@ const data = [
 <template>
   <div class="lt-md:(px-5 gap-5) flex flex-col md:gap-10">
     <h1 class="text-h2 leading-h2 text-brand-1 font-bold">渦潮隱私權政策</h1>
-    <div v-for="{ title, content, list } in data" class="flex flex-col gap-3 md:gap-5">
+    <div v-for="({ title, content, list },index) in data" :key="index" class="flex flex-col gap-3 md:gap-5">
       <h2 v-if="title" class="text-gray-1 text-h5 leading-h5 font-medium">{{ title }}</h2>
       <div v-if="content" class="flex flex-col gap-3">
-        <p v-for="c in content" class="text-gray-2 leading-h4">{{ c }}</p>
+        <p v-for="(c, index) in content" :key="index" class="text-gray-2 leading-h4">{{ c }}</p>
       </div>
-      
+
       <ul v-if="list" class="flex flex-col gap-3">
-        <li v-for="item in list" class="text-gray-2 leading-h4">{{ item }}</li>
+        <li v-for="(item, index) in list" :key="index" class="text-gray-2 leading-h4">{{ item }}</li>
       </ul>
     </div>
   </div>

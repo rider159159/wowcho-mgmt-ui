@@ -44,7 +44,6 @@ const RWDMenuBtnRef: Ref<null | HTMLElement> = ref(null)
 
 function RWDMenuControl () {
   RWDMenu.value = !RWDMenu.value
-  RWDMenuBtnRef.value?.classList.toggle('open')
 }
 
 const showProposalMenu = computed(() => {
@@ -55,7 +54,7 @@ const showProposalMenu = computed(() => {
 <template>
   <header class="fixed z-10 top-0 left-0 w-full">
     <nav
-      class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start">
+      class="relative flex w-full h-72px items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start">
       <div class="flex w-full flex-wrap items-center justify-between px-6">
         <div
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
@@ -127,7 +126,10 @@ const showProposalMenu = computed(() => {
             </li>
           </ul>
 
-          <a ref="RWDMenuBtnRef" @click.prevent="RWDMenuControl" class="toggle-menu inline-block lg:hidden relative w-50px h-50px  cursor-pointer">
+          <a ref="RWDMenuBtnRef" @click.prevent="RWDMenuControl"
+            class="toggle-menu inline-block lg:hidden relative w-50px h-50px  cursor-pointer"
+            :class="{'open': RWDMenu}"
+          >
             <i></i>
             <i></i>
             <i></i>
@@ -137,9 +139,9 @@ const showProposalMenu = computed(() => {
     </nav>
     <!-- RWD Menu -->
     <transition name="slide">
-      <div v-show="RWDMenu" class="fixed top-72px left-0 w-screen h-screen bg-white py-2 px-8"
+      <div v-show="RWDMenu" class="fixed top-72px left-0 w-screen h-[calc(100vh-72px)] bg-white py-2 px-8"
       >
-        <div  class="container flex flex-col justify-between mx-auto">
+        <div  class="container h-full flex flex-col justify-between mx-auto">
           <div>
             <ul v-if="isLogin">
               <li class="mb-8">

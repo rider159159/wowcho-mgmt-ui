@@ -113,10 +113,10 @@ const data = [
 <template>
   <div class="lt-md:(px-5 gap-5) flex flex-col md:gap-10">
     <h1 class="text-h2 leading-h2 text-brand-1 font-bold">常見問題</h1>
-    <div v-for="{ title, list } in data" class="flex flex-col gap-10">
+    <div v-for="({ title, list },i) in data" :key="i" class="flex flex-col gap-10">
       <h2 class="text-gray-1 text-h3 leading-h3 font-medium">{{ title }}</h2>
       <div class="grid lg:grid-cols-3 gap-10">
-        <div v-for="{ q, a } in list" class="flex flex-col gap-5 bg-brand-4 rounded-2xl p-5 shadow-lg shadow-gray-4 hover:(transition scale-110)">
+        <div v-for="{ q, a },i in list" :key="i"  class="flex flex-col gap-5 bg-brand-4 rounded-2xl p-5 shadow-lg shadow-gray-4 hover:(transition scale-110)">
           <h3 class="text-gray-1 text-h5 leading-h5">{{ q }}</h3>
           <p class="text-gray-2">{{ a }}</p>
         </div>

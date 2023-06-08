@@ -23,7 +23,7 @@ const data = [
   {
     title: '三、遵守法律',
     content: [
-    '當使用渦潮服務時，您必須遵守中華民國法律。您只有在同意遵守所有適用的相關法律法規和本條款時，才有權使用渦潮服務（無論您是否為訪客或決定使用此服務）。請您仔細閱讀本條款並將其妥善保存。'
+      '當使用渦潮服務時，您必須遵守中華民國法律。您只有在同意遵守所有適用的相關法律法規和本條款時，才有權使用渦潮服務（無論您是否為訪客或決定使用此服務）。請您仔細閱讀本條款並將其妥善保存。'
     ]
   },
   {
@@ -180,18 +180,18 @@ const data = [
 <template>
   <div class="lt-md:(px-5 gap-5) flex flex-col md:gap-10">
     <h1 class="text-h2 leading-h2 text-brand-1 font-bold">渦潮使用條款</h1>
-    <div v-for="{ title, content, list, secondContent } in data" class="flex flex-col gap-3 md:gap-5">
+    <div v-for="({ title, content, list, secondContent } ,index) in data" :key="index" class="flex flex-col gap-3 md:gap-5">
       <h2 v-if="title" class="text-gray-1 text-h5 leading-h5 font-medium">{{ title }}</h2>
       <div v-if="content" class="flex flex-col gap-3">
-        <p v-for="c in content" class="text-gray-2 leading-h4">{{ c }}</p>
+        <p v-for="(c ,index) in content" :key="index" class="text-gray-2 leading-h4">{{ c }}</p>
       </div>
 
       <ul v-if="list" class="flex flex-col gap-3">
-        <li v-for="item in list" class="text-gray-2 leading-h4">{{ item }}</li>
+        <li v-for="(item, index) in list" :key="index" class="text-gray-2 leading-h4">{{ item }}</li>
       </ul>
 
       <div v-if="secondContent" class="flex flex-col gap-3">
-        <p v-for="c in secondContent" class="text-gray-2 leading-h4">{{ c }}</p>
+        <p v-for="(c ,index) in secondContent" :key="index" class="text-gray-2 leading-h4">{{ c }}</p>
       </div>
     </div>
   </div>
