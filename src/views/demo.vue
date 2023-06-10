@@ -101,7 +101,7 @@ onMounted(() => {
 
 <template>
   <section class="p-4">
-    <AdminMenu></AdminMenu>
+    <!-- <AdminMenu></AdminMenu> -->
     <div class="flex gap-4">
       <span class="mdi mdi-account"></span>
       <MyButton class="bg-brand-1 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">lorem</MyButton>

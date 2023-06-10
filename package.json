@@ -43,6 +43,7 @@
     "sweetalert2": "^11.7.5",
     "vee-validate": "^4.9.5",
     "vue": "^3.3.4",
+    "vue-cropper": "^1.0.9",
     "vue-router": "^4.2.1",
     "vue3-toastify": "^0.1.11"
   },

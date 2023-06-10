@@ -9,6 +9,7 @@ import { setupRouter } from './router'
 import { setupPlugins } from './plugins'
 import 'vue3-toastify/dist/index.css'
 import '@vuepic/vue-datepicker/dist/main.css'
+import 'vue-cropper/dist/index.css'
 
 function setupApp (): void {
   const app = createApp(App)

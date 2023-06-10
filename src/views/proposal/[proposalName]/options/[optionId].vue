@@ -141,9 +141,9 @@ onMounted(() => {
 
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 font-bold leading-h2 mb-4">新增募資提案</h4>
+    <h4 class="text-h2 font-bold leading-h2 mb-4">編輯募資方案</h4>
     <p class="w-full text-gray2 text-h5 mb-56px">可以在此頁面中設定，募資計畫中的商品方案。</p>
-    <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
+    <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資方案基本資訊</h5>
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
       <div>
         <MyLabel title="回饋方案名稱" label="name" :require="true" class="mb-6" remark="長度限制12字，請勿加入數量、價格折扣等等行銷字樣。">
@@ -168,14 +168,17 @@ onMounted(() => {
       </div>
       <div>
         <MyLabel title="方案原始價格" label="originalPrice" class="mb-6" remark="系統會將實際價格與原始價格進行折扣計算，將折扣顯示於募資活動畫面上。">
-          <input  v-model="formBody.originalPrice" type="number" id="originalPrice" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3">
+          <VField v-model="formBody.originalPrice" id="originalPrice" type="number"  name="originalPrice" label="原始價格" placeholder="請輸入原始價格" rules="required"
+            class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+            :class="{'!border-#FF5D71':errors.originalPrice}" />
         </MyLabel>
+        <span v-if="errors.originalPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.originalPrice }}</span>
       </div>
-      <div>
+      <div class="xl:col-span-2">
         <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">
-          <div class="flex flex-col">
-            <img v-if="formBody.image" :src="formBody.image" class="mb-4">
-            <Upload v-model="formBody.image"></Upload>
+          <div class="flex flex-col items-start">
+            <img v-if="formBody.image" :src="formBody.image" class="mb-4 max-h-500px w-auto">
+            <CropperAndUpload v-model="formBody.image" :fixedNumber="[3,1]" class="self-start"></CropperAndUpload>
           </div>
         </MyLabel>
       </div>

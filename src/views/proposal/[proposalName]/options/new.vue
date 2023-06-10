@@ -107,6 +107,7 @@ async function submitForm() {
     })
   }, 2100)
 }
+
 </script>
 
 <template>
@@ -137,15 +138,18 @@ async function submitForm() {
         <span v-if="errors.actualPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.actualPrice }}</span>
       </div>
       <div>
-        <MyLabel title="方案原始價格" label="originalPrice" class="mb-6" remark="系統會將實際價格與原始價格進行折扣計算，將折扣顯示於募資活動畫面上。">
-          <input  v-model="formBody.originalPrice" type="number" id="originalPrice" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3">
+        <MyLabel title="方案原始價格" label="originalPrice" :require="true" class="mb-6" remark="系統會將實際價格與原始價格進行折扣計算，將折扣顯示於募資活動畫面上。">
+          <VField v-model="formBody.originalPrice" id="originalPrice" type="number"  name="originalPrice" label="原始價格" placeholder="請輸入原始價格" rules="required"
+            class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+            :class="{'!border-#FF5D71':errors.originalPrice}" />
         </MyLabel>
+        <span v-if="errors.originalPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.originalPrice }}</span>
       </div>
-      <div>
-        <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">
-          <div class="flex flex-col">
-            <img v-if="formBody.image" :src="formBody.image" class="mb-4">
-            <Upload v-model="formBody.image"></Upload>
+      <div class="xl:col-span-2">
+        <MyLabel title="募資方案預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 600 x 200 像素 (3:1),方案圖片可於上線後修改。">
+          <div class="flex flex-col items-start">
+            <img v-if="formBody.image" :src="formBody.image" class="mb-4 max-h-500px w-auto">
+            <CropperAndUpload v-model="formBody.image" :fixedNumber="[3,1]" class="self-start"></CropperAndUpload>
           </div>
         </MyLabel>
       </div>
@@ -212,6 +216,7 @@ async function submitForm() {
       <li>接受 Markdown 語法。</li>
     </ul>
     <Markdown v-model="formBody.toSponsor" class="mb-6"></Markdown>
+    <p>{{ errors }}</p>
     <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存方案</button>
   </VForm>
 </template>
