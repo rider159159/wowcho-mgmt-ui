@@ -24,7 +24,7 @@ const inputList:Ref<Array<IinputItem>> = ref([
 ])
 
 // 添加方按規格
-function addPlan() {
+function addSpecification() {
   if (formBody.value.specification.length >= 2) return
   const specification:Ispecification = {
     title: '',
@@ -50,8 +50,8 @@ function addOptionItem(index:number, itemOption:string) {
   inputList.value[index].optionText = ''
   formBody.value.specification[index].option.push(itemOption)
 }
-// 刪除方案
-function delPlan(index:number) {
+// 刪除規格
+function delSpecification(index:number) {
   formBody.value.specification.splice(index, 1)
   inputList.value.splice(index, 1)
 }
@@ -207,9 +207,9 @@ onMounted(() => {
     <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
 
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">方案規格</h5>
-    <button @click.prevent="addPlan" class="w-130px bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 rounded-3xl" :class="{ 'bg-gray4 text-gray3 !hover:bg-gray4 hover:text-gray3': formBody.specification.length >= 2 }">新增規格</button>
+    <button @click.prevent="addSpecification" class="w-130px bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 rounded-3xl" :class="{ 'bg-gray4 text-gray3 !hover:bg-gray4 hover:text-gray3': formBody.specification.length >= 2 }">新增規格</button>
     <div v-for="(item,index) in formBody.specification" :key="item.id" class="first:mt-4 relative bg-gray4 rounded-4 p-6 my-6">
-      <img @click="delPlan(index)" class="w-24px absolute top-[-12px] right-[-12px] cursor-pointer" src="/close2.svg" alt="">
+      <img @click="delSpecification(index)" class="w-24px absolute top-[-12px] right-[-12px] cursor-pointer" src="/close2.svg" alt="">
       <div class="grid gird-cols-1 xl:grid-cols-2 gap-6 pb-4">
         <div class="w-full">
           <p class="mb-3">規格{{ index+1 }}</p>

@@ -107,7 +107,7 @@ onMounted(() => {
 
 <template>
   <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
-    <h4 class="text-h2 leading-h2 mb-56px">修改募資提案</h4>
+    <h4 class="text-h2 leading-h2 mb-56px font-bold">修改募資提案</h4>
     <!-- 方案基本資訊 -->
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
     <MyLabel title="募資商品預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 1200 x 675 像素 (16:9),封面圖片可在專案上線前再另行編輯修改。">

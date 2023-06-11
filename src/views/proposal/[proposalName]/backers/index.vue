@@ -41,7 +41,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="md:(max-w-324 mx-auto) flex flex-col justify-center py-20">
+  <div class="md:(max-w-324 mx-auto) flex flex-col justify-center py-6">
+    <h4 class="text-h2 leading-h2 mb-56px fw-700">贊助訂單列表</h4>
     <div class="mb-8 w-full overflow-x-auto ">
       <table class="min-w-324">
         <thead class="h-50px bg-gray-4 rounded-lg text-gray-2 font-medium">
@@ -53,7 +54,7 @@ onMounted(() => {
           <th>購買人名稱</th>
           <th class="rounded-r-lg">詳細</th>
         </thead>
-        <tbody>
+        <tbody v-if="data.list.length > 0">
           <tr v-for="sponsor in data.list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
             <td>{{ sponsor.MerchantOrderNo }}</td>
             <td>{{ dateYYYYMMDD(sponsor.updatedAt) }}</td>
@@ -68,6 +69,7 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
+      <div v-if="data.list.length === 0" class="flex justify-center py-4 w-full text-gray-2 font-medium font-bold">目前無資料</div>
     </div>
     <Pagination
       v-if="data.totalCount > 0"

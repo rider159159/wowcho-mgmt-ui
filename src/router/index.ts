@@ -348,13 +348,13 @@ const router = createRouter({
                 // 常見問答編輯
                 {
                   path: ':faqID/edit',
-                  name: 'faqsEdit',
+                  name: 'faqEdit',
                   component: async () => await import('../views/proposal/[proposalName]/faqs/[faqID].vue')
                 },
                 // 常見問答新增
                 {
                   path: 'new',
-                  name: 'new',
+                  name: 'faqNew',
                   component: async () => await import('../views/proposal/[proposalName]/faqs/new.vue')
                 }
               ]

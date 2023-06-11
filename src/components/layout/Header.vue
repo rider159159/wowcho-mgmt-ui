@@ -139,7 +139,7 @@ const showProposalMenu = computed(() => {
     </nav>
     <!-- RWD Menu -->
     <transition name="slide">
-      <div v-show="RWDMenu" class="fixed top-72px left-0 w-screen h-[calc(100vh-72px)] bg-white py-2 px-8"
+      <div v-show="RWDMenu" class="fixed top-72px left-0 overflow-auto w-screen h-[calc(100vh-72px)] bg-white py-2 px-8"
       >
         <div  class="container h-full flex flex-col justify-between mx-auto">
           <div>
@@ -219,6 +219,26 @@ const showProposalMenu = computed(() => {
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M18.75 9V21.75H5.25V2.25H12V6.375C12 7.824 13.176 9 14.625 9H18.75ZM18.5685 6.75L14.25 2.4315V6.375C14.25 6.582 14.418 6.75 14.625 6.75H18.5685ZM3 1.5C3 1.10218 3.15804 0.720644 3.43934 0.43934C3.72064 0.158035 4.10218 0 4.5 0L14.379 0C14.7768 8.49561e-05 15.1583 0.158176 15.4395 0.4395L20.5605 5.5605C20.8418 5.84174 20.9999 6.22321 21 6.621V22.5C21 22.8978 20.842 23.2794 20.5607 23.5607C20.2794 23.842 19.8978 24 19.5 24H4.5C4.10218 24 3.72064 23.842 3.43934 23.5607C3.15804 23.2794 3 22.8978 3 22.5V1.5ZM8.625 12C8.32663 12 8.04048 12.1185 7.8295 12.3295C7.61853 12.5405 7.5 12.8266 7.5 13.125C7.5 13.4234 7.61853 13.7095 7.8295 13.9205C8.04048 14.1315 8.32663 14.25 8.625 14.25H15.375C15.6734 14.25 15.9595 14.1315 16.1705 13.9205C16.3815 13.7095 16.5 13.4234 16.5 13.125C16.5 12.8266 16.3815 12.5405 16.1705 12.3295C15.9595 12.1185 15.6734 12 15.375 12H8.625ZM7.5 16.875C7.5 16.5766 7.61853 16.2905 7.8295 16.0795C8.04048 15.8685 8.32663 15.75 8.625 15.75H12.375C12.6734 15.75 12.9595 15.8685 13.1705 16.0795C13.3815 16.2905 13.5 16.5766 13.5 16.875C13.5 17.1734 13.3815 17.4595 13.1705 17.6705C12.9595 17.8815 12.6734 18 12.375 18H8.625C8.32663 18 8.04048 17.8815 7.8295 17.6705C7.61853 17.4595 7.5 17.1734 7.5 16.875Z" fill="#636466"/>
                       </svg> -->
                       計畫方案
+                    </router-link>
+                  </li>
+                  <li class="mb-2">
+                    <!-- routeMatched -->
+                    <router-link
+                      class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
+                      :to="`/proposal/${route.params.proposal}/announce`"
+                      @click="closeMenu"
+                    >
+                      公告管理
+                    </router-link>
+                  </li>
+                  <li class="mb-2">
+                    <!-- routeMatched -->
+                    <router-link
+                      class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
+                      :to="`/proposal/${route.params.proposal}/faqs`"
+                      @click="closeMenu"
+                    >
+                      常見問答
                     </router-link>
                   </li>
                   <li class="mb-2">
