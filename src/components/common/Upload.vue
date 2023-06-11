@@ -59,7 +59,7 @@ function checkImage(e:any) {
 
 <template>
   <div class="w-full flex justify-start">
-    <label for="uploadInput" class="inline-block cursor-pointer min-w-200px md:min-w-350px lg:w-auto" :class="props.class">
+    <label for="uploadInput" class="inline-block cursor-pointer min-w-200px md:min-w-200px lg:w-auto" :class="props.class">
       <!-- <img class="w-full" src="/proposal/Upload.svg"> -->
       <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16">
         <img src="/CloudUploplad.svg">

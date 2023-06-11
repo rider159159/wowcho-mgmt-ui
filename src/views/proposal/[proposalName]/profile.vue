@@ -46,7 +46,7 @@ async function submitForm() {
 
 <template>
   <h4 class="text-h2 font-bold leading-h2 mb-56px">商業檔案設定</h4>
-  <VForm @submit="submitForm" v-slot="{ errors }" class="container m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
+  <VForm @submit="submitForm" v-slot="{ errors }" class="m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
 
     <section class=" w-full lg:w-1/4 pt-40px">
       <svg v-if="formBody.businessImage == undefined" class="w-full" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ async function submitForm() {
       <Upload v-model="formBody.businessImage" labelTitle="上傳個人圖片" class="m-a mt-8"></Upload>
     </section>
 
-    <section class="w-full lg:w-3/4 flex flex-col gap-8 pt-20px">
+    <section class="w-full lg:w-3/4 flex flex-col gap-6 pt-20px">
       <MyLabel title="提案單位名稱" label="businessName" :require="true">
       <VField v-model="formBody.businessName" name="businessName" id="businessName" label="提案單位名稱" placeholder="請輸入你的單位名稱" rules="required"
           class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
