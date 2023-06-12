@@ -56,6 +56,8 @@ export const Sponsor: ISponsor = {
   remark: '', // 備註
   option: [], // 方案規格
   address: '', // 購買人地址
+
+  updatedAt:''
 }
 
 export const SponsorList = [
