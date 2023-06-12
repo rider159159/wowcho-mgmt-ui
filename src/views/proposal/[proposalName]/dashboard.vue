@@ -80,7 +80,7 @@ onMounted(() => {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="flex flex-col items-end gap-3 p-6 md:p-10 border-brand-3 hover:bg-brand-4 border-3 w-full transition-all tansition-duration-500">
         <div class="text-h6 leading-h6 md:(text-h5 leading-h5) text-gray-2 font-medium">專案結束倒數</div>
-        <div class="text-h2 leading-h2 md:(text-h3 leading-h3) text-gray-1 font-bold">{{ formatRemainingTime(dashboard.endTime) }} 天</div>
+        <div class="text-h2 leading-h2 md:(text-h3 leading-h3) text-gray-1 font-bold">{{ formatRemainingTime(dashboard.endTime) === 'expired' ? '已過期' : `${formatRemainingTime(dashboard.endTime)}天` }} </div>
         <div class="text-h6 leading-h6 text-gray-2">{{ `${dateYYYYMMDD(dashboard.startTime)} - ${dateYYYYMMDD(dashboard.endTime)}` }}</div>
       </div>
       <div class="flex flex-col items-end gap-3 p-6 md:p-10 border-brand-3 hover:bg-brand-4 border-3 w-full transition-all tansition-duration-500">

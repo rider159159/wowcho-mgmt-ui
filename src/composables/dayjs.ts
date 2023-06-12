@@ -47,6 +47,5 @@ export function formatRemainingTime(timeStamp:any) {
   const currentTime = dayjs()
   const targetTime = dayjs(timeStamp)
   const diff = targetTime.diff(currentTime, 'day')
-
-  return diff
+  return diff < 0 ? 'expired' : diff
 }

@@ -11,5 +11,7 @@ export const fetchProposal = {
   // 獲得列表
   getList: async (params?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpGet('/proposal', { params }, isUnLoad),
   // 刪除
-  delete: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpDelete('/proposal', data, isUnLoad)
+  delete: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpDelete('/proposal', data, isUnLoad),
+  // 下架募資提案
+  offShelf: async (data?: any, isUnLoad?: boolean): Promise<ApiResponse> => await http.httpPatch('/proposal/offShelf', data, isUnLoad)
 }

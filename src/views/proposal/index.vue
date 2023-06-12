@@ -40,17 +40,55 @@ async function getProposalList() {
   proposalList.value = res.data.list
   ProposalListTotal.value = res.data.totalCount
 }
-
-async function delProposal(id:string) {
-  const query = { id: [id] }
-  const res = await fetchProposal.delete(query)
+// 下架募資提案
+async function offShelfProposal(id:string) {
+  const query = { id }
+  const res = await fetchProposal.offShelf(query)
   if (res.status !== 'Success') return
-  toast.success('刪除募資提案成功!', {
+  toast.success('下架募資提案成功!', {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: 2000,
     theme: 'colored'
   })
   getProposalList()
+}
+
+// 刪除募資提案
+// async function delProposal(id:string) {
+//   const query = { id: [id] }
+//   const res = await fetchProposal.delete(query)
+//   if (res.status !== 'Success') return
+//   toast.success('刪除募資提案成功!', {
+//     position: toast.POSITION.TOP_RIGHT,
+//     autoClose: 2000,
+//     theme: 'colored'
+//   })
+//   getProposalList()
+// }
+
+function statusToTitle(status = 1) {
+  let title = ''
+  switch (status) {
+    case 0:
+      title = '草稿'
+      break
+    case 1:
+      title = '等待審核'
+      break
+    case 2:
+      title = '審核通過'
+      break
+    case 3:
+      title = '審核未通過'
+      break
+    case 4:
+      title = '停權'
+      break
+    case 5:
+      title = '下架'
+      break
+  }
+  return title
 }
 
 watch(
@@ -82,6 +120,7 @@ onMounted(() => {
         </a>
       </li>
     </ul> -->
+    <h2 class="text-h2 font-bold leading-h2 mb-56px">提案列表</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
       <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">
         <div class="flex flex-col w-full">
@@ -89,11 +128,12 @@ onMounted(() => {
           <h5 class="text-h6 leading-h5">{{ item.name }}</h5>
           <div class="flex justify-between text-14px">
             <div>
+              <p>提案狀態: {{ statusToTitle(item.status) }} </p>
               <p class="leading-h5">募資目標金額: {{ item.targetPrice }}</p>
               <p>當前累積金額: {{ item.nowPrice }}</p>
             </div>
             <div class="self-center">
-              <button @click.prevent="delProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-3 px-6 rounded-full">刪除募資提案</button>
+              <button @click.prevent="offShelfProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-3 px-6 rounded-full">下架募資提案</button>
             </div>
           </div>
         </div>
