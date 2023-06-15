@@ -45,7 +45,7 @@ onMounted(() => {
     <h4 class="text-h2 leading-h2 mb-56px fw-700">贊助訂單列表</h4>
     <div class="mb-8 w-full overflow-x-auto ">
       <table class="min-w-324">
-        <thead class="h-50px bg-gray-4 rounded-lg text-gray-2 font-medium">
+        <thead class="h-50px bg-gray-4 text-gray-2 font-medium">
           <th class="rounded-l-lg">訂單編號</th>
           <th>購買日期</th>
           <th>贊助專案</th>

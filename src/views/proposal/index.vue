@@ -125,15 +125,18 @@ onMounted(() => {
       <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">
         <div class="flex flex-col w-full">
           <img v-default-image="'./proposal/proposalDefault.svg'" @click="toProject(item)" :src="item.image" class="cursor-pointer mb-2">
-          <h5 class="text-h6 leading-h5">{{ item.name }}</h5>
+          <h5 class="text-h6 leading-h5 mb-3 font-bold">{{ item.name }}</h5>
           <div class="flex justify-between text-14px">
-            <div>
-              <p>提案狀態: {{ statusToTitle(item.status) }} </p>
+            <div class="flex flex-col gap-2 text-gray-2">
+              <div class="flex">
+                <p>提案狀態: </p>
+                <p  class="font-bold" :class="{'text-#FFCD29': item.status === 1, 'text-emerald':item.status === 2, 'text-#FF5D71':item.status === 3 || item.status === 4 || item.status === 5 }"> {{ statusToTitle(item.status) }}</p>
+              </div>
               <p class="leading-h5">募資目標金額: {{ item.targetPrice }}</p>
               <p>當前累積金額: {{ item.nowPrice }}</p>
             </div>
             <div class="self-center">
-              <button @click.prevent="offShelfProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-3 px-6 rounded-full">下架募資提案</button>
+              <button @click.prevent="offShelfProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-2 px-4 rounded-full">下架募資提案</button>
             </div>
           </div>
         </div>

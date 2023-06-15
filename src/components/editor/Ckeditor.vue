@@ -43,6 +43,10 @@ const props = defineProps({
   getCkData: {
     type: Boolean,
     default: false
+  },
+  test: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -161,9 +165,9 @@ onBeforeUnmount(() => {
 })
 
 </script>
-
 <template>
-  <div id="editor" class="formatted" :class="props.class">
+  <div id="editor" class="formatted" :class="{'errorMessage ckError':props.test}" >
+    <p> {{ props.class }}</p>
     <div ref="editor" ></div>
   </div>
 </template>

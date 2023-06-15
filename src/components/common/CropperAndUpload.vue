@@ -26,6 +26,10 @@ const props = defineProps({
   fixedNumber: {
     type: Array,
     default: () => [18, 10]
+  },
+  error: {
+    type: Boolean,
+    default: false
   }
 })
 const emits = defineEmits(['update:modelValue'])
@@ -100,7 +104,8 @@ async function uploadImage(files:any) : Promise<void> {
   <div class="w-full flex flex-col lg:flex-row justify-start">
     <label for="uploadInput" class="inline-block cursor-pointer min-w-200px md:min-w-350px lg:w-auto" :class="props.class">
       <!-- <img class="w-full" src="/proposal/Upload.svg"> -->
-      <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16">
+
+      <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16" :class="{ 'b-#FF5D71':props.error}">
         <img src="/CloudUploplad.svg">
         <p v-if="modelValue === ''" class="text-gray-2">{{ props.labelTitle }}</p>
         <p v-else class="text-gray-2">重新上傳圖片</p>

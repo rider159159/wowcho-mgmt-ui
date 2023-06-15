@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { fetchBusinessProfile } from '@/api'
 import { toast } from '@/plugins'
+import { scrollToError, checkObjKey } from '@/composables'
 
 onMounted(() => { getBusinessProfile() })
 
@@ -42,11 +43,17 @@ async function submitForm() {
     theme: 'colored'
   })
 }
+
+function onInvalidSubmit({ errors }:any) {
+  if (checkObjKey(errors).length > 0) {
+    scrollToError()
+  }
+}
 </script>
 
 <template>
   <h4 class="text-h2 font-bold leading-h2 mb-56px">商業檔案設定</h4>
-  <VForm @submit="submitForm" v-slot="{ errors }" class="m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
+  <VForm @submit="submitForm" @invalid-submit="onInvalidSubmit" v-slot="{ errors }" class="m-a flex flex-col lg:flex-row gap-10 items-center lg-items-start">
 
     <section class=" w-full lg:w-1/4 pt-40px">
       <svg v-if="formBody.businessImage == undefined" class="w-full" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,14 +66,16 @@ async function submitForm() {
     </section>
 
     <section class="w-full lg:w-3/4 flex flex-col gap-6 pt-20px">
-      <MyLabel title="提案單位名稱" label="businessName" :require="true">
-      <VField v-model="formBody.businessName" name="businessName" id="businessName" label="提案單位名稱" placeholder="請輸入你的單位名稱" rules="required"
+
+      <MyLabel title="提案單位名稱" label="businessName" :require="true" class="mb-1" :class="{'errorMessage':errors.businessName}"
+        >
+        <VField v-model="formBody.businessName" name="businessName" id="businessName" label="提案單位名稱" placeholder="請輸入你的單位名稱" rules="required"
           class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
           :class="{'!border-#FF5D71':errors.businessName}" />
-          <span v-if="errors.businessName" class="block text-#FF5D71 mt-4 text-14px">{{ errors.businessName }}</span>
+        <span v-if="errors.businessName" class="block text-#FF5D71 mt-4 text-14px">{{ errors.businessName }}</span>
       </MyLabel>
 
-      <MyLabel title="提案單位 Email" label="email" :require="true" >
+      <MyLabel title="提案單位 Email" label="email" :require="true" class="mb-1" :class="{'errorMessage':errors.businessEmail}">
         <VField v-model="formBody.businessEmail" name="businessEmail" id="email" label="提案單位 Email" placeholder="example@mail.com" rules="required"
           class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
           :class="{'!border-#FF5D71':errors.businessEmail}" />

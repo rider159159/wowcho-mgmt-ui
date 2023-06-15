@@ -2,15 +2,15 @@ import { Field, Form, ErrorMessage, configure, defineRule } from 'vee-validate'
 import { localize, setLocale } from '@vee-validate/i18n'
 import ZhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import {
-  email, required, min, max, integer
+  email, required, min, max, integer, min_value as minValue
 } from '@vee-validate/rules'
 import { type App } from 'vue'
+defineRule('min_value', minValue)
 
 defineRule('required', required)
 defineRule('email', email)
 defineRule('min', min)
 defineRule('integer', integer)
-
 // defineRule('confirmed', (value: string, [target]: any) => {
 //   if (value === target) {
 //     return true
@@ -27,13 +27,6 @@ defineRule('password', (value: string) => {
   }
   return '密碼必須在 8 至 20 碼之間'
 })
-
-// defineRule('mobile', (val: string, { target, ctx }: MobileRuleParams) => {
-//   if (!/^09\d{8}$/.test(val)) {
-//     return `${ctx.field}有誤`;
-//   }
-//   return true;
-// });
 
 export function setupVeeValidate (AppInstance: App<Element>) {
   AppInstance.component('VField', Field)

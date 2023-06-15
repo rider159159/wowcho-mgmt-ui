@@ -4,6 +4,8 @@ import { plan, Ispecification, IinputItem } from '@/interface'
 import type { Ref } from 'vue'
 import { Swal, toast } from '@/plugins'
 import { fetchPlan } from '@/api'
+import { scrollToError, checkObjKey } from '@/composables'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -59,18 +61,6 @@ function delOptionItem(index:number, idx:number) {
   formBody.value.specification[index].option.splice(idx, 1)
 }
 
-// 未上傳圖片
-function imageError () {
-  if (!formBody.value.image) { // 沒圖片
-    if (formControl) { // 若送出表單沒圖片，顯示錯誤
-      Swal.fire({
-        icon: 'warning',
-        title: '請上傳募資商品預覽圖'
-      })
-    }
-  }
-}
-
 // 規格錯誤
 function specificationError () {
   if (formBody.value.specification.length > 0) {
@@ -88,7 +78,6 @@ function specificationError () {
 async function submitForm() {
   formControl.value = true
   specificationError()
-  imageError()
   const formData = JSON.parse(JSON.stringify(formBody.value))
   formData.proposalUrl = route.params.proposal
   const res = await fetchPlan.create(formData)
@@ -108,16 +97,24 @@ async function submitForm() {
   }, 2100)
 }
 
+function onInvalidSubmit({ errors }:any) {
+  if (checkObjKey(errors).length > 0) {
+    scrollToError()
+  }
+}
 </script>
 
 <template>
-  <VForm @submit="submitForm" v-slot="{ errors }" class="container mx-auto px-3 py-6">
+  <VForm @submit="submitForm" @invalid-submit="onInvalidSubmit" v-slot="{ errors }" class="container mx-auto px-3 py-6">
     <h4 class="text-h2 font-bold leading-h2 mb-4">新增募資方案</h4>
     <p class="w-full text-gray2 text-h5 mb-56px">可以在此頁面中設定，募資計畫中的商品方案。</p>
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6">募資商品基本資訊</h5>
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
       <div>
-        <MyLabel title="回饋方案名稱" label="name" :require="true" class="mb-6" remark="長度限制12字，請勿加入數量、價格折扣等等行銷字樣。">
+        <MyLabel title="回饋方案名稱" label="name" :require="true" class="mb-6"
+          remark="長度限制12字，請勿加入數量、價格折扣等等行銷字樣。"
+          :class="{'errorMessage !mb-1':errors.name}"
+          >
           <VField v-model="formBody.name" id="name" name="name" label="募資商品名稱" placeholder="請輸入方案名稱" rules="required"
             class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
             :class="{'!border-#FF5D71':errors.name}" />
@@ -130,55 +127,66 @@ async function submitForm() {
         </MyLabel>
       </div>
       <div>
-        <MyLabel title="方案實際價格" label="actualPrice" :require="true" class="mb-6" remark="此價格是贊助者實際購買時的折扣價格。">
-          <VField v-model="formBody.actualPrice" id="actualPrice" type="number"  name="actualPrice" label="實際價格" placeholder="請輸入實際價格" rules="required"
+        <MyLabel title="方案實際價格" label="actualPrice" :require="true" class="mb-6" remark="此價格是贊助者實際購買時的折扣價格。"
+          :class="{'errorMessage !mb-1':errors.actualPrice}"
+          >
+          <VField v-model="formBody.actualPrice" id="actualPrice" type="number"  name="actualPrice" label="實際價格" placeholder="請輸入實際價格" rules="required|min_value:0|integer"
             class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
             :class="{'!border-#FF5D71':errors.actualPrice}" />
         </MyLabel>
         <span v-if="errors.actualPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.actualPrice }}</span>
       </div>
       <div>
-        <MyLabel title="方案原始價格" label="originalPrice" :require="true" class="mb-6" remark="系統會將實際價格與原始價格進行折扣計算，將折扣顯示於募資活動畫面上。">
-          <VField v-model="formBody.originalPrice" id="originalPrice" type="number"  name="originalPrice" label="原始價格" placeholder="請輸入原始價格" rules="required"
+        <MyLabel title="方案原始價格" label="originalPrice" :require="true" class="mb-6" remark="系統會將實際價格與原始價格進行折扣計算，將折扣顯示於募資活動畫面上。"
+          :class="{'errorMessage !mb-1':errors.originalPrice}"
+          >
+          <VField v-model="formBody.originalPrice" id="originalPrice" type="number"  name="originalPrice" label="原始價格" placeholder="請輸入原始價格" rules="required|min_value:0|integer"
             class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
             :class="{'!border-#FF5D71':errors.originalPrice}" />
         </MyLabel>
         <span v-if="errors.originalPrice" class="block text-#FF5D71 mb-3 text-14px">{{ errors.originalPrice }}</span>
       </div>
       <div class="xl:col-span-2">
-        <MyLabel title="募資方案預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 600 x 200 像素 (3:1),方案圖片可於上線後修改。">
+        <MyLabel title="募資方案預覽圖" label="image" :require="true" class="mb-6" remark="請上傳小於 1MB 的圖片,建議尺寸為 600 x 200 像素 (3:1),方案圖片可於上線後修改。"
+          :class="{'errorMessage !mb-1':errors.image}"
+        >
           <div class="flex flex-col items-start">
             <img v-if="formBody.image" :src="formBody.image" class="mb-4 max-h-500px w-auto">
-            <CropperAndUpload v-model="formBody.image" :fixedNumber="[3,1]" class="self-start"></CropperAndUpload>
+            <CropperAndUpload v-model="formBody.image" :fixedNumber="[3,1]" :error="errors.image ? true: false" class="self-start"></CropperAndUpload>
           </div>
         </MyLabel>
+        <VField v-model="formBody.image" name="image" label="募資商品預覽圖" rules="required" class="hidden"></VField>
+        <span class="block text-#FF5D71 mb-3 text-14px">{{ errors.image }}</span>
       </div>
       <div>
-        <MyLabel title="出貨日期" :require="true" class="w-full">
-          <VField v-model="formBody.pickupDate"  name="pickupDate" id="pickupDate" label="提案開始時間" rules="required" type="number" placeholder="請根據你計畫的需求,估算你所需要募集的金額。">
+        <MyLabel title="出貨日期" :require="true" class="w-full" :class="{'errorMessage !mb-1':errors.pickupDate}">
+          <VField v-model="formBody.pickupDate"  name="pickupDate" id="pickupDate" label="出貨日期" rules="required" type="number">
             <VueDatePicker v-model="formBody.pickupDate" :min-date="new Date()" :format="'yyyy/MM/dd HH:mm'" model-type="timestamp" locale="zh-TW" auto-apply>
               <template #dp-input="{ value }">
-                <input :value="value" type="text" placeholder="請選擇開始時間" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
+                <input :value="value" type="text"  placeholder="請選擇出貨時間" class="w-full h-48px text-h6 leading-h4 px-2 rounded-8px b-2px border-line focus:outline-none focus:border-brand3"
                   :class="{'!border-#FF5D71':errors.pickupDate}">
               </template>
             </VueDatePicker>
           </VField>
         </MyLabel>
+        <span class="block text-#FF5D71 mb-3 text-14px">{{ errors.pickupDate }}</span>
       </div>
     </div>
-    <div class="flex pb-4 mb-6 mt-56px border-b-2 b-line">
-      <span class="text-#FF5D71 mr-1">*</span>
-      <h5 class="w-full text-brand1 text-h4">方案簡介</h5>
+    <div :class="{'errorMessage !mb-1':errors.summary}">
+      <div class="flex pb-4 mb-6 mt-56px border-b-2 b-line">
+        <span class="text-#FF5D71 mr-1">*</span>
+        <h5 class="w-full text-brand1 text-h4">方案簡介</h5>
+      </div>
+      <ul class="list-disc text-14px text-gray2 pl-4 mb-4">
+        <li>此選項介紹該方案內容，商品金額、分期付款、贊助數量，等等資訊介紹，可以無需在此介紹。</li>
+        <li>簡短扼要地介紹品項描述，可縮短贊助人決定時間，提升使用者體驗。</li>
+        <li>接受 Markdown 語法。</li>
+      </ul>
+      <VField v-model="formBody.summary" name="summary" id="summary" label="方案內容" rules="required" type="text">
+        <Markdown v-model="formBody.summary" :class="{'ckError': errors.summary }"></Markdown>
+      </VField>
+      <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
     </div>
-    <ul class="list-disc text-14px text-gray2 pl-4 mb-4">
-      <li>此選項介紹該方案內容，商品金額、分期付款、贊助數量，等等資訊介紹，可以無需在此介紹。</li>
-      <li>簡短扼要地介紹品項描述，可縮短贊助人決定時間，提升使用者體驗。</li>
-      <li>接受 Markdown 語法。</li>
-    </ul>
-    <VField v-model="formBody.summary" name="summary" id="summary" label="方案內容" rules="required" type="number">
-      <Markdown v-model="formBody.summary" :class="{'ckError': errors.summary }"></Markdown>
-    </VField>
-    <span v-if="errors.summary" class="block text-#FF5D71 mb-3 text-14px">{{ errors.summary }}</span>
 
     <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">方案規格</h5>
     <button @click.prevent="addSpecification" class="w-130px bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 rounded-3xl" :class="{ 'bg-gray4 text-gray3 !hover:bg-gray4 hover:text-gray3': formBody.specification.length >= 2 }">新增規格</button>
