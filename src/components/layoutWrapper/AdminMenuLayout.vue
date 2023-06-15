@@ -12,6 +12,6 @@
         </div>
       </div>
     </main>
-    <Footer />
+    <Footer class="pb-130px lg:pb-80px" />
   </div>
 </template>

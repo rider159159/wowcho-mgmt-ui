@@ -78,8 +78,9 @@ onMounted(() => {
         </VField>
       </MyLabel> -->
       <span v-if="errors.date" class="block text-#FF5D71 mb-3 text-14px">{{ errors.startTime }}</span>
-      <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存公告</button>
-
+      <FooterProposal>
+        <button type="submit" class="mt-4 lg:mt-0 px-6 py-3 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存公告</button>
+      </FooterProposal>
     </VForm>
   </div>
 </template>

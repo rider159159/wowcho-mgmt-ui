@@ -58,13 +58,13 @@ onMounted(() => {
           <tr v-for="sponsor in data.list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
             <td>{{ sponsor.MerchantOrderNo }}</td>
             <td>{{ dateYYYYMMDD(sponsor.updatedAt) }}</td>
-            <td>{{  sponsor.proposalId.name }}</td>
+            <td>{{ sponsor.proposalId.name }}</td>
             <td>{{ sponsor.option.join('、') }}</td>
             <td>{{ sponsor.planId.actualPrice }}</td>
             <td>{{ sponsor.CVSCOMName }}</td>
-            <td class="flex justify-center items-center text-brand-2 hover:text-brand-1 transition transition-all transition-duration-500 rounded-r-lg" @click="goDetail(sponsor.id)">
-              <div>詳情</div>
-              <div class="mdi mdi-chevron-right w-6 h-6"></div>
+            <td class="text-brand-2 hover:text-brand-1 transition transition-all transition-duration-500 rounded-r-lg" @click="goDetail(sponsor.id)">
+              <div class="inline-block">詳情</div>
+              <div class="mdi mdi-chevron-right w-6 h-6 inline-block"></div>
             </td>
           </tr>
         </tbody>
@@ -77,6 +77,7 @@ onMounted(() => {
       :page-size="formQuery.pageSize"
       :total="data.totalCount"
     />
+    <FooterProposal></FooterProposal>
   </div>
 </template>
 

@@ -96,6 +96,7 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <FooterProposal></FooterProposal>
   </div>
 </template>
 

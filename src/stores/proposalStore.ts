@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
+import { proposal } from '@/interface'
 
-export const messageStore = defineStore('message-store', () => {
-  const MESSAGE_REF = ref('')
+export const proposalStore = defineStore('message-store', () => {
+  const PROPOSAL_REF = ref({ ...proposal })
 
   return {
-    MESSAGE_REF
+    PROPOSAL_REF
   }
 })

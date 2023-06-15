@@ -89,5 +89,6 @@ onMounted(() => {
         :total="planListTotal"
       ></Pagination>
     </div>
+    <FooterProposal></FooterProposal>
   </div>
 </template>

@@ -247,6 +247,8 @@ onMounted(() => {
       <li>接受 Markdown 語法。</li>
     </ul>
     <Markdown v-model="formBody.toSponsor" :getCkData="getCkData" class="mb-6"></Markdown>
-    <button type="submit" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存方案</button>
+    <FooterProposal>
+      <button type="submit" class="mt-4 lg:mt-0 px-6 py-3 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存方案</button>
+    </FooterProposal>
   </VForm>
 </template>

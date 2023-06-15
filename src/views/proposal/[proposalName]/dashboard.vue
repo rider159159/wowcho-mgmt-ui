@@ -105,5 +105,6 @@ onMounted(() => {
         <div class="text-h2 leading-h2 md:(text-h3 leading-h3) text-gray-1 font-bold">NT$ 4,657</div>
       </div> -->
     </div>
+    <FooterProposal></FooterProposal>
   </div>
 </template>

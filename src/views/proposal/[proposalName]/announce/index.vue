@@ -87,7 +87,8 @@ onMounted(() => {
         :page-size="formQuery.pageSize"
         :total="data.totalCount"
       />
-  </div>
+    </div>
+    <FooterProposal></FooterProposal>
   </section>
 </template>
 

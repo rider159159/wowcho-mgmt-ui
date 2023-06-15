@@ -53,7 +53,7 @@ onMounted(() => {
 
 <template>
   <section class="py-6">
-    <div class="text-h2 leading-h2 mb-56px fw-700">問答列表</div>
+    <div class="text-h2 leading-h2 mb-56px fw-700">常見問答列表</div>
     <div class="md:(max-w-324 mx-auto) flex flex-col justify-center">
       <div class="w-full flex justify-end mb-10">
         <RouterLink :to="`/proposal/${route.params.proposal}/faqs/new`" class="flex justify-center bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 px-4 rounded-3xl">新增常見問答</RouterLink>
@@ -91,7 +91,8 @@ onMounted(() => {
         :page-size="formQuery.pageSize"
         :total="data.totalCount"
       />
-  </div>
+    </div>
+    <FooterProposal></FooterProposal>
   </section>
 </template>
 
@@ -106,12 +107,4 @@ onMounted(() => {
 
 }
 
-// .overflow-ellipsis::after {
-//     content: "...";
-//     position: absolute;
-//     bottom: 0;
-//     right: 0;
-//     padding: 0 10px 10px 45px;
-//     background: inherit;
-// }
 </style>

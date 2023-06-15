@@ -61,7 +61,7 @@ const showProposalMenu = computed(() => {
           id="navbarSupportedContentX">
           <img @click="router.push('/proposal')" class="cursor-pointer max-w-[calc(100vw-150px)]" src="/logo.svg">
           <ul
-            class="hidden lg:flex items-center gap-4">
+            class="hidden lg:flex items-center gap-6">
             <li>
               <a
                 class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
