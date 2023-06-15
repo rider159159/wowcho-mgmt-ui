@@ -1,13 +1,41 @@
 <script setup lang="ts">
 import { fetchMember } from '@/api'
-import { SET_TOKEN } from '@/utils'
+import { SET_TOKEN, REMOVE_TOKEN } from '@/utils'
 import { Swal } from '@/plugins/sweet-alert'
+import { storeToRefs } from 'pinia'
+import { userInfoStore } from '@/stores'
+
+const store = userInfoStore()
+const { USER_INFO_REF } = storeToRefs(store)
+
 const router = useRouter()
+const passwordShow = ref(true)
+const passwordType = ref('password')
+function togglePasswordType(show:boolean, type:string) {
+  passwordShow.value = show
+  passwordType.value = type
+}
 
 async function submitForm(value:any) {
   const formBody = value
   const res = await fetchMember.login(formBody)
+  if (res.status !== 'Success') return
   SET_TOKEN(res.data.token)
+
+  await getProfile()
+}
+
+async function getProfile() {
+  const res = await fetchMember.getProfile()
+  if (res.status !== 'Success') return
+  // 如果停權，跳 swal 並刪除 cookie
+  // userSuspend()
+  // 正常狀態使用 loginSuccess
+  USER_INFO_REF.value = res.data
+  loginSuccess()
+}
+
+function loginSuccess() {
   Swal.fire({
     icon: 'success',
     title: '登入成功，即將將前往首頁!',
@@ -20,11 +48,15 @@ async function submitForm(value:any) {
   }, 2000)
 }
 
-const passwordShow = ref(true)
-const passwordType = ref('password')
-function togglePasswordType(show:boolean, type:string) {
-  passwordShow.value = show
-  passwordType.value = type
+function userSuspend() {
+  REMOVE_TOKEN()
+  Swal.fire({
+    icon: 'warning',
+    text: '帳號已被停權，請聯繫渦潮管理員。',
+    confirmButtonText: '確定',
+    confirmButtonColor: '#2378BF',
+    timer: 3000
+  })
 }
 </script>
 
