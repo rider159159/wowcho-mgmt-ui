@@ -7,18 +7,18 @@ const { PROPOSAL_REF } = storeToRefs(proposalStoreInstance)
 const route = useRoute()
 
 const VITE_FRONT_BUILD_URL = import.meta.env.VITE_FRONT_BUILD_URL
+
 async function getProposal () {
   const query = {
     proposalUrl: route.params.proposal
   }
   const res = await fetchProposal.get(query)
   if (res.status !== 'Success') return
-
   PROPOSAL_REF.value = res.data
 }
 
 onMounted(() => {
-  if (PROPOSAL_REF.value.name.length === 0) {
+  if (PROPOSAL_REF.value.name.length === 0 || PROPOSAL_REF.value.customizedUrl !== route.params.proposal) {
     getProposal()
   }
 })

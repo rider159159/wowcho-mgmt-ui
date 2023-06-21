@@ -252,7 +252,7 @@ const router = createRouter({
                 // 公告列表
                 {
                   path: '',
-                  name: 'announce',
+                  name: 'announceList',
                   component: async () => await import('../views/proposal/[proposalName]/announce/index.vue')
                 },
                 // 新增公告

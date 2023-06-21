@@ -71,7 +71,6 @@ async function submitForm() {
     icon: 'success',
     title: '新增成功'
   })
-  console.log(res.data, '新增成功')
 }
 
 function openToast() {

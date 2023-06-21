@@ -18,7 +18,7 @@ async function submitForm() {
   })
   setTimeout(() => {
     router.push({
-      name: 'announce',
+      name: 'announceList',
       params: {
         proposal: res.data.customizedUrl
       }

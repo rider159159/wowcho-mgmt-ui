@@ -25,7 +25,7 @@ const props = defineProps({
   },
   fixedNumber: {
     type: Array,
-    default: () => [18, 10]
+    default: () => [16, 9]
   },
   error: {
     type: Boolean,
@@ -120,7 +120,7 @@ async function uploadImage(files:any) : Promise<void> {
           v-bind="option">
         </VueCropper>
       </div>
-      <button @click="checkUpload" type="button" class="mt-4 w-full py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">確定上傳</button>
+      <button @click="checkUpload" type="button" class="mt-4 w-full lg:w-auto lg:px-6 py-2 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">確定上傳</button>
     </div>
 
     <span v-if="showErrorMessage" class="block self-end text-#FF5D71 mb-3 text-14px">{{ props.errorMessage }}</span>

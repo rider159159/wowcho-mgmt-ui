@@ -54,17 +54,17 @@ async function offShelfProposal(id:string) {
 }
 
 // 刪除募資提案
-// async function delProposal(id:string) {
-//   const query = { id: [id] }
-//   const res = await fetchProposal.delete(query)
-//   if (res.status !== 'Success') return
-//   toast.success('刪除募資提案成功!', {
-//     position: toast.POSITION.TOP_RIGHT,
-//     autoClose: 2000,
-//     theme: 'colored'
-//   })
-//   getProposalList()
-// }
+async function delProposal(id:string) {
+  const query = { id: [id] }
+  const res = await fetchProposal.delete(query)
+  if (res.status !== 'Success') return
+  toast.success('刪除募資提案成功!', {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 2000,
+    theme: 'colored'
+  })
+  getProposalList()
+}
 
 function statusToTitle(status = 1) {
   let title = ''
@@ -136,6 +136,7 @@ onMounted(() => {
               <p>當前累積金額: {{ item.nowPrice }}</p>
             </div>
             <div class="self-center">
+              <!-- delProposal offShelfProposal -->
               <button @click.prevent="offShelfProposal(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white  b-2 duration-300 py-2 px-4 rounded-full">下架募資提案</button>
             </div>
           </div>
