@@ -6,7 +6,7 @@ import { requestStore } from '@/stores'
 const defaultConfig = {
   timeout: 30000,
   // 判斷環境變數
-  baseURL: import.meta.env.VITE_BASE_URL ? import.meta.env.VITE_BASE_URL : 'http://localhost:3034'
+  baseURL: import.meta.env.VITE_BASE_URL ? import.meta.env.VITE_BASE_URL : 'http://localhost:3001'
 }
 class ApiResponse {
   constructor (response: any) {
