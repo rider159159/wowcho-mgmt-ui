@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
   console.log('command', command)
   console.log('mode', mode)
   return {
-    base: process.env.NODE_ENV === 'production' ? '/backstage/' : '/',
+    base: '/backstage/',
     plugins: [
       vue(),
       ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-theme-lark') }),
