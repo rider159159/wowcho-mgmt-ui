@@ -58,7 +58,7 @@ onMounted(() => {
         新增募資方案
       </router-link>
     </div>
-    <div>
+    <div v-if="planList.length>0">
       <div v-for="(item,index) in planList" :key="index" class="mb-4">
         <div class="flex flex-col md:flex-row w-full py-4 gap-6">
           <div class="grid grid-cols-2  md:grid-cols-1 gpa-6 lg:w-[calc(25%-24px)]">
@@ -89,6 +89,7 @@ onMounted(() => {
         :total="planListTotal"
       ></Pagination>
     </div>
+    <div v-else class="flex justify-center py-4 w-full text-gray-2 font-medium font-bold">目前尚無資料</div>
     <FooterProposal></FooterProposal>
   </div>
 </template>
