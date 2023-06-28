@@ -4,21 +4,6 @@ import { defaultImage as vDefaultImage } from '@/directive/defaultImage'
 import { toast } from '@/plugins'
 
 const router = useRouter()
-// const tabList = ref([
-//   {
-//     title: '集資中',
-//     value: 0
-//   },
-//   {
-//     title: '集資尚未開始',
-//     value: 1
-//   },
-//   {
-//     title: '集資結束',
-//     value: 2
-//   }
-// ])
-// const tabActive = ref(0)
 
 const proposalList:any = ref([])
 
@@ -29,7 +14,6 @@ const query = ref({
 const ProposalListTotal = ref(0)
 
 function toProject (item:any) {
-  // TODO: 確認使用 customizedUrl 、 id
   router.push({
     path: `/proposal/${item.customizedUrl}/dashboard`
   })
@@ -109,17 +93,6 @@ onMounted(() => {
 
 <template>
   <section class="container m-auto">
-    <!-- <ul class="flex">
-      <li v-for="item in tabList" :key="item.value">
-        <a
-          @click.prevent="tabActive = item.value"
-          :class="{'bg-brand-4 border-brand-2': tabActive === item.value }"
-          class="flex items-center gap-x-3 border-b-4 border-#fff py-4 px-9 hover:bg-brand-4 hover:border-brand-2 cursor-pointer duration-300"
-        >
-          {{ item.title }}
-        </a>
-      </li>
-    </ul> -->
     <h2 class="text-h2 font-bold leading-h2 mb-56px">提案列表</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
       <div  v-for="(item,index) in proposalList" :key="index" class="mb-4">

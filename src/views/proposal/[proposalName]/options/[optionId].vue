@@ -44,7 +44,9 @@ function addOptionItem(index:number, itemOption:string) {
   if (itemOption.length <= 0) {
     return Swal.fire({
       icon: 'warning',
-      title: '請輸入正確的規格選項。'
+      title: '請輸入正確的規格選項。',
+      confirmButtonText: '確定',
+      confirmButtonColor: '#2378BF'
     })
   }
   // 移除輸入框
@@ -69,7 +71,9 @@ function specificationError () {
       if (item.option.length <= 0 || item.title.length <= 0) {
         return Swal.fire({
           icon: 'warning',
-          title: '方案規格請輸入，規格標題、規格選項。'
+          title: '方案規格請輸入，規格標題、規格選項。',
+          confirmButtonText: '確定',
+          confirmButtonColor: '#2378BF'
         })
       }
     })

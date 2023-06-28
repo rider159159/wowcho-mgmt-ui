@@ -22,7 +22,6 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col px-3 lg:px-0 py-12 max-w-324 flex justify-center mx-auto gap-8">
-    <!-- <div class="text-h3 leading-h3 mb-4 md:(text-h2 leading-h2 mb-6) text-gray-1">控制中心</div> -->
     <div class="flex flex-col lg:flex-row justify-around gap-4 lg:gap-2 items-start lg:items-center p-6 md:p-10 border-brand-3 border-3 w-full">
       <div class="flex gap-3 items-center">
         <div class="rounded-25px bg-brand-3 min-w-10 min-h-10 flex justify-center items-center">

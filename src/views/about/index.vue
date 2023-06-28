@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div>
     <div class="bg-brand-4 h-100 flex flex-col items-center justify-around p-20 text-center">

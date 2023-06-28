@@ -24,7 +24,6 @@ onMounted(() => {
   <div class="flex flex-col px-3 lg:px-0 py-6 max-w-324 flex justify-center mx-auto">
     <div class="text-h2 leading-h2 mb-56px fw-700">贊助詳情</div>
     <div class="flex flex-col md:flex-row gap-2 md:gap-4 lg:gap-8">
-      <!-- <div class="flex justify-center items-center w-full border-gray-1 border-2 bg-gray-4">我是為了方案保留的區域</div> -->
       <div class="flex flex-col w-full">
         <div class="text-brand-1 text-h5 leading-h5 md:(text-h4 leading-h4) font-medium border-b-1 border-line py-4">訂單資訊</div>
         <div class="flex flex-col py-4 md:py-6 gap-2 md:gap-3">
