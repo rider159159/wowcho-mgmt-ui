@@ -103,12 +103,20 @@ onMounted(() => {
 
 }
 
-// .overflow-ellipsis::after {
-//     content: "...";
-//     position: absolute;
-//     bottom: 0;
-//     right: 0;
-//     padding: 0 10px 10px 45px;
-//     background: inherit;
-// }
+table {
+  th, td {
+    @apply p-4 min-w-25 text-center;
+  }
+  th {
+    @apply h-50px;
+  }
+  tr {
+    &:not(:first-child) {
+      @apply border-t-1 border-line;
+    }
+  }
+  td {
+    @apply h-14;
+  }
+}
 </style>

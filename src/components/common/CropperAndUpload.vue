@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { fetchUpload } from '@/api'
+
 const showErrorMessage = ref(false)
 const props = defineProps({
   modelValue: {
@@ -48,7 +49,7 @@ const option = computed(() => {
 
 const currentImg = ref('')
 const showCropper = ref(false)
-
+const refInput:Ref<HTMLInputElement | null> = ref(null)
 function choseImage(e:any) {
   const files = e.target.files
   const file = files[0]
@@ -72,7 +73,6 @@ function showCropperImage(file:any) {
   const fileReader = new FileReader()
   showErrorMessage.value = false
   showCropper.value = true
-  // 將檔案轉成 Base 64
   fileReader.readAsDataURL(file)
   fileReader.onload = () => {
     if (typeof fileReader.result === 'string') {
@@ -94,7 +94,8 @@ async function uploadImage(files:any) : Promise<void> {
   formData.append('file', files, 'filename.jpeg')
   const { data, status } = await fetchUpload.upload(formData)
   if (status !== 'Success') return
-
+  // 上傳成功後清除 input Value 避免同張圖片無法上傳
+  if (refInput.value) refInput.value.value = ''
   emits('update:modelValue', data.imgUrl)
   showCropper.value = false
 }
@@ -103,15 +104,14 @@ async function uploadImage(files:any) : Promise<void> {
 <template>
   <div class="w-full flex flex-col lg:flex-row justify-start">
     <label for="uploadInput" class="inline-block cursor-pointer min-w-200px md:min-w-350px lg:w-auto" :class="props.class">
-      <!-- <img class="w-full" src="/proposal/Upload.svg"> -->
 
       <div class="flex flex-col items-center max-w-320px b-#DFEAF4 b-dotted b-2 w-full py-16" :class="{ 'b-#FF5D71':props.error}">
         <img src="/CloudUploplad.svg">
-        <p v-if="modelValue === ''" class="text-gray-2">{{ props.labelTitle }}</p>
+        <p v-if="props.modelValue === ''" class="text-gray-2">{{ props.labelTitle }}</p>
         <p v-else class="text-gray-2">重新上傳圖片</p>
       </div>
     </label>
-    <input @change="choseImage" accept=".jpg, .png, .jpeg .webp" type="file" id="uploadInput" class="hidden">
+    <input @change="choseImage" ref="refInput" accept=".jpg, .png, .jpeg .webp" type="file" id="uploadInput" class="hidden">
     <div v-if="showCropper" class="w-full">
       <div class="h-500px">
         <VueCropper

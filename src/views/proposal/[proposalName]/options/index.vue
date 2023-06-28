@@ -63,7 +63,7 @@ onMounted(() => {
         <div class="flex flex-col md:flex-row w-full py-4 gap-6">
           <div class="grid grid-cols-2  md:grid-cols-1 gpa-6 lg:w-[calc(25%-24px)]">
             <img :src="item.image" class=" grid md:w-full">
-            <div class="flex flex-col md:hidden">
+            <div class="flex flex-col md:hidden pl-6">
               <router-link :to="`/proposal/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center text-center mb-4">修改方案</router-link>
               <button @click="delPlan(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white b-2 duration-300 px-4 py-2 rounded-8px">刪除方案</button>
             </div>

@@ -23,7 +23,9 @@ function logout () {
   FN_LOGOUT()
   Swal.fire({
     text: '已成功登出，將切換至登入頁面。',
-    icon: 'success'
+    icon: 'success',
+    confirmButtonText: '確定',
+    confirmButtonColor: '#2378BF'
   })
   closeMenu()
   setTimeout(() => {
@@ -62,13 +64,13 @@ const showProposalMenu = computed(() => {
           <img @click="router.push('/proposal')" class="cursor-pointer max-w-[calc(100vw-150px)]" src="/logo.svg">
           <ul
             class="hidden lg:flex items-center gap-6">
-            <li>
+            <!-- <li>
               <a
                 class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
                 @click.prevent="router.push('/demo')"
                 >範例</a
               >
-            </li>
+            </li> -->
             <li>
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"

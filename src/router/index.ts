@@ -11,35 +11,7 @@ const router = createRouter({
     return { top: 0 }
   },
   routes: [
-    {
-      path: '/routerDemo',
-      name: 'routerDemo',
-      component: async () => await import('../views/routerDemo.vue'),
-      meta: {
-        keepAlive: false,
-        layout: DefaultLayout
-      }
-    },
-    {
-      path: '/demo',
-      name: 'demo',
-      component: async () => await import('../views/demo.vue'),
-      meta: {
-        keepAlive: false,
-        layout: DefaultLayout
-      }
-    },
-    // TODO: 以上範例用，上線移除
-    // 首頁
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: async () => await import('../views/home/index.vue'),
-    //   meta: {
-    //     keepAlive: false,
-    //     layout: DefaultLayout
-    //   }
-    // },
+
     // 登入
     {
       path: '/login',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { fetchMember } from '@/api'
-import { SET_TOKEN, REMOVE_TOKEN } from '@/utils'
+import { SET_TOKEN } from '@/utils'
 import { Swal } from '@/plugins/sweet-alert'
 import { storeToRefs } from 'pinia'
 import { userInfoStore } from '@/stores'
@@ -48,16 +48,6 @@ function loginSuccess() {
   }, 2000)
 }
 
-function userSuspend() {
-  REMOVE_TOKEN()
-  Swal.fire({
-    icon: 'warning',
-    text: '帳號已被停權，請聯繫渦潮管理員。',
-    confirmButtonText: '確定',
-    confirmButtonColor: '#2378BF',
-    timer: 3000
-  })
-}
 </script>
 
 <template>

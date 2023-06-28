@@ -6,3 +6,5 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 export function setupGSAP (AppInstance: App<Element>) {
   AppInstance.provide('$gsap', gsap)
 }
+
+export { gsap }

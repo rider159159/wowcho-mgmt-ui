@@ -107,4 +107,20 @@ onMounted(() => {
 
 }
 
+table {
+  th, td {
+    @apply p-4 min-w-25 text-center;
+  }
+  th {
+    @apply h-50px;
+  }
+  tr {
+    &:not(:first-child) {
+      @apply border-t-1 border-line;
+    }
+  }
+  td {
+    @apply h-14;
+  }
+}
 </style>
