@@ -15,7 +15,7 @@ const ProposalListTotal = ref(0)
 
 function toProject (item:any) {
   router.push({
-    path: `/proposal/${item.customizedUrl}/dashboard`
+    path: `/${item.customizedUrl}/dashboard`
   })
 }
 async function getProposalList() {
@@ -124,7 +124,7 @@ onMounted(() => {
     <div v-else-if="proposalList.length === 0">
       <div class="flex">
         <p>目前尚無提案</p>
-        <router-link to="/proposal/new" class="text-brand-1 ">可於提案頁面</router-link>
+        <router-link to="/new" class="text-brand-1 ">可於提案頁面</router-link>
         <p>進行提案</p>
       </div>
     </div>

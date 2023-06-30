@@ -61,7 +61,7 @@ const showProposalMenu = computed(() => {
         <div
           class="container mx-auto !visible grow basis-[100%] items-center flex lg:basis-auto justify-between"
           id="navbarSupportedContentX">
-          <img @click="router.push('/proposal')" class="cursor-pointer max-w-[calc(100vw-150px)]" src="/logo.svg">
+          <img @click="router.push('/')" class="cursor-pointer max-w-[calc(100vw-150px)]" src="/logo.svg">
           <ul
             class="hidden lg:flex items-center gap-6">
             <!-- <li>
@@ -74,7 +74,7 @@ const showProposalMenu = computed(() => {
             <li>
               <router-link
                 class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                to="/proposal/new"
+                to="/new"
                 >提案</router-link
               >
             </li>
@@ -103,7 +103,7 @@ const showProposalMenu = computed(() => {
                 <li class="px-4 py-3">
                   <router-link
                     class="block cursor-pointer transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white lg:p-2 [&.active]:text-black/90"
-                    to="/proposal"
+                    to="/"
                     @click="closeMenu"
                     >提案紀錄</router-link
                   >
@@ -149,7 +149,7 @@ const showProposalMenu = computed(() => {
               <li class="mb-8">
                 <router-link
                   class="block transition hover:text-neutral-700 focus:text-neutral-700 py-2 text-lg"
-                  to="/proposal/new"
+                  to="/new"
                   @click="closeMenu"
                   >提案</router-link
                 >
@@ -163,7 +163,7 @@ const showProposalMenu = computed(() => {
                   <li class="mb-2">
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700  py-2"
-                      to="/proposal"
+                      to="/"
                       @click="closeMenu"
                       >提案紀錄</router-link
                     >
@@ -188,7 +188,7 @@ const showProposalMenu = computed(() => {
                   <li class="mb-2">
                     <router-link
                       @click="closeMenu"
-                      :to="`/proposal/${route.params.proposal}/dashboard`"
+                      :to="`/${route.params.proposal}/dashboard`"
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
                     >
                       <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +200,7 @@ const showProposalMenu = computed(() => {
                   <li class="mb-2">
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
-                      :to="`/proposal/${route.params.proposal}/edit`"
+                      :to="`/${route.params.proposal}/edit`"
                       @click="closeMenu"
                     >
                       <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,7 +214,7 @@ const showProposalMenu = computed(() => {
                     <!-- routeMatched -->
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
-                      :to="`/proposal/${route.params.proposal}/options`"
+                      :to="`/${route.params.proposal}/options`"
                       @click="closeMenu"
                     >
                       <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +227,7 @@ const showProposalMenu = computed(() => {
                     <!-- routeMatched -->
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
-                      :to="`/proposal/${route.params.proposal}/announce`"
+                      :to="`/${route.params.proposal}/announce`"
                       @click="closeMenu"
                     >
                       公告管理
@@ -237,7 +237,7 @@ const showProposalMenu = computed(() => {
                     <!-- routeMatched -->
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
-                      :to="`/proposal/${route.params.proposal}/faqs`"
+                      :to="`/${route.params.proposal}/faqs`"
                       @click="closeMenu"
                     >
                       常見問答
@@ -246,7 +246,7 @@ const showProposalMenu = computed(() => {
                   <li class="mb-2">
                     <router-link
                       class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 py-2"
-                      :to="`/proposal/${route.params.proposal}/backers`"
+                      :to="`/${route.params.proposal}/backers`"
                       @click="closeMenu"
                     >
                       <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
