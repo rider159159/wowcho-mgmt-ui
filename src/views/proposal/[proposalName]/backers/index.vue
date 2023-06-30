@@ -46,13 +46,13 @@ onMounted(() => {
     <div class="mb-8 w-full overflow-x-auto ">
       <table class="min-w-324">
         <thead class="h-50px bg-gray-4 text-gray-2 font-medium">
-          <th class="rounded-l-lg">訂單編號</th>
+          <th>訂單編號</th>
           <th>購買日期</th>
           <th>贊助專案</th>
           <th>選擇規格</th>
           <th>金額</th>
           <th>購買人名稱</th>
-          <th class="rounded-r-lg">詳細</th>
+          <th>詳細</th>
         </thead>
         <tbody v-if="data.list.length > 0">
           <tr v-for="sponsor in data.list" :key="sponsor.id" class="cursor-pointer text-gray-1 rounded-l-lg transition-all transition-duraiotn-500 hover:bg-brand-4 text-center">
