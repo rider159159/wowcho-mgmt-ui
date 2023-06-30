@@ -44,7 +44,7 @@ function loginSuccess() {
     timer: 3000
   })
   setTimeout(() => {
-    router.push({ path: '/proposal' })
+    router.push({ path: '/' })
   }, 2000)
 }
 

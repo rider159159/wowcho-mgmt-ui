@@ -56,7 +56,7 @@ onMounted(() => {
     <div class="text-h2 leading-h2 mb-56px fw-700">常見問答列表</div>
     <div class="md:(max-w-324 mx-auto) flex flex-col justify-center">
       <div class="w-full flex justify-end mb-10">
-        <RouterLink :to="`/proposal/${route.params.proposal}/faqs/new`" class="flex justify-center bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 px-4 rounded-3xl">新增常見問答</RouterLink>
+        <RouterLink :to="`/${route.params.proposal}/faqs/new`" class="flex justify-center bg-brand-1 text-white hover:bg-brand-2 duration-300 py-2 px-4 rounded-3xl">新增常見問答</RouterLink>
       </div>
       <div class="mb-8 w-full overflow-x-auto ">
         <table class="w-full">
@@ -76,7 +76,7 @@ onMounted(() => {
               <td>{{ dateYYYYMMDD(faq.updatedAt) }}</td>
               <td>
                 <div class="flex justify-center items-center py-2">
-                  <RouterLink :to="`/proposal/${route.params.proposal}/faqs/${faq.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center mr-4">編輯</RouterLink>
+                  <RouterLink :to="`/${route.params.proposal}/faqs/${faq.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center mr-4">編輯</RouterLink>
                   <button @click="delFaq(faq.id)" type="button" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white b-2 duration-300 px-4 py-2 rounded-8px">刪除</button>
                 </div>
               </td>

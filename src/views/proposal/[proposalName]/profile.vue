@@ -20,7 +20,6 @@ function patchBusinessProfile(formData: any) {
 
 const getCkData = ref(false)
 
-// 有 api 後會拔掉
 const formBody = ref({
   businessName: '',
   businessEmail: '',

@@ -93,7 +93,7 @@ const router = createRouter({
     },
     // 提案紀錄 router-view
     {
-      path: '/proposal',
+      path: '/',
       name: 'proposal',
       component: async () => await import('../views/proposal.vue'),
       meta: {
@@ -367,15 +367,6 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: async () => await import('../views/proposal/[proposalName]/profile.vue'),
-      meta: {
-        keepAlive: false,
-        layout: DefaultLayout
-      }
-    },
-    {
-      path: '/',
-      name: 'home',
-      component: async () => await import('../views/home/index.vue'),
       meta: {
         keepAlive: false,
         layout: DefaultLayout

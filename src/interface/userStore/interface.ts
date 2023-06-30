@@ -17,4 +17,8 @@ export interface IUserInfo {
   tokenList?: Array<string> // 驗證
   memberRole?: string, //是否是第三方資料
   oauthId: string//第三方驗證資料關聯
+  businessName: string,
+  businessEmail: string,
+  businessIntro: string,
+  businessImage: string
 }

@@ -53,7 +53,7 @@ onMounted(() => {
       <h5 class="w-full text-gray2 text-h5 self-center mb-4 md:mb-0">可以在此頁面中設定，募資計畫中的商品方案。</h5>
       <router-link
         class="flex justify-center bg-brand-1 text-white hover:bg-brand-2 w-150px duration-300 py-2 rounded-3xl"
-        :to="`/proposal/${route.params.proposal}/options/new`"
+        :to="`/${route.params.proposal}/options/new`"
       >
         新增募資方案
       </router-link>
@@ -64,7 +64,7 @@ onMounted(() => {
           <div class="grid grid-cols-2  md:grid-cols-1 gpa-6 lg:w-[calc(25%-24px)]">
             <img :src="item.image" class=" grid md:w-full">
             <div class="flex flex-col md:hidden pl-6">
-              <router-link :to="`/proposal/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center text-center mb-4">修改方案</router-link>
+              <router-link :to="`/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center text-center mb-4">修改方案</router-link>
               <button @click="delPlan(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white b-2 duration-300 px-4 py-2 rounded-8px">刪除方案</button>
             </div>
           </div>
@@ -75,7 +75,7 @@ onMounted(() => {
               <p class="leading-h5">NT {{ item.actualPrice }}</p>
               <p> {{ item.nowBuyers }} / {{ item.quantity }}</p>
               <div class="hidden md:flex">
-                <router-link :to="`/proposal/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center mr-4">修改方案</router-link>
+                <router-link :to="`/${route.params.proposal}/options/${item.id}/edit`" class="text-brand2 b-2 b-brand2 hover:bg-brand-1 hover:b-brand-1 hover:text-white duration-300 rounded-8px cursor-pointer px-4 py-2 items-center mr-4">修改方案</router-link>
                 <button @click="delPlan(item.id)" class="bg-white b-#FF5D71 text-#FF5D71 hover:bg-#FF98A5 hover:b-#FF98A5 hover:text-white b-2 duration-300 px-4 py-2 rounded-8px">刪除方案</button>
               </div>
             </div>

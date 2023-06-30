@@ -17,5 +17,9 @@ export const UserInfo: IUserInfo = {
   instagram: '',
   facebook: '',
   memberRole: '', //是否是第三方資料
-  oauthId: ''//
+  oauthId: '', // 使用 oauthId 關聯另一個資料表。
+  businessName: '',
+  businessEmail: '',
+  businessIntro: '',
+  businessImage: ''
 }
