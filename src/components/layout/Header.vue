@@ -91,13 +91,13 @@ const showProposalMenu = computed(() => {
             </li>
             <li  v-if="isLogin" ref="loginMenuRef" class="cursor-pointer relative">
               <!-- 使用者預設頭像 -->
-              <svg v-if="USER_INFO_REF.image == null" @click="showMemberMenu = !showMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg v-if="USER_INFO_REF.businessImage == null" @click="showMemberMenu = !showMemberMenu" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 33V32C16 28.6863 18.6863 26 22 26H26C29.3137 26 32 28.6863 32 32V33" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <path d="M24 23C21.7909 23 20 21.2091 20 19C20 16.7909 21.7909 15 24 15C26.2091 15 28 16.7909 28 19C28 21.2091 26.2091 23 24 23Z" stroke="#369CF0" stroke-width="2" stroke-linecap="round"/>
                 <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="#70BEFB"/>
               </svg>
               <!-- 使用者頭像 -->
-              <img v-else :src="USER_INFO_REF.image" @click="showMemberMenu = !showMemberMenu" class="w-48px h-48px rounded-full">
+              <img v-else :src="USER_INFO_REF.businessImage" @click="showMemberMenu = !showMemberMenu" class="object-cover w-48px h-48px rounded-full">
               <!-- 下拉選單 -->
               <ul v-if="showMemberMenu" class="member-menu absolute right-0 -bottom-50 w-40 bg-white">
                 <li class="px-4 py-3">
