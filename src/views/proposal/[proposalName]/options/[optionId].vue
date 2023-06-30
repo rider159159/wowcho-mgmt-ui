@@ -244,13 +244,13 @@ onMounted(() => {
       </div>
     </div>
 
-    <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">給贊助人的話</h5>
+    <!-- <h5 class="w-full text-brand1 text-h4 border-b-2 b-line pb-4 mb-6 mt-56px">給贊助人的話</h5>
     <ul class="list-disc text-14px text-gray2 pl-4 mb-4">
       <li>此選項介紹該方案內容，商品金額、分期付款、贊助數量，等等資訊介紹，可以無需在此介紹。</li>
       <li>簡短扼要地介紹品項描述，可縮短贊助人決定時間，提升使用者體驗。</li>
       <li>接受 Markdown 語法。</li>
     </ul>
-    <Markdown v-model="formBody.toSponsor" :getCkData="getCkData" class="mb-6"></Markdown>
+    <Markdown v-model="formBody.toSponsor" :getCkData="getCkData" class="mb-6"></Markdown> -->
     <FooterProposal>
       <button type="submit" class="mt-4 lg:mt-0 px-6 py-3 bg-brand-1 hover:bg-brand-2 duration-300 text-white rounded-3xl">儲存方案</button>
     </FooterProposal>

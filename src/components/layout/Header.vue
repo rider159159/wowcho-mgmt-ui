@@ -81,12 +81,12 @@ const showProposalMenu = computed(() => {
 
             <li v-if="!isLogin">
               <div class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white [&.active]:text-black/90">
-                <RouterLink to="/signup" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 py-2 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">註冊</RouterLink>
+                <RouterLink to="/signup" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 hover:border-brand-1 b-1 py-2 text-white hover:bg-white hover:text-brand-1">註冊</RouterLink>
               </div>
             </li>
             <li v-if="!isLogin">
               <div class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 dark:hover:text-white dark:focus:text-white [&.active]:text-black/90">
-                <RouterLink to="/login" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 py-2 text-white outline outline-2 outline-brand-1 hover:bg-white hover:text-brand-1">登入</RouterLink>
+                <RouterLink to="/login" class="rounded-5xl cursor-pointer transition duration-500 px-6 bg-brand-1 hover:border-brand-1 b-1 py-2 text-white hover:bg-white hover:text-brand-1">登入</RouterLink>
               </div>
             </li>
             <li  v-if="isLogin" ref="loginMenuRef" class="cursor-pointer relative">
@@ -273,7 +273,7 @@ const showProposalMenu = computed(() => {
             @click.prevent="logout()"
             class="block transition duration-150 hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30"
             >
-            <MyButton class="w-full outline outline-2 outline-brand-1 bg-white text-brand-1 hover:bg-brand-1 hover:text-white">登出</MyButton>
+            <MyButton class="w-full bg-white text-brand-1 hover:bg-brand-1 hover:text-white">登出</MyButton>
           </a>
         </div>
       </div>

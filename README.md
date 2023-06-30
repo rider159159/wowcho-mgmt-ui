@@ -112,3 +112,80 @@ Swal.fire({
   title: '新增成功'
 })
 ```
+
+## 使用套件
+
+- axios
+- clipboard
+- dayjs
+- eslint
+- eslint-config-standard-with-typescript
+- eslint-plugin-import
+- eslint-plugin-n
+- eslint-plugin-promise
+- eslint-plugin-vue
+- gsap
+- js-cookie
+- pinia
+- sass
+- sweetalert2
+- swiper
+- typescript
+- unocss
+- unplugin-auto-import
+- unplugin-vue-components
+- vee-validate
+- vite
+- vue
+- vue-router
+- vue3-toastify
+- vue-eslint-parser
+- vue-tsc
+
+- @ckeditor/ckeditor5-alignment
+- @ckeditor/ckeditor5-autoformat
+- @ckeditor/ckeditor5-basic-styles
+- @ckeditor/ckeditor5-block-quote
+- @ckeditor/ckeditor5-editor-classic
+- @ckeditor/ckeditor5-essentials
+- @ckeditor/ckeditor5-font
+- @ckeditor/ckeditor5-heading
+- @ckeditor/ckeditor5-horizontal-line
+- @ckeditor/ckeditor5-image
+- @ckeditor/ckeditor5-indent
+- @ckeditor/ckeditor5-link
+- @ckeditor/ckeditor5-list
+- @ckeditor/ckeditor5-media-embed
+- @ckeditor/ckeditor5-paste-from-office
+- @ckeditor/ckeditor5-remove-format
+- @ckeditor/ckeditor5-theme-lark
+- @ckeditor/ckeditor5-upload
+- @ckeditor/vite-plugin-ckeditor5
+- @mdi/font
+- @types/js-cookie
+- @types/node
+- @typescript-eslint/eslint-plugin
+- @typescript-eslint/parser
+- @unocss/preset-uno
+- @unocss/reset
+- @unocss/transformer-directives
+- @unocss/vite
+- @vee-validate/i18n
+- @vee-validate/rules
+- @vitejs/plugin-vue
+- @vue/runtime-core
+- @vuepic/vue-datepicker
+
+
+## Setup
+
+```
+npm i
+npm run dev
+```
+
+## Build
+```
+npm i
+npm run build
+```
