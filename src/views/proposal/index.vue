@@ -3,8 +3,6 @@ import { fetchProposal } from '@/api'
 import { defaultImage as vDefaultImage } from '@/directive/defaultImage'
 import { toast } from '@/plugins'
 
-const router = useRouter()
-
 const proposalList:any = ref([])
 
 const query = ref({
@@ -13,11 +11,6 @@ const query = ref({
 })
 const ProposalListTotal = ref(0)
 
-function toProject (item:any) {
-  router.push({
-    path: `/${item.customizedUrl}/dashboard`
-  })
-}
 async function getProposalList() {
   const res = await fetchProposal.getList(query.value)
   if (res.status !== 'Success') return
@@ -38,17 +31,17 @@ async function offShelfProposal(id:string) {
 }
 
 // 刪除募資提案
-async function delProposal(id:string) {
-  const query = { id: [id] }
-  const res = await fetchProposal.delete(query)
-  if (res.status !== 'Success') return
-  toast.success('刪除募資提案成功!', {
-    position: toast.POSITION.TOP_RIGHT,
-    autoClose: 2000,
-    theme: 'colored'
-  })
-  getProposalList()
-}
+// async function delProposal(id:string) {
+//   const query = { id: [id] }
+//   const res = await fetchProposal.delete(query)
+//   if (res.status !== 'Success') return
+//   toast.success('刪除募資提案成功!', {
+//     position: toast.POSITION.TOP_RIGHT,
+//     autoClose: 2000,
+//     theme: 'colored'
+//   })
+//   getProposalList()
+// }
 
 function statusToTitle(status = 1) {
   let title = ''
@@ -98,7 +91,9 @@ onMounted(() => {
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         <div v-for="(item,index) in proposalList" :key="index" class="mb-4">
           <div class="flex flex-col w-full">
-            <img v-default-image="'./proposal/proposalDefault.svg'" @click="toProject(item)" :src="item.image" class="cursor-pointer mb-2">
+            <RouterLink :to="`/${item.customizedUrl}/dashboard`" class="w-full pb-56.25% relative mb-2">
+              <img v-default-image="'./proposal/proposalDefault.svg'" :src="item.image" class="cursor-pointer absolute top-0 left-0 w-full h-full object-cover">
+            </RouterLink>
             <h5 class="text-h6 leading-h5 mb-3 font-bold">{{ item.name }}</h5>
             <div class="flex justify-between text-14px">
               <div class="flex flex-col gap-2 text-gray-2">
