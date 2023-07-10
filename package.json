@@ -10,9 +10,6 @@
     "lint:fix": "eslint . --ext .vue,.ts --fix",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "engines": {
-    "node": "16.19.0"
-  },
   "dependencies": {
     "@ckeditor/ckeditor5-alignment": "^38.0.1",
     "@ckeditor/ckeditor5-autoformat": "^38.0.1",
@@ -72,7 +69,6 @@
     "unocss": "^0.52.4",
     "unplugin-auto-import": "^0.16.2",
     "unplugin-vue-components": "^0.24.1",
-    "vee-validate": "^4.7.4",
     "vite": "^4.3.9",
     "vue-eslint-parser": "^9.3.0",
     "vue-tsc": "^1.6.5"
