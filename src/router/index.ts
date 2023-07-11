@@ -6,7 +6,7 @@ import AdminMenuLayout from '../components/layoutWrapper/AdminMenuLayout.vue'
 import FullWidthLayout from '@/components/layoutWrapper/FullWidthLayout.vue'
 
 const router = createRouter({
-  history: createWebHistory('/backstage'),
+  history: createWebHistory(),
   scrollBehavior() {
     return { top: 0 }
   },
