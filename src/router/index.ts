@@ -1,12 +1,12 @@
 import { type App } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import permission from './permission'
 import DefaultLayout from '../components/layoutWrapper/DefaultLayout.vue'
 import AdminMenuLayout from '../components/layoutWrapper/AdminMenuLayout.vue'
 import FullWidthLayout from '@/components/layoutWrapper/FullWidthLayout.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   scrollBehavior() {
     return { top: 0 }
   },

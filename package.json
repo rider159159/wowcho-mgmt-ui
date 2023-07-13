@@ -10,6 +10,9 @@
     "lint:fix": "eslint . --ext .vue,.ts --fix",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
+  "engines": {
+    "node": "16.19.0"
+  },
   "dependencies": {
     "@ckeditor/ckeditor5-alignment": "^38.0.1",
     "@ckeditor/ckeditor5-autoformat": "^38.0.1",
