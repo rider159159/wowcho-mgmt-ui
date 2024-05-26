@@ -68,10 +68,7 @@ async function onSubmit() {
   })
   setTimeout(() => {
     router.push({
-      path: '/',
-      params: {
-        proposal: res.data.customizedUrl
-      }
+      path: '/'
     })
   }, 2100)
 }

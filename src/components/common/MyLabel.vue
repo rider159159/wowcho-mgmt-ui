@@ -17,14 +17,18 @@ const props = defineProps({
     default: ''
   },
   class: {
-    type: String,
+    type: [String, Object] as PropType<string | Record<string, boolean>>,
     default: ''
   }
+})
+
+const finalClass = computed(() => {
+  return [props.class]
 })
 </script>
 
 <template>
-  <label :for="props.label" class="block" :class="props.class">
+  <label :for="props.label" class="block" :class="finalClass">
     <div class="flex flex-col xl:flex-row xl:mb-3">
       <div class="flex items-start whitespace-pre">
         <span v-if="props.require" class="text-#FF5D71 mr-1">*</span>
