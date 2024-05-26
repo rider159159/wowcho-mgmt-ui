@@ -26,8 +26,8 @@ const isLoading = computed(() => loadingArray.value.length > 0)
   box-sizing: border-box;
   width: 60px;
   height: 60px;
-  padding: 6px / 2;
   overflow: visible;
+  color:#379CF0;
 
   > circle {
     fill: none;

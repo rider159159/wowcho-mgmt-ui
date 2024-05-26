@@ -12,6 +12,7 @@ dist
 *.local
 package-lock.json
 
+.env
 .env.development
 .env.production
 pnpm-lock.yaml
